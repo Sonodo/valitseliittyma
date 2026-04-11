@@ -18,9 +18,9 @@ export const MobilePlanCard = memo(function MobilePlanCard({ plan, showOperator 
   const operator = getOperatorById(plan.operatorId);
 
   return (
-    <div className="group relative flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
+    <div className="card-hover group relative flex flex-col">
       {plan.has5G && (
-        <span className="absolute -top-3 right-4 rounded-full bg-cyan-600 px-3 py-1 text-xs font-bold text-white">
+        <span className="absolute -top-3 right-4 rounded-full bg-accent px-3 py-1 text-xs font-bold text-white">
           5G
         </span>
       )}
@@ -30,7 +30,7 @@ export const MobilePlanCard = memo(function MobilePlanCard({ plan, showOperator 
           {showOperator && operator && (
             <Link
               href={`/operaattorit/${operator.slug}`}
-              className="text-xs font-medium uppercase tracking-wider text-slate-500 hover:text-cyan-600"
+              className="text-xs font-medium uppercase tracking-wider text-slate-500 hover:text-accent"
             >
               {operator.name}
             </Link>
@@ -46,14 +46,14 @@ export const MobilePlanCard = memo(function MobilePlanCard({ plan, showOperator 
       </div>
 
       <div className={`mb-4 grid gap-3 ${plan.maxSpeed === 0 ? 'grid-cols-1' : 'grid-cols-2'}`}>
-        <div className="rounded-lg bg-slate-50 p-3 text-center">
-          <Signal className="mx-auto mb-1 h-4 w-4 text-cyan-600" />
+        <div className="rounded-lg bg-accent-50 p-3 text-center">
+          <Signal className="mx-auto mb-1 h-4 w-4 text-accent" />
           <p className="text-sm font-semibold text-slate-900">{formatData(plan.dataAmount)}</p>
           <p className="text-xs text-slate-500">Data</p>
         </div>
         {plan.maxSpeed > 0 && (
-          <div className="rounded-lg bg-slate-50 p-3 text-center">
-            <Wifi className="mx-auto mb-1 h-4 w-4 text-cyan-600" />
+          <div className="rounded-lg bg-accent-50 p-3 text-center">
+            <Wifi className="mx-auto mb-1 h-4 w-4 text-accent" />
             <p className="text-sm font-semibold text-slate-900">{formatSpeed(plan.maxSpeed)}</p>
             <p className="text-xs text-slate-500">Maksiminopeus</p>
           </div>
@@ -84,7 +84,7 @@ export const MobilePlanCard = memo(function MobilePlanCard({ plan, showOperator 
         href={plan.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 rounded-xl bg-cyan-600 py-3 text-sm font-semibold text-white transition-colors hover:bg-cyan-700"
+        className="flex items-center justify-center gap-2 rounded-xl bg-accent py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-600 min-h-[44px]"
       >
         Katso tarjous
         <ExternalLink className="h-4 w-4" />
@@ -104,8 +104,8 @@ export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOpe
     plan.technology === 'fiber' ? 'Valokuitu' : plan.technology === '5G' ? '5G-kotinetti' : '4G-kotinetti';
 
   return (
-    <div className="group relative flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
-      <span className="absolute -top-3 right-4 rounded-full bg-violet-600 px-3 py-1 text-xs font-bold text-white">
+    <div className="card-hover group relative flex flex-col">
+      <span className="absolute -top-3 right-4 rounded-full bg-secondary px-3 py-1 text-xs font-bold text-white">
         {techLabel}
       </span>
 
@@ -114,7 +114,7 @@ export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOpe
           {showOperator && operator && (
             <Link
               href={`/operaattorit/${operator.slug}`}
-              className="text-xs font-medium uppercase tracking-wider text-slate-500 hover:text-cyan-600"
+              className="text-xs font-medium uppercase tracking-wider text-slate-500 hover:text-accent"
             >
               {operator.name}
             </Link>
@@ -130,11 +130,11 @@ export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOpe
       </div>
 
       <div className="mb-4 grid grid-cols-2 gap-3">
-        <div className="rounded-lg bg-slate-50 p-3 text-center">
+        <div className="rounded-lg bg-accent-50 p-3 text-center">
           <p className="text-sm font-semibold text-slate-900">{formatSpeed(plan.downloadSpeed)}</p>
           <p className="text-xs text-slate-500">Lataus</p>
         </div>
-        <div className="rounded-lg bg-slate-50 p-3 text-center">
+        <div className="rounded-lg bg-accent-50 p-3 text-center">
           <p className="text-sm font-semibold text-slate-900">{formatSpeed(plan.uploadSpeed)}</p>
           <p className="text-xs text-slate-500">Lähetys</p>
         </div>
@@ -153,7 +153,7 @@ export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOpe
         href={plan.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 rounded-xl bg-cyan-600 py-3 text-sm font-semibold text-white transition-colors hover:bg-cyan-700"
+        className="flex items-center justify-center gap-2 rounded-xl bg-accent py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-600 min-h-[44px]"
       >
         Katso tarjous
         <ExternalLink className="h-4 w-4" />

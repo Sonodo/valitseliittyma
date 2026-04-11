@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Tietoa palvelusta — Valitse Liittymä',
   description:
-    'Valitse Liittymä on ilmainen ja puolueeton puhelinliittymien ja laajakaistojen vertailupalvelu Suomessa.',
+    'Valitse Liittymä on ilmainen ja kattava puhelinliittymien ja laajakaistojen vertailupalvelu Suomessa.',
   alternates: { canonical: '/tietoa' },
 };
 
@@ -18,7 +18,7 @@ export default function TietoaPage() {
         <article className="mt-10 prose prose-slate prose-lg max-w-none">
           <h2>Mikä on Valitse Liittymä?</h2>
           <p>
-            Valitse Liittymä on ilmainen ja puolueeton verkkopalvelu, joka auttaa suomalaisia
+            Valitse Liittymä on ilmainen ja kattava verkkopalvelu, joka auttaa suomalaisia
             kuluttajia löytämään parhaan puhelinliittymän ja laajakaistan. Vertailemme kaikkia
             Suomen suurimpia operaattoreita ja niiden liittymiä yhdessä paikassa.
           </p>
@@ -37,9 +37,9 @@ export default function TietoaPage() {
             vertailun tuloksiin tai suosituksiimme.
           </p>
 
-          <h2>Miten varmistatte puolueettomuuden?</h2>
+          <h2>Miten varmistatte vertailun laadun?</h2>
           <p>
-            Vertailemme liittymiä objektiivisin kriteerein: hinta, datamäärä, nopeus ja
+            Vertailemme liittymiä avoimiin kriteerein: hinta, datamäärä, nopeus ja
             ominaisuudet. Emme suosi mitään operaattoria. Kaikki operaattorit näytetään samoilla
             kriteereillä, ja käyttäjä voi itse suodattaa ja lajitella tuloksia.
           </p>
@@ -56,7 +56,7 @@ export default function TietoaPage() {
           <p>
             Sonodo — Henri Linnainmaa<br />
             Helsinki, Suomi<br />
-            Sähköposti: info@valitseliittyma.fi
+            <a href="/yhteystiedot" className="text-blue-600 hover:underline">Ota yhteyttä</a>
           </p>
         </article>
       </div>

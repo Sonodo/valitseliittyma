@@ -4,7 +4,7 @@ import { NavigationItem } from '@/types';
 export const SITE_NAME = 'Liittymävertailu';
 export const SITE_URL = 'https://valitseliittyma.fi';
 export const SITE_DESCRIPTION =
-  'Vertaa puhelinliittymiä ja laajakaistoja Suomessa. Löydä halvin liittymä Elisan, DNA:n, Telian ja budjettioperaattoreiden valikoimista. Ilmainen ja puolueeton vertailu.';
+  'Vertaa puhelinliittymiä ja laajakaistoja Suomessa. Löydä halvin liittymä Elisan, DNA:n, Telian ja budjettioperaattoreiden valikoimista. Ilmainen ja kattava vertailu.';
 export const SITE_TAGLINE = 'Vertaa ja säästä liittymäkuluissa';
 
 // Colors — teal/blue telecom theme

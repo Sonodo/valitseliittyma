@@ -71,13 +71,6 @@ export default async function BlogPostPage({ params }: Props) {
             {post.title}
           </h1>
           <div className="mt-4 flex items-center gap-4 text-sm text-slate-500">
-            <time dateTime={post.date}>
-              {new Date(post.date).toLocaleDateString('fi-FI', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </time>
             <span className="flex items-center gap-1">
               <Clock className="h-4 w-4" /> {post.readingTime} min lukuaika
             </span>

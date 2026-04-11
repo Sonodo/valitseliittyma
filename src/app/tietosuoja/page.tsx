@@ -19,8 +19,7 @@ export default function TietosuojaPage() {
           <h2>1. Rekisterinpitäjä</h2>
           <p>
             Sonodo — Henri Linnainmaa<br />
-            Helsinki, Suomi<br />
-            Sähköposti: info@valitseliittyma.fi
+            Helsinki, Suomi
           </p>
 
           <h2>2. Mitä tietoja keräämme?</h2>
@@ -65,7 +64,7 @@ export default function TietosuojaPage() {
           <h2>7. Rekisteröidyn oikeudet</h2>
           <p>
             Sinulla on oikeus tarkastaa, oikaista ja poistaa tietosi. Voit myös vastustaa
-            tietojen käsittelyä. Ota yhteyttä: info@valitseliittyma.fi.
+            tietojen käsittelyä. Ota yhteyttä <a href="/yhteystiedot" className="text-blue-600 hover:underline">yhteydenottosivullamme</a>.
           </p>
 
           <h2>8. Muutokset</h2>

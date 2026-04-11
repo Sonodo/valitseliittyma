@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { blogPosts } from '@/data/blog-posts';
 
 export const metadata: Metadata = {
-  title: 'Blogi — Ajankohtaista puhelinliittymistä ja operaattoreista',
+  title: 'Artikkelit — Ajankohtaista puhelinliittymistä ja operaattoreista',
   description:
     'Valitse Puhelimen blogi: vertailuja, oppaita ja ajankohtaisia artikkeleita puhelinliittymistä, operaattoreista ja laajakaistoista.',
   alternates: { canonical: '/blogi' },
@@ -18,7 +18,7 @@ export default function BlogiPage() {
     <div className="py-12 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12">
-          <h1 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">Blogi</h1>
+          <h1 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">Artikkelit</h1>
           <p className="mt-4 text-lg text-slate-600">
             Ajankohtaista puhelinliittymistä, operaattoreista ja laajakaistoista Suomessa.
           </p>
@@ -39,11 +39,7 @@ export default function BlogiPage() {
                   {post.title}
                 </h2>
                 <p className="mt-3 flex-1 text-sm text-slate-600">{post.description}</p>
-                <div className="mt-4 flex items-center gap-3 text-xs text-slate-400">
-                  <time dateTime={post.date}>
-                    {new Date(post.date).toLocaleDateString('fi-FI')}
-                  </time>
-                  <span>&middot;</span>
+                <div className="mt-4 text-xs text-slate-400">
                   <span>{post.readingTime} min lukuaika</span>
                 </div>
               </div>

@@ -19,8 +19,7 @@ export default function KayttoehdotPage() {
           <h2>1. Palveluntarjoaja</h2>
           <p>
             Sonodo — Henri Linnainmaa<br />
-            Helsinki, Suomi<br />
-            Sähköposti: info@valitseliittyma.fi
+            Helsinki, Suomi
           </p>
 
           <h2>2. Palvelun kuvaus</h2>

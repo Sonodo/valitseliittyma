@@ -12,9 +12,15 @@ export default function SubscriptionCalculator() {
     const plansWithData = mobilePlans.filter(
       (p) => p.dataAmount === 'unlimited' || (typeof p.dataAmount === 'number' && p.dataAmount > 0)
     );
-    const cheapest = plansWithData.reduce((min, p) =>
+    // Only consider plans with unlimited data or at least 10 GB — plans with
+    // minimal data are not realistic replacements for most users.
+    const usablePlans = plansWithData.filter(
+      (p) => p.dataAmount === 'unlimited' || (typeof p.dataAmount === 'number' && p.dataAmount >= 10)
+    );
+    const candidates = usablePlans.length > 0 ? usablePlans : plansWithData;
+    const cheapest = candidates.reduce((min, p) =>
       p.monthlyPrice < min.monthlyPrice ? p : min
-    , plansWithData[0]);
+    , candidates[0]);
     return { cheapestMarket: cheapest.monthlyPrice, cheapestPlanName: cheapest.name };
   }, []);
 

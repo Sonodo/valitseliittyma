@@ -50,20 +50,20 @@ export default function CookieConsent() {
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 sm:flex-row sm:justify-between">
         <p className="text-sm text-slate-600">
           Käytämme evästeitä parantaaksemme palvelua.{' '}
-          <Link href="/tietosuoja" className="text-cyan-600 underline hover:text-cyan-700">
+          <Link href="/tietosuoja" className="text-accent underline hover:text-accent-600">
             Lue lisää
           </Link>
         </p>
         <div className="flex shrink-0 gap-3">
           <button
             onClick={reject}
-            className="rounded-lg border border-slate-300 bg-white px-6 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
+            className="rounded-lg border border-slate-300 bg-white px-6 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 min-h-[44px]"
           >
             Hylkää
           </button>
           <button
             onClick={accept}
-            className="rounded-lg bg-cyan-600 px-6 py-2 text-sm font-semibold text-white transition-colors hover:bg-cyan-700"
+            className="rounded-lg bg-accent px-6 py-2 text-sm font-semibold text-white transition-colors hover:bg-accent-600 min-h-[44px]"
           >
             Hyväksy
           </button>

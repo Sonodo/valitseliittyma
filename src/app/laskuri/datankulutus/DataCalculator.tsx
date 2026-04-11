@@ -6,7 +6,7 @@ import { Smartphone, MonitorPlay, Music, Globe, MessageCircle } from 'lucide-rea
 
 // Data usage per hour/session in GB
 const USAGE_RATES = {
-  videoStreaming: 1.5, // GB per hour (HD)
+  videoStreaming: 1.0, // GB per hour (HD 720p)
   musicStreaming: 0.07, // GB per hour
   socialMedia: 0.3, // GB per hour
   webBrowsing: 0.06, // GB per hour

@@ -27,7 +27,7 @@ export default function NotFound() {
             Operaattorit
           </Link>
           <Link href="/blogi" className="text-sm text-cyan-600 hover:text-cyan-700 hover:underline">
-            Blogi
+            Artikkelit
           </Link>
         </div>
       </div>
