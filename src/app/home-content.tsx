@@ -254,10 +254,6 @@ export default function HomeContent({
           </div>
         </div>
 
-        {/* Animated wave to white */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <WaveDivider color="#ffffff" />
-        </div>
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
