@@ -70,7 +70,7 @@ const organizationSchema = {
   name: SITE_NAME,
   url: SITE_URL,
   description: SITE_DESCRIPTION,
-  logo: `${SITE_URL}/icon.svg`,
+  logo: `${SITE_URL}/logo.png`,
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer service',

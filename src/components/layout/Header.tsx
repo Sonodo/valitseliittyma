@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Smartphone, Menu, X } from 'lucide-react';
+import Image from 'next/image';
+import { Menu, X } from 'lucide-react';
 import { NAVIGATION } from '@/lib/constants';
 import { UserMenu } from '@/components/auth/UserMenu';
 
@@ -13,13 +14,15 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-navy/95 backdrop-blur-md border-b border-white/10">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5" aria-label="Valitse Liittymä — Etusivu">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-accent to-accent-600">
-            <Smartphone className="h-5 w-5 text-white" />
-          </div>
-          <span className="text-lg font-bold text-white">
-            Valitse<span className="text-accent-400"> Liittymä</span>
-          </span>
+        <Link href="/" className="flex items-center" aria-label="Valitse Liittymä — Etusivu">
+          <Image
+            src="/logo.png"
+            alt="Valitse Liittymä"
+            width={621}
+            height={191}
+            priority
+            className="h-9 w-auto"
+          />
         </Link>
 
         {/* Desktop navigation */}
