@@ -111,7 +111,7 @@ export default function RootLayout({
               {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","${CLARITY_ID}");`}
             </Script>
             <Script id="clarity-consent-default" strategy="afterInteractive">
-              {`(function w(){if(window.clarity){var c=localStorage.getItem("analytics_consent");clarity("consentv2",{analytics_storage:c==="granted"?"granted":"denied",ad_storage:"denied"})}else{setTimeout(w,100)}})();`}
+              {`(function w(){if(window.clarity){var c=localStorage.getItem("cookie_consent");clarity("consentv2",{analytics_storage:c==="granted"?"granted":"denied",ad_storage:"denied"})}else{setTimeout(w,100)}})();`}
             </Script>
           </>
         )}
