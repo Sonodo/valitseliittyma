@@ -39,7 +39,7 @@ const ease = [0.25, 0.1, 0.25, 1] as const;
 const faqItems = [
   {
     q: 'Onko Valitse Liittymän palvelu ilmainen?',
-    a: 'Kyllä, palvelumme on täysin ilmainen kuluttajille. Saatamme saada korvauksen operaattoreilta, mutta se ei vaikuta vertailun tuloksiin.',
+    a: 'Kyllä. Valitse Liittymä on täysin ilmainen käyttää — ei maksuja, ei rekisteröitymistä, ei sitoumusta.',
   },
   {
     q: 'Kuinka usein liittymätiedot päivitetään?',
@@ -83,8 +83,8 @@ const howItWorks = [
 const valueProps = [
   {
     icon: Shield,
-    title: 'Kattava vertailu',
-    description: 'Emme suosi mitään operaattoria. Vertailumme perustuu todellisiin hintoihin ja ominaisuuksiin — et mainoksiin.',
+    title: 'Puolueeton vertailu',
+    description: 'Järjestys perustuu hintaan, nopeuteen ja ominaisuuksiin. Sama menetelmä jokaiselle liittymälle.',
   },
   {
     icon: Clock,
@@ -569,7 +569,7 @@ export default function HomeContent({
                 <tbody className="divide-y divide-slate-100 bg-white text-sm">
                   {[
                     { label: 'Kattavuus', a: 'Operaattori kerrallaan', b: 'Rajallinen', c: 'Kaikki operaattorit' },
-                    { label: 'Läpinäkyvyys', a: 'Mainosten vaikutus', b: 'Henkilökohtainen kokemus', c: 'Avoin menetelmä' },
+                    { label: 'Menetelmä', a: 'Vaihteleva', b: 'Henkilökohtainen kokemus', c: 'Objektiivinen järjestys' },
                     { label: 'Ajantasaisuus', a: 'Vaihtelee', b: 'Voi olla vanhentunutta', c: 'Viikoittain päivitetty' },
                     { label: 'Ajankäyttö', a: 'Tunteja', b: 'Satunnaista', c: 'Muutama minuutti' },
                     { label: 'Hinta', a: 'Ilmainen', b: 'Ilmainen', c: 'Ilmainen' },

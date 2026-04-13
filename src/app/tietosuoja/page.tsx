@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Tietosuojaseloste — Valitse Liittymä',
-  description: 'Valitse Puhelimen tietosuojaseloste. Kerromme, miten käsittelemme henkilötietojasi.',
+  description: 'Valitse Liittymän tietosuojaseloste. Kerromme, miten käsittelemme henkilötietojasi.',
   alternates: { canonical: '/tietosuoja' },
 };
 

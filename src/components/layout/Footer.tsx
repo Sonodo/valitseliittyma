@@ -129,10 +129,6 @@ export default function Footer() {
             <Link href="/tietoa" className="hover:text-slate-300 transition-colors">Tietoa</Link>
           </div>
         </div>
-
-        <p className="mt-4 text-center text-xs text-slate-600">
-          Palvelu on käyttäjille ilmainen. Saatamme saada korvauksen, jos siirryt palvelumme kautta operaattorin sivuille.
-        </p>
       </div>
     </footer>
   );

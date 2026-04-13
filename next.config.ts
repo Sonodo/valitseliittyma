@@ -19,6 +19,15 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: process.cwd(),
   },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        destination: 'https://valitseliittyma.fi/:path*',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     const securityHeaders = [
       { key: 'X-Frame-Options', value: 'DENY' },
@@ -30,7 +39,7 @@ const nextConfig: NextConfig = {
     if (process.env.NODE_ENV === 'production') {
       securityHeaders.push({ key: 'Content-Security-Policy', value: cspPolicy });
     }
-    return [{ source: '/(.*)', headers: securityHeaders }];
+    return [{ source: '/((?!sitemap\\.xml|robots\\.txt).*)', headers: securityHeaders }];
   },
 };
 

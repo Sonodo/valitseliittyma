@@ -18,30 +18,29 @@ export default function TietoaPage() {
         <article className="mt-10 prose prose-slate prose-lg max-w-none">
           <h2>Mikä on Valitse Liittymä?</h2>
           <p>
-            Valitse Liittymä on ilmainen ja kattava verkkopalvelu, joka auttaa suomalaisia
-            kuluttajia löytämään parhaan puhelinliittymän ja laajakaistan. Vertailemme kaikkia
-            Suomen suurimpia operaattoreita ja niiden liittymiä yhdessä paikassa.
+            Valitse Liittymä on ilmainen verkkopalvelu, joka auttaa suomalaisia
+            kuluttajia löytämään sopivimman puhelinliittymän ja laajakaistan. Vertailemme
+            merkittävimpien Suomen operaattoreiden liittymiä yhdessä paikassa.
           </p>
 
           <h2>Miten palvelu toimii?</h2>
           <p>
             Keräämme tiedot suoraan operaattoreiden verkkosivuilta ja päivitämme ne säännöllisesti.
-            Vertailussa ovat mukana kaikki merkittävät operaattorit: Elisa, DNA, Telia sekä
+            Vertailussa ovat mukana merkittävimmät operaattorit: Elisa, DNA, Telia sekä
             budjettioperaattorit Moi Mobiili, Giga Mobiili, Oomi Mobiili ja Globetel.
           </p>
 
           <h2>Onko palvelu ilmainen?</h2>
           <p>
-            Kyllä, palvelu on täysin ilmainen kuluttajille. Saatamme saada korvauksen, jos käyttäjä
-            siirtyy palvelumme kautta operaattorin sivuille ja tekee tilauksen. Tämä ei vaikuta
-            vertailun tuloksiin tai suosituksiimme.
+            Kyllä. Valitse Liittymä on täysin ilmainen käyttää — ei maksuja, ei
+            rekisteröitymistä, ei sitoumusta.
           </p>
 
-          <h2>Miten varmistatte vertailun laadun?</h2>
+          <h2>Mihin vertailun järjestys perustuu?</h2>
           <p>
-            Vertailemme liittymiä avoimiin kriteerein: hinta, datamäärä, nopeus ja
-            ominaisuudet. Emme suosi mitään operaattoria. Kaikki operaattorit näytetään samoilla
-            kriteereillä, ja käyttäjä voi itse suodattaa ja lajitella tuloksia.
+            Vertailun järjestys perustuu objektiivisiin kriteereihin: hintaan, datamäärään,
+            nopeuteen ja ominaisuuksiin. Sama menetelmä koskee jokaista liittymää. Käyttäjä
+            voi itse suodattaa ja lajitella tuloksia oman käyttötarpeensa mukaan.
           </p>
 
           <h2>Osa Valitse-verkostoa</h2>

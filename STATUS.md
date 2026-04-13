@@ -1,12 +1,12 @@
 # Puhelinvertailu — Status
 
-**Project**: Puhelinvertailu — Finnish Telecom Comparison (Valitse Liittymä)
-**Status**: LIVE at valitseliittyma.fi
-**Health**: GREEN
-**Domain**: valitseliittyma.fi (custom domain, rebranded from valitsepuhelin.fi)
-**GA4**: G-Q3MR58J1E7 (active)
-**Clarity**: w9nc8umkc7 (active)
-**Last Updated**: Session #083 — 2026-04-10
+**Project**: Puhelinvertailu — RETIRED as standalone site
+**Status**: RETIRED — 308 redirect shell only. Active product lives in `Sonodo/liittyma-deploy` at valitseliittyma.fi
+**Health**: GREEN (redirect shell)
+**Domain**: N/A — all paths 308 → valitseliittyma.fi
+**GA4**: G-Q3MR58J1E7 (tracked on liittyma-deploy, not this shell)
+**Clarity**: w9nc8umkc7 (tracked on liittyma-deploy)
+**Last Updated**: Session #087 — 2026-04-12
 
 ## Current State — LIVE
 
@@ -19,6 +19,13 @@
 - Next.js 16 + TypeScript + Tailwind
 
 ## Recent Changes
+
+### Session #087 — Retired to Redirect Shell (2026-04-12)
+- **Status changed to RETIRED** as standalone site
+- **`next.config.ts` rewrite**: All paths now return 308 Permanent Redirect to `https://valitseliittyma.fi/:path*`
+- **Deployed via `vercel --prod`**: Redirect shell live
+- **Valitse-ID env vars set** (vestigial): AUTH_SECRET, Neon DB URL, Google OAuth client configured on this Vercel project — harmless leftover, never consumed since the project is now a redirect-only stub
+- **Actual product location**: `Sonodo/liittyma-deploy` — that's where the live Liittymä site is built and deployed
 
 ### Session #083 — Rebrand to Valitse Liittymä (2026-04-10)
 - **Rebranded**: valitsepuhelin.fi → valitseliittyma.fi, "Valitse Puhelin" → "Valitse Liittymä"

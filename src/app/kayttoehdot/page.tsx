@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Käyttöehdot — Valitse Liittymä',
-  description: 'Valitse Puhelimen käyttöehdot. Palvelun käyttöä koskevat ehdot ja vastuunrajoitukset.',
+  description: 'Valitse Liittymän käyttöehdot. Palvelun käyttöä koskevat ehdot ja vastuunrajoitukset.',
   alternates: { canonical: '/kayttoehdot' },
 };
 
@@ -51,9 +51,8 @@ export default function KayttoehdotPage() {
 
           <h2>6. Kaupalliset linkit</h2>
           <p>
-            Palvelu voi sisältää kaupallisia linkkejä operaattoreiden sivuille.
-            Saatamme saada korvauksen, jos käyttäjä tekee tilauksen linkin kautta.
-            Tämä ei vaikuta vertailun tuloksiin.
+            Palvelu voi sisältää kaupallisia linkkejä operaattoreiden sivuille, ja
+            palveluntarjoaja voi saada korvauksen linkin kautta tehdystä tilauksesta.
           </p>
 
           <h2>7. Tekijänoikeudet</h2>
