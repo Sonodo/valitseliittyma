@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { mobilePlans, get5GPlans } from '@/data/mobile-plans';
+import { operators } from '@/data/operators';
 import { MobilePlanCard } from '@/components/ui/PlanCard';
+import MethodologyBox from '@/components/ui/MethodologyBox';
 
 export const metadata: Metadata = {
   title: 'Paras 5G-liittymä 2026 — Vertaa 5G-puhelinliittymiä',
@@ -14,6 +16,9 @@ export default function Paras5GPage() {
   const plans5G = get5GPlans().sort((a, b) => a.monthlyPrice - b.monthlyPrice);
   const cheapest5G = plans5G.slice(0, 3);
   const fastest5G = [...plans5G].sort((a, b) => b.maxSpeed - a.maxSpeed).slice(0, 3);
+  const operatorsWith5G = operators.filter((op) =>
+    mobilePlans.some((p) => p.operatorId === op.id && p.has5G),
+  );
 
   return (
     <div className="py-12 sm:py-16">
@@ -24,13 +29,20 @@ export default function Paras5GPage() {
           </h1>
           <p className="mt-4 text-lg text-slate-600">
             5G-verkko tarjoaa huippunopeat yhteydet ja pienen viiveen. Vertaa kaikkia
-            5G-puhelinliittymiä ja löydä paras vaihtoehto juuri sinulle.
+            5G-puhelinliittymiä ja löydä sinulle sopivin vaihtoehto.
           </p>
         </div>
 
+        <MethodologyBox
+          superlative="paras 5G-liittymä"
+          operatorCount={operatorsWith5G.length}
+          planCount={plans5G.length}
+          methodology="5G-liittymät on listattu kahdessa ulottuvuudessa: halvin €/kk (perushinta) ja nopein maksiminopeuden (Mbit/s) mukaan. &quot;Paras&quot; riippuu käyttötarpeistasi — hinnasta, nopeudesta ja siitä, kuuluuko operaattorin 5G-kattavuus omalle alueellesi."
+        />
+
         {/* Cheapest 5G */}
         <section className="mb-16">
-          <h2 className="mb-6 text-2xl font-bold text-slate-900">Halvimmat 5G-liittymät</h2>
+          <h2 className="mb-6 text-2xl font-bold text-slate-900">Edullisimmat 5G-liittymät</h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {cheapest5G.map((plan) => (
               <MobilePlanCard key={plan.id} plan={plan} />

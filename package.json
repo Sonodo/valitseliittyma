@@ -1,5 +1,5 @@
 {
-  "name": "puhelinvertailu",
+  "name": "valitseliittyma",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,10 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^1.0.2",
     "@tailwindcss/typography": "^0.5.19",
     "framer-motion": "^12.38.0",
-    "jose": "^6.2.2",
     "lucide-react": "^1.7.0",
     "next": "16.2.1",
     "react": "19.2.4",

@@ -5,7 +5,7 @@ import { blogPosts } from '@/data/blog-posts';
 export const metadata: Metadata = {
   title: 'Artikkelit — Ajankohtaista puhelinliittymistä ja operaattoreista',
   description:
-    'Valitse Puhelimen blogi: vertailuja, oppaita ja ajankohtaisia artikkeleita puhelinliittymistä, operaattoreista ja laajakaistoista.',
+    'Valitse Liittymän blogi: vertailuja, oppaita ja ajankohtaisia artikkeleita puhelinliittymistä, operaattoreista ja laajakaistoista.',
   alternates: { canonical: '/blogi' },
 };
 
@@ -39,7 +39,15 @@ export default function BlogiPage() {
                   {post.title}
                 </h2>
                 <p className="mt-3 flex-1 text-sm text-slate-600">{post.description}</p>
-                <div className="mt-4 text-xs text-slate-400">
+                <div className="mt-4 flex items-center gap-2 text-xs text-slate-400">
+                  <time dateTime={post.date}>
+                    {new Date(post.date).toLocaleDateString('fi-FI', {
+                      day: 'numeric',
+                      month: 'long',
+                      year: 'numeric',
+                    })}
+                  </time>
+                  <span aria-hidden>·</span>
                   <span>{post.readingTime} min lukuaika</span>
                 </div>
               </div>

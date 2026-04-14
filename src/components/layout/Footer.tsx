@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { Smartphone } from 'lucide-react';
 import { VALITSE_SITES, EMPIRE_SITES } from '@/lib/constants';
@@ -23,6 +25,7 @@ const footerSections = {
       { label: 'Moi Mobiili', href: '/operaattorit/moi' },
       { label: 'Giga Mobiili', href: '/operaattorit/giga' },
       { label: 'Oomi Mobiili', href: '/operaattorit/oomi' },
+      { label: 'Globetel', href: '/operaattorit/globetel' },
     ],
   },
   tietoa: {
@@ -121,12 +124,27 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-8 flex flex-col items-center gap-4 border-t border-white/10 pt-8 sm:flex-row sm:justify-between">
           <p className="text-xs text-slate-500">
-            &copy; {new Date().getFullYear()} Valitse Liittymä. Kaikki oikeudet pidätetaan.
+            &copy; {new Date().getFullYear()} Valitse Liittymä. Kaikki oikeudet pidätetään.
           </p>
-          <div className="flex items-center gap-4 text-xs text-slate-500">
+          <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500">
             <Link href="/tietosuoja" className="hover:text-slate-300 transition-colors">Tietosuoja</Link>
             <Link href="/kayttoehdot" className="hover:text-slate-300 transition-colors">Käyttöehdot</Link>
             <Link href="/tietoa" className="hover:text-slate-300 transition-colors">Tietoa</Link>
+            <Link href="/yhteystiedot" className="hover:text-slate-300 transition-colors">Yhteystiedot</Link>
+            <button
+              type="button"
+              onClick={() => {
+                try {
+                  window.localStorage.removeItem('cookie_consent');
+                } catch {
+                  /* ignored */
+                }
+                window.dispatchEvent(new Event('cookie-consent-reopen'));
+              }}
+              className="hover:text-slate-300 transition-colors"
+            >
+              Muuta evästeasetuksia
+            </button>
           </div>
         </div>
       </div>

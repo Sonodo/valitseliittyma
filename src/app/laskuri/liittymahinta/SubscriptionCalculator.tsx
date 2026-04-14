@@ -5,29 +5,77 @@ import Link from 'next/link';
 import { Calculator, TrendingDown } from 'lucide-react';
 import { mobilePlans } from '@/data/mobile-plans';
 
-export default function SubscriptionCalculator() {
-  const [currentPrice, setCurrentPrice] = useState<number>(30);
+type DataTier = 'small' | 'medium' | 'large' | 'unlimited';
 
-  const { cheapestMarket, cheapestPlanName } = useMemo(() => {
-    const plansWithData = mobilePlans.filter(
-      (p) => p.dataAmount === 'unlimited' || (typeof p.dataAmount === 'number' && p.dataAmount > 0)
-    );
-    // Only consider plans with unlimited data or at least 10 GB — plans with
-    // minimal data are not realistic replacements for most users.
-    const usablePlans = plansWithData.filter(
-      (p) => p.dataAmount === 'unlimited' || (typeof p.dataAmount === 'number' && p.dataAmount >= 10)
-    );
-    const candidates = usablePlans.length > 0 ? usablePlans : plansWithData;
-    const cheapest = candidates.reduce((min, p) =>
-      p.monthlyPrice < min.monthlyPrice ? p : min
-    , candidates[0]);
-    return { cheapestMarket: cheapest.monthlyPrice, cheapestPlanName: cheapest.name };
-  }, []);
+interface TierConfig {
+  label: string;
+  description: string;
+  match: (plan: (typeof mobilePlans)[number]) => boolean;
+}
+
+// Feature-parity tiers so the comparison benchmark matches the user's actual need.
+const TIERS: Record<DataTier, TierConfig> = {
+  small: {
+    label: 'Alle 10 Gt/kk (kevyt käyttö)',
+    description: '≤ 10 Gt/kk',
+    match: (p) =>
+      p.dataAmount !== 'unlimited' &&
+      typeof p.dataAmount === 'number' &&
+      p.dataAmount > 0 &&
+      p.dataAmount <= 10,
+  },
+  medium: {
+    label: '10–50 Gt/kk (perussuomalainen käyttö)',
+    description: '10–50 Gt/kk',
+    match: (p) =>
+      p.dataAmount !== 'unlimited' &&
+      typeof p.dataAmount === 'number' &&
+      p.dataAmount >= 10 &&
+      p.dataAmount <= 50,
+  },
+  large: {
+    label: 'Yli 50 Gt/kk tai rajaton 4G',
+    description: '> 50 Gt/kk',
+    match: (p) =>
+      p.dataAmount === 'unlimited' ||
+      (typeof p.dataAmount === 'number' && p.dataAmount > 50),
+  },
+  unlimited: {
+    label: 'Rajaton data (5G)',
+    description: 'Rajaton 5G',
+    match: (p) => p.dataAmount === 'unlimited' && p.has5G,
+  },
+};
+
+export default function SubscriptionCalculator() {
+  const [currentPrice, setCurrentPrice] = useState<number>(20);
+  const [tier, setTier] = useState<DataTier>('medium');
+
+  const { benchmarkPrice, sampleSize, sampleNames } = useMemo(() => {
+    const config = TIERS[tier];
+    const matching = mobilePlans
+      .filter(config.match)
+      .sort((a, b) => a.monthlyPrice - b.monthlyPrice);
+
+    // Use the average of the top 5 cheapest matching plans — avoids anchoring on a
+    // single outlier (KKV methodology friendly).
+    const sample = matching.slice(0, 5);
+    const avg =
+      sample.length > 0
+        ? sample.reduce((sum, p) => sum + p.monthlyPrice, 0) / sample.length
+        : 0;
+    return {
+      benchmarkPrice: avg,
+      sampleSize: sample.length,
+      sampleNames: sample.map((p) => p.name).join(', '),
+    };
+  }, [tier]);
 
   const yearlyCurrent = currentPrice * 12;
-  const yearlyCheapest = cheapestMarket * 12;
-  const yearlySavings = yearlyCurrent - yearlyCheapest;
+  const yearlyBenchmark = benchmarkPrice * 12;
+  const yearlySavings = yearlyCurrent - yearlyBenchmark;
   const fiveYearSavings = yearlySavings * 5;
+  const savingsPositive = yearlySavings > 0;
 
   return (
     <div className="space-y-8">
@@ -45,7 +93,7 @@ export default function SubscriptionCalculator() {
             type="range"
             min={5}
             max={60}
-            step={0.5}
+            step={0.1}
             value={currentPrice}
             onChange={(e) => setCurrentPrice(Number(e.target.value))}
             aria-label="Nykyinen kuukausihinta"
@@ -55,6 +103,28 @@ export default function SubscriptionCalculator() {
             <span>5 €</span>
             <span>60 €</span>
           </div>
+        </div>
+
+        <div className="mt-6">
+          <label htmlFor="tier-select" className="mb-2 block text-sm font-medium text-slate-700">
+            Datantarpeesi
+          </label>
+          <select
+            id="tier-select"
+            value={tier}
+            onChange={(e) => setTier(e.target.value as DataTier)}
+            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+          >
+            {Object.entries(TIERS).map(([key, config]) => (
+              <option key={key} value={key}>
+                {config.label}
+              </option>
+            ))}
+          </select>
+          <p className="mt-2 text-xs text-slate-500">
+            Vertailuhinta lasketaan samasta datakategoriasta — näet todellisen säästön, et
+            ylimitoitettua arviota.
+          </p>
         </div>
       </div>
 
@@ -73,28 +143,41 @@ export default function SubscriptionCalculator() {
             </p>
           </div>
           <div className="rounded-xl bg-white p-4">
-            <p className="text-sm text-slate-500">Halvin vaihtoehto (vuosi)</p>
+            <p className="text-sm text-slate-500">
+              Markkinavertailu ({TIERS[tier].description}, vuosi)
+            </p>
             <p className="text-2xl font-extrabold text-emerald-600">
-              {yearlyCheapest.toFixed(2).replace('.', ',')} €
+              {yearlyBenchmark.toFixed(2).replace('.', ',')} €
             </p>
           </div>
-          <div className="rounded-xl bg-emerald-100 p-4">
-            <p className="text-sm text-emerald-700">Mahdollinen säästö/vuosi</p>
-            <p className="text-2xl font-extrabold text-emerald-700">
-              {yearlySavings > 0 ? yearlySavings.toFixed(2).replace('.', ',') : '0,00'} €
+          <div className={`rounded-xl ${savingsPositive ? 'bg-emerald-100' : 'bg-slate-100'} p-4`}>
+            <p className={`text-sm ${savingsPositive ? 'text-emerald-700' : 'text-slate-600'}`}>
+              {savingsPositive ? 'Mahdollinen säästö/vuosi' : 'Nykyinen hintasi on markkinan alapäässä'}
+            </p>
+            <p
+              className={`text-2xl font-extrabold ${savingsPositive ? 'text-emerald-700' : 'text-slate-700'}`}
+            >
+              {savingsPositive ? `${yearlySavings.toFixed(2).replace('.', ',')} €` : '0,00 €'}
             </p>
           </div>
-          <div className="rounded-xl bg-emerald-100 p-4">
-            <p className="text-sm text-emerald-700">Säästö 5 vuodessa</p>
-            <p className="text-2xl font-extrabold text-emerald-700">
-              {fiveYearSavings > 0 ? fiveYearSavings.toFixed(2).replace('.', ',') : '0,00'} €
+          <div className={`rounded-xl ${savingsPositive ? 'bg-emerald-100' : 'bg-slate-100'} p-4`}>
+            <p className={`text-sm ${savingsPositive ? 'text-emerald-700' : 'text-slate-600'}`}>
+              Säästö 5 vuodessa
+            </p>
+            <p
+              className={`text-2xl font-extrabold ${savingsPositive ? 'text-emerald-700' : 'text-slate-700'}`}
+            >
+              {savingsPositive ? `${fiveYearSavings.toFixed(2).replace('.', ',')} €` : '0,00 €'}
             </p>
           </div>
         </div>
 
         <p className="mt-4 text-xs text-slate-500">
-          * Halvin datallinen liittymä on tällä hetkellä {cheapestMarket.toFixed(2).replace('.', ',')} €/kk
-          ({cheapestPlanName}). Todellinen säästö riippuu valitsemastasi liittymästä ja datantarpeistasi.
+          * Vertailuhinta on valitsemasi datakategorian {sampleSize} halvimman liittymän keskiarvo
+          ({benchmarkPrice.toFixed(2).replace('.', ',')} €/kk)
+          {sampleSize > 0 && `: ${sampleNames}`}. Todellinen säästö riippuu valitsemastasi
+          liittymästä ja operaattorin kulloisestakin kampanjasta. Hintatiedot tarkistettu viimeksi{' '}
+          {new Date().toLocaleDateString('fi-FI')}.
         </p>
       </div>
 

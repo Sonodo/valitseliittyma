@@ -13,7 +13,16 @@ interface Props {
 type SortOption = 'price-asc' | 'price-desc' | 'speed-desc';
 
 export default function BroadbandPlanFilters({ plans }: Props) {
-  const [maxPrice, setMaxPrice] = useState<number>(50);
+  const priceBounds = useMemo(() => {
+    if (plans.length === 0) return { min: 10, max: 60 };
+    const prices = plans.map((p) => p.monthlyPrice);
+    return {
+      min: Math.floor(Math.min(...prices)),
+      max: Math.ceil(Math.max(...prices) + 1),
+    };
+  }, [plans]);
+
+  const [maxPrice, setMaxPrice] = useState<number>(priceBounds.max);
   const [selectedOperator, setSelectedOperator] = useState<string>('all');
   const [technology, setTechnology] = useState<BroadbandTechnology | 'all'>('all');
   const [sort, setSort] = useState<SortOption>('price-asc');
@@ -62,8 +71,8 @@ export default function BroadbandPlanFilters({ plans }: Props) {
             <input
               id="bb-filter-max-price"
               type="range"
-              min={15}
-              max={50}
+              min={priceBounds.min}
+              max={priceBounds.max}
               value={maxPrice}
               onChange={(e) => setMaxPrice(Number(e.target.value))}
               className="w-full accent-cyan-600"

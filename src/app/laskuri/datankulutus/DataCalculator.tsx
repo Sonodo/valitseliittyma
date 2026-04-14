@@ -4,13 +4,13 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Smartphone, MonitorPlay, Music, Globe, MessageCircle } from 'lucide-react';
 
-// Data usage per hour/session in GB
+// Data usage per hour in GB — values reflect 2026 reality (1080p default streaming)
 const USAGE_RATES = {
-  videoStreaming: 1.0, // GB per hour (HD 720p)
+  videoStreaming: 3.0, // GB per hour (1080p HD — 720p ~0.9, 4K ~7)
   musicStreaming: 0.07, // GB per hour
-  socialMedia: 0.3, // GB per hour
-  webBrowsing: 0.06, // GB per hour
-  videoCalls: 0.5, // GB per hour
+  socialMedia: 0.5, // GB per hour (autoplay 720p reels/TikTok)
+  webBrowsing: 0.08, // GB per hour
+  videoCalls: 0.6, // GB per hour
 };
 
 export default function DataCalculator() {
@@ -27,11 +27,13 @@ export default function DataCalculator() {
     browsingHours * USAGE_RATES.webBrowsing +
     videoCallHours * USAGE_RATES.videoCalls;
 
+  // Recommendation floor is intentionally conservative: underestimating data costs more
+  // than overestimating, so we nudge borderline users toward the next tier up.
   const recommendation =
-    totalGB < 3 ? '3–5 Gt' :
-    totalGB < 8 ? '5–10 Gt' :
-    totalGB < 20 ? '10–20 Gt' :
-    totalGB < 40 ? '20–50 Gt' :
+    totalGB < 5 ? '10 Gt' :
+    totalGB < 15 ? '20 Gt' :
+    totalGB < 30 ? '30–50 Gt' :
+    totalGB < 60 ? '50–100 Gt' :
     'Rajaton data';
 
   return (
@@ -42,10 +44,10 @@ export default function DataCalculator() {
         <div className="space-y-6">
           <SliderInput
             icon={<MonitorPlay className="h-5 w-5 text-red-500" />}
-            label="Videoiden katselu (YouTube, Netflix yms.)"
+            label="Videoiden katselu (YouTube, Netflix yms., 1080p HD)"
             value={videoHours}
             onChange={setVideoHours}
-            max={60}
+            max={180}
             unit="h/kk"
           />
           <SliderInput

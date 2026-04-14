@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import { NAVIGATION } from '@/lib/constants';
-import { UserMenu } from '@/components/auth/UserMenu';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -48,8 +47,6 @@ export default function Header() {
               Vertaa liittymiä
             </Link>
           </div>
-          <UserMenu />
-
           {/* Mobile menu button */}
           <button
             type="button"

@@ -54,6 +54,11 @@ export default function CookieConsent() {
       updateGtagConsent(false);
       updateClarityConsent(false);
     }
+
+    // Allow footer "Muuta evästeasetuksia" to re-open the banner
+    const handleReopen = () => setConsent('pending');
+    window.addEventListener('cookie-consent-reopen', handleReopen);
+    return () => window.removeEventListener('cookie-consent-reopen', handleReopen);
   }, []);
 
   const accept = () => {
@@ -76,7 +81,7 @@ export default function CookieConsent() {
     <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-slate-200 bg-white p-4 shadow-lg sm:p-6">
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 sm:flex-row sm:justify-between">
         <p className="text-sm text-slate-600">
-          Käytämme evästeitä parantaaksemme palvelua.{' '}
+          Käytämme evästeitä parantaaksemme palveluamme.{' '}
           <Link href="/tietosuoja" className="text-accent underline hover:text-accent-600">
             Lue lisää
           </Link>

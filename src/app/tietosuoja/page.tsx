@@ -36,8 +36,12 @@ export default function TietosuojaPage() {
           <ul>
             <li>Palvelun toiminnan varmistaminen ja kehittäminen</li>
             <li>Kävijäanalytiikka ja palvelun parantaminen</li>
-            <li>Mainosten kohdentaminen (evästeiden suostumuksella)</li>
           </ul>
+          <p className="text-sm text-slate-600">
+            <strong>Emme kohdenna mainoksia.</strong> Palvelu ei käytä ad_storage- tai
+            mainostunnisteisiin liittyviä evästeitä, ja Google Consent V2:n ad_storage-arvo on
+            aina <code>denied</code>.
+          </p>
 
           <h2>4. Evästeet</h2>
           <p>

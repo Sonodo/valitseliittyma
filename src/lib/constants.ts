@@ -1,7 +1,7 @@
 import { NavigationItem } from '@/types';
 
 // Site metadata
-export const SITE_NAME = 'Liittymävertailu';
+export const SITE_NAME = 'Valitse Liittymä';
 export const SITE_URL = 'https://valitseliittyma.fi';
 export const SITE_DESCRIPTION =
   'Vertaa puhelinliittymiä ja laajakaistoja Suomessa. Löydä halvin liittymä Elisan, DNA:n, Telian ja budjettioperaattoreiden valikoimista. Ilmainen ja kattava vertailu.';

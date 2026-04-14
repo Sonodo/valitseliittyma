@@ -6,6 +6,7 @@ import { comparisonPairs, getComparisonBySlug } from '@/data/comparisons';
 import { getOperatorById } from '@/data/operators';
 import { getPlansByOperator } from '@/data/mobile-plans';
 import { MobilePlanCard } from '@/components/ui/PlanCard';
+import { operatorGenitive } from '@/lib/utils';
 
 interface Props {
   params: Promise<{ slugPair: string }>;
@@ -116,8 +117,8 @@ export default async function ComparisonPage({ params }: Props) {
               {(op1.network || op2.network) && (
                 <tr>
                   <td className="px-6 py-3 text-sm font-medium text-slate-700">Verkko</td>
-                  <td className="px-6 py-3 text-center text-sm">{op1.network ? `${op1.network}:n verkko` : 'Oma verkko'}</td>
-                  <td className="px-6 py-3 text-center text-sm">{op2.network ? `${op2.network}:n verkko` : 'Oma verkko'}</td>
+                  <td className="px-6 py-3 text-center text-sm">{op1.network ? `${operatorGenitive(op1.network)} verkko` : 'Oma verkko'}</td>
+                  <td className="px-6 py-3 text-center text-sm">{op2.network ? `${operatorGenitive(op2.network)} verkko` : 'Oma verkko'}</td>
                 </tr>
               )}
             </tbody>
@@ -159,19 +160,19 @@ export default async function ComparisonPage({ params }: Props) {
               }
 
               if (has5G1 && !has5G2) {
-                points.push(`${op1.name} tarjoaa 5G-liittymiä, kun taas ${op2.name}n valikoimasta 5G puuttuu.`);
+                points.push(`${op1.name} tarjoaa 5G-liittymiä, kun taas ${operatorGenitive(op2.name)} valikoimasta 5G puuttuu.`);
               } else if (!has5G1 && has5G2) {
-                points.push(`${op2.name} tarjoaa 5G-liittymiä, kun taas ${op1.name}n valikoimasta 5G puuttuu.`);
+                points.push(`${op2.name} tarjoaa 5G-liittymiä, kun taas ${operatorGenitive(op1.name)} valikoimasta 5G puuttuu.`);
               } else if (has5G1 && has5G2) {
                 points.push('Molemmat tarjoavat 5G-liittymiä.');
               }
 
               if (isMvno1 && !isMvno2) {
-                points.push(`${op1.name} on virtuaalioperaattori (MVNO), joka käyttää ${op1.network}:n verkkoa. ${op2.name} on verkko-operaattori (MNO) omalla verkollaan.`);
+                points.push(`${op1.name} on virtuaalioperaattori (MVNO), joka käyttää ${operatorGenitive(op1.network ?? '')} verkkoa. ${op2.name} on verkko-operaattori (MNO) omalla verkollaan.`);
               } else if (!isMvno1 && isMvno2) {
-                points.push(`${op2.name} on virtuaalioperaattori (MVNO), joka käyttää ${op2.network}:n verkkoa. ${op1.name} on verkko-operaattori (MNO) omalla verkollaan.`);
+                points.push(`${op2.name} on virtuaalioperaattori (MVNO), joka käyttää ${operatorGenitive(op2.network ?? '')} verkkoa. ${op1.name} on verkko-operaattori (MNO) omalla verkollaan.`);
               } else if (isMvno1 && isMvno2) {
-                points.push(`Molemmat ovat virtuaalioperaattoreita (MVNO): ${op1.name} käyttää ${op1.network}:n verkkoa ja ${op2.name} käyttää ${op2.network}:n verkkoa.`);
+                points.push(`Molemmat ovat virtuaalioperaattoreita (MVNO): ${op1.name} käyttää ${operatorGenitive(op1.network ?? '')} verkkoa ja ${op2.name} käyttää ${operatorGenitive(op2.network ?? '')} verkkoa.`);
               }
 
               if (cheaper && isMvno1 !== isMvno2) {

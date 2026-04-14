@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { mobilePlans, getCheapestPlans } from '@/data/mobile-plans';
+import { operators } from '@/data/operators';
 import { MobilePlanCard } from '@/components/ui/PlanCard';
+import MethodologyBox from '@/components/ui/MethodologyBox';
 
 export const metadata: Metadata = {
   title: 'Halvin puhelinliittymä 2026 — Edullisimmat liittymät vertailussa',
@@ -11,8 +13,35 @@ export const metadata: Metadata = {
 };
 
 export default function HalvinPuhelinliittymaPage() {
-  const cheapest = getCheapestPlans(10);
-  const budgetPlans = mobilePlans.filter((p) => p.monthlyPrice < 15).sort((a, b) => a.monthlyPrice - b.monthlyPrice);
+  // "Top 3 halvinta" now means: cheapest ≥5 Gt, cheapest ≥10 Gt, cheapest rajaton —
+  // not three Globetel data-less plans. Fallback to overall cheapest if a tier is empty.
+  const sortedByPrice = [...mobilePlans].sort((a, b) => a.monthlyPrice - b.monthlyPrice);
+  const cheapestSmall =
+    sortedByPrice.find(
+      (p) => typeof p.dataAmount === 'number' && p.dataAmount >= 5 && p.dataAmount < 10,
+    ) ??
+    sortedByPrice.find((p) => typeof p.dataAmount === 'number' && p.dataAmount >= 5);
+  const cheapestMedium = sortedByPrice.find(
+    (p) => typeof p.dataAmount === 'number' && p.dataAmount >= 10,
+  );
+  const cheapestUnlimited = sortedByPrice.find((p) => p.dataAmount === 'unlimited');
+  const top3 = [cheapestSmall, cheapestMedium, cheapestUnlimited]
+    .filter((p): p is (typeof mobilePlans)[number] => Boolean(p))
+    // De-duplicate in case the same plan fills two slots
+    .filter((p, i, arr) => arr.findIndex((x) => x.id === p.id) === i);
+  // Ensure we show at least 3 cards
+  while (top3.length < 3 && top3.length < sortedByPrice.length) {
+    const next = sortedByPrice.find((p) => !top3.some((x) => x.id === p.id));
+    if (!next) break;
+    top3.push(next);
+  }
+
+  // Keep the legacy absolute-cheapest list for context under the guide
+  void getCheapestPlans;
+
+  const budgetPlans = mobilePlans
+    .filter((p) => p.monthlyPrice < 15)
+    .sort((a, b) => a.monthlyPrice - b.monthlyPrice);
   const unlimitedCheap = mobilePlans
     .filter((p) => p.dataAmount === 'unlimited')
     .sort((a, b) => a.monthlyPrice - b.monthlyPrice)
@@ -26,18 +55,25 @@ export default function HalvinPuhelinliittymaPage() {
             Halvin puhelinliittymä 2026
           </h1>
           <p className="mt-4 text-lg text-slate-600">
-            Etsimme puolestasi Suomen halvimmat puhelinliittymät. Useimmissa vertailun liittymissä on
-            rajaton puhe ja viestit Suomeen — erona on datamäärä, nopeus ja hinta.
+            Vertailemme puolestasi Suomen edullisimmat puhelinliittymät. Useimmissa vertailun
+            liittymissä on rajaton puhe ja viestit Suomeen — erona on datamäärä, nopeus ja hinta.
           </p>
         </div>
+
+        <MethodologyBox
+          superlative="halvin"
+          operatorCount={operators.length}
+          planCount={mobilePlans.length}
+          methodology="Liittymät on järjestetty perushinnan (€/kk ilman kampanja-alennuksia) mukaan. Top 3 -listalle valitaan halvin liittymä kolmelta datatasolta: ≥5 Gt, ≥10 Gt ja rajaton — jotta vertailuun ei valikoidu ainoastaan datattomia perusliittymiä."
+        />
 
         {/* Top 3 cheapest */}
         <section className="mb-16">
           <h2 className="mb-6 text-2xl font-bold text-slate-900">
-            Top 3 halvinta liittymää
+            Halvimmat liittymät datatason mukaan
           </h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {cheapest.slice(0, 3).map((plan) => (
+            {top3.map((plan) => (
               <MobilePlanCard key={plan.id} plan={plan} />
             ))}
           </div>

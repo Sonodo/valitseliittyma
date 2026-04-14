@@ -14,7 +14,18 @@ interface Props {
 type SortOption = 'price-asc' | 'price-desc' | 'data-desc' | 'speed-desc';
 
 export default function MobilePlanFilters({ plans }: Props) {
-  const [maxPrice, setMaxPrice] = useState<number>(50);
+  // Derive slider bounds from the actual dataset, with a small buffer — avoids the
+  // "Max: 50 €/kk" nonsense when the priciest plan is 44,90 €.
+  const priceBounds = useMemo(() => {
+    if (plans.length === 0) return { min: 5, max: 50 };
+    const prices = plans.map((p) => p.monthlyPrice);
+    return {
+      min: Math.floor(Math.min(...prices)),
+      max: Math.ceil(Math.max(...prices) + 1),
+    };
+  }, [plans]);
+
+  const [maxPrice, setMaxPrice] = useState<number>(priceBounds.max);
   const [selectedOperator, setSelectedOperator] = useState<string>('all');
   const [only5G, setOnly5G] = useState(false);
   const [onlyUnlimited, setOnlyUnlimited] = useState(false);
@@ -35,15 +46,22 @@ export default function MobilePlanFilters({ plans }: Props) {
     // Sort
     switch (sort) {
       case 'price-asc':
-        result.sort((a, b) => a.monthlyPrice - b.monthlyPrice);
+        // Bubble data-less (0 Gt) plans to the bottom so naive users don't land on
+        // "cheapest" plans that have no data included — bad UX and bad affiliate economics.
+        result.sort((a, b) => {
+          const aNoData = a.dataAmount === 0;
+          const bNoData = b.dataAmount === 0;
+          if (aNoData !== bNoData) return aNoData ? 1 : -1;
+          return a.monthlyPrice - b.monthlyPrice;
+        });
         break;
       case 'price-desc':
         result.sort((a, b) => b.monthlyPrice - a.monthlyPrice);
         break;
       case 'data-desc':
         result.sort((a, b) => {
-          const aData = a.dataAmount === 'unlimited' ? 99999 : a.dataAmount;
-          const bData = b.dataAmount === 'unlimited' ? 99999 : b.dataAmount;
+          const aData = a.dataAmount === 'unlimited' ? Infinity : a.dataAmount;
+          const bData = b.dataAmount === 'unlimited' ? Infinity : b.dataAmount;
           return bData - aData;
         });
         break;
@@ -73,8 +91,8 @@ export default function MobilePlanFilters({ plans }: Props) {
             <input
               id="filter-max-price"
               type="range"
-              min={5}
-              max={50}
+              min={priceBounds.min}
+              max={priceBounds.max}
               value={maxPrice}
               onChange={(e) => setMaxPrice(Number(e.target.value))}
               className="w-full accent-cyan-600"

@@ -83,12 +83,15 @@ export const MobilePlanCard = memo(function MobilePlanCard({ plan, showOperator 
       <a
         href={plan.url}
         target="_blank"
-        rel="noopener noreferrer"
+        rel="noopener noreferrer sponsored"
         className="flex items-center justify-center gap-2 rounded-xl bg-accent py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-600 min-h-[44px]"
       >
         Katso tarjous
         <ExternalLink className="h-4 w-4" />
       </a>
+      <p className="mt-1.5 text-center text-[11px] text-slate-400">
+        Mainoslinkki — saatamme saada palkkion siirryttyäsi operaattorin sivulle.
+      </p>
     </div>
   );
 });
@@ -152,12 +155,15 @@ export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOpe
       <a
         href={plan.url}
         target="_blank"
-        rel="noopener noreferrer"
+        rel="noopener noreferrer sponsored"
         className="flex items-center justify-center gap-2 rounded-xl bg-accent py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-600 min-h-[44px]"
       >
         Katso tarjous
         <ExternalLink className="h-4 w-4" />
       </a>
+      <p className="mt-1.5 text-center text-[11px] text-slate-400">
+        Mainoslinkki — saatamme saada palkkion siirryttyäsi operaattorin sivulle.
+      </p>
     </div>
   );
 });

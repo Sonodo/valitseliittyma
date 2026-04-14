@@ -171,9 +171,9 @@ export const mobilePlans: MobilePlan[] = [
   // TELIA
   // ═══════════════════════════════════════
   {
-    id: 'telia-rajaton-4g-10gb',
+    id: 'telia-mobiili-4g-10gb',
     operatorId: 'telia',
-    name: 'Telia Rajaton 4G 10 Gt',
+    name: 'Telia Mobiili 4G 10 Gt',
     category: 'mobile',
     monthlyPrice: 15.90,
     dataAmount: 10,
@@ -187,9 +187,9 @@ export const mobilePlans: MobilePlan[] = [
     url: 'https://www.telia.fi/puhelinliittymat',
   },
   {
-    id: 'telia-rajaton-4g-50gb',
+    id: 'telia-mobiili-4g-50gb',
     operatorId: 'telia',
-    name: 'Telia Rajaton 4G 50 Gt',
+    name: 'Telia Mobiili 4G 50 Gt',
     category: 'mobile',
     monthlyPrice: 23.90,
     dataAmount: 50,

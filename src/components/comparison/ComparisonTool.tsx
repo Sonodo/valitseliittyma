@@ -9,6 +9,8 @@ import type { MobilePlan } from '@/types';
 
 export default function ComparisonTool() {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  // Controlled select value — reset to "" after each pick instead of mutating e.target.value
+  const [pickerValue, setPickerValue] = useState<string>('');
 
   const addPlan = (planId: string) => {
     if (selectedIds.length < 3 && !selectedIds.includes(planId)) {
@@ -32,12 +34,15 @@ export default function ComparisonTool() {
           Valitse liittymiä vertailuun (max 3)
         </h2>
         <select
+          value={pickerValue}
           onChange={(e) => {
-            if (e.target.value) addPlan(e.target.value);
-            e.target.value = '';
+            const v = e.target.value;
+            if (v) addPlan(v);
+            setPickerValue('');
           }}
           className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm sm:max-w-md"
           disabled={selectedIds.length >= 3}
+          aria-label="Valitse liittymä vertailuun"
         >
           <option value="">Valitse liittymä...</option>
           {mobilePlans

@@ -178,12 +178,12 @@ export default function HomeContent({
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-400" />
               </span>
-              Liittymävertailu
+              Valitse Liittymä
             </motion.div>
 
             {/* Animated heading */}
             <AnimatedHeading
-              text="LÖYDÄ PARAS LIITTYMÄ."
+              text="LÖYDÄ SINULLE SOPIVIN LIITTYMÄ."
               className="text-4xl font-extrabold uppercase leading-tight tracking-wide text-white sm:text-5xl lg:text-6xl"
             />
             <motion.p
@@ -204,8 +204,8 @@ export default function HomeContent({
               transition={{ duration: 0.6, delay: 0.7, ease }}
               className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/80"
             >
-              Vertaile puhelinliittymiä ja laajakaistoja kaikilta operaattoreilta.
-              Elisa, DNA, Telia, Moi ja muut — yhdellä haulla.
+              Vertaile puhelinliittymiä ja laajakaistoja kaikilta 7 operaattorilta —
+              Elisa, DNA, Telia, Moi, Giga, Oomi ja Globetel yhdellä haulla.
             </motion.p>
 
             {/* CTAs */}
@@ -463,7 +463,7 @@ export default function HomeContent({
                 Operaattorit vertailussa
               </h2>
               <p className="mt-3 text-slate-500">
-                Vertailemme kaikkia Suomen suurimpia operaattoreita
+                Vertailemme Suomen suurimpia operaattoreita
               </p>
             </div>
           </ScrollReveal>

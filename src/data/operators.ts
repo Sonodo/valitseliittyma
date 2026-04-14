@@ -32,7 +32,7 @@ export const operators: Operator[] = [
     name: 'DNA',
     slug: 'dna',
     description:
-      'Suomen kolmanneksi suurin teleoperaattori noin 27 % markkinaosuudella. DNA tunnetaan kilpailukykyisistä hinnoista, hyvästä 5G-kattavuudesta ja selkeistä liittymäpaketeista. Osa Telenor-konsernia.',
+      'Suomen kolmanneksi suurin teleoperaattori noin 27 % markkinaosuudella. DNA tunnetaan kilpailukykyisistä hinnoista, hyvästä 5G-kattavuudesta ja selkeistä liittymäpaketeista.',
     founded: 2001,
     website: 'https://www.dna.fi',
     type: 'MNO',
@@ -79,7 +79,7 @@ export const operators: Operator[] = [
     name: 'Moi Mobiili',
     slug: 'moi',
     description:
-      'Moi Mobiili on suomalainen budjettioperaattori, joka toimii DNA:n verkossa. Tunnettu yksinkertaisista ja edullisista liittymistä ilman turhia lisäpalveluita. Kaikki hallitaan sovelluksella.',
+      'Moi Mobiili on alun perin itsenäisenä MVNO-toimijana perustettu (2016), joka siirtyi DNA:n omistukseen vuonna 2019 ja toimii nykyään käytännössä DNA:n budjettibrändinä DNA:n verkossa. Tunnettu yksinkertaisista ja edullisista liittymistä ilman turhia lisäpalveluita. Kaikki hallitaan sovelluksella.',
     founded: 2016,
     website: 'https://www.moi.fi',
     type: 'MVNO',
@@ -116,7 +116,7 @@ export const operators: Operator[] = [
       'Saatavilla Gigantin myymälöissä',
     ],
     cons: [
-      'Uusi toimija — kokemuksia vähän',
+      'Lanseerattu 2025, alle vuoden ikäinen — vähän pitkän aikavälin käyttökokemuksia',
       'Suppea liittymävalikoima (4 liittymää)',
       'Ei halvimpia perusliittymiä — hinnat alkaen ~22 €/kk',
     ],

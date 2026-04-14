@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { broadbandPlans, getCheapestBroadband, getFiberPlans, get5GBroadband } from '@/data/broadband-plans';
+import { operators } from '@/data/operators';
 import { BroadbandPlanCard } from '@/components/ui/PlanCard';
+import MethodologyBox from '@/components/ui/MethodologyBox';
 
 export const metadata: Metadata = {
   title: 'Paras laajakaista 2026 — Vertaa laajakaistaliittymiä',
@@ -23,12 +25,19 @@ export default function ParasLaajakaistaPage() {
             Paras laajakaista 2026
           </h1>
           <p className="mt-4 text-lg text-slate-600">
-            Vertaa laajakaistoja ja löydä paras vaihtoehto kotiisi: valokuitu, 4G- tai 5G-kotinetti.
+            Vertaa laajakaistoja ja löydä sopivin vaihtoehto kotiisi: valokuitu, 4G- tai 5G-kotinetti.
           </p>
         </div>
 
+        <MethodologyBox
+          superlative="paras laajakaista"
+          operatorCount={operators.filter((op) => broadbandPlans.some((p) => p.operatorId === op.id)).length}
+          planCount={broadbandPlans.length}
+          methodology="Laajakaistat on ryhmitelty kolmeen kategoriaan (halvin, valokuitu, 5G-kotinetti) ja listattu kunkin sisällä perushinnan (€/kk) mukaan. &quot;Paras&quot; kategoriassa tarkoittaa edullisinta listattua; kuituyhteydet vaativat tarkistuksen oman osoitteesi saatavuudelta."
+        />
+
         <section className="mb-16">
-          <h2 className="mb-6 text-2xl font-bold text-slate-900">Halvimmat laajakaistat</h2>
+          <h2 className="mb-6 text-2xl font-bold text-slate-900">Edullisimmat laajakaistat</h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {cheapest.map((plan) => (
               <BroadbandPlanCard key={plan.id} plan={plan} />
