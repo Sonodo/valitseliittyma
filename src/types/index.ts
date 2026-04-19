@@ -16,6 +16,8 @@ export interface Operator {
   color: string; // brand color for UI
   pros: string[];
   cons: string[];
+  isAffiliate?: boolean; // if true, operator monetised via affiliate program — KKV requires disclosure
+  affiliateUrl?: string; // Adtraction / affiliate tracking URL (preferred over plan.url when present)
 }
 
 // Plan types

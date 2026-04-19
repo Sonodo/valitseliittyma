@@ -1,9 +1,12 @@
+'use client';
+
 import Link from 'next/link';
 import { memo } from 'react';
 import { Signal, Wifi, Check, X, ExternalLink } from 'lucide-react';
 import { MobilePlan, BroadbandPlan } from '@/types';
 import { getOperatorById } from '@/data/operators';
 import { formatData, formatSpeed } from '@/lib/utils';
+import { trackAffiliateClick } from '@/lib/analytics';
 
 function formatPriceDisplay(price: number): string {
   return price.toFixed(2).replace('.', ',');
@@ -16,12 +19,22 @@ interface MobilePlanCardProps {
 
 export const MobilePlanCard = memo(function MobilePlanCard({ plan, showOperator = true }: MobilePlanCardProps) {
   const operator = getOperatorById(plan.operatorId);
+  const isAffiliate = Boolean(operator?.isAffiliate);
+  const targetUrl = isAffiliate && operator?.affiliateUrl ? operator.affiliateUrl : plan.url;
+  const relAttr = isAffiliate
+    ? 'sponsored noopener noreferrer nofollow'
+    : 'noopener noreferrer sponsored';
 
   return (
     <div className="card-hover group relative flex flex-col">
       {plan.has5G && (
         <span className="absolute -top-3 right-4 rounded-full bg-accent px-3 py-1 text-xs font-bold text-white">
           5G
+        </span>
+      )}
+      {isAffiliate && (
+        <span className="absolute -top-3 left-4 rounded-full bg-slate-200 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-600">
+          Mainos
         </span>
       )}
 
@@ -81,9 +94,17 @@ export const MobilePlanCard = memo(function MobilePlanCard({ plan, showOperator 
       </ul>
 
       <a
-        href={plan.url}
+        href={targetUrl}
         target="_blank"
-        rel="noopener noreferrer sponsored"
+        rel={relAttr}
+        onClick={() =>
+          trackAffiliateClick(operator?.name ?? plan.operatorId, 'mobile', {
+            plan_id: plan.id,
+            plan_name: plan.name,
+            monthly_price: plan.monthlyPrice,
+            is_affiliate: isAffiliate,
+          })
+        }
         className="flex items-center justify-center gap-2 rounded-xl bg-accent py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-600 min-h-[44px]"
       >
         Katso tarjous
@@ -103,6 +124,11 @@ interface BroadbandPlanCardProps {
 
 export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOperator = true }: BroadbandPlanCardProps) {
   const operator = getOperatorById(plan.operatorId);
+  const isAffiliate = Boolean(operator?.isAffiliate);
+  const targetUrl = isAffiliate && operator?.affiliateUrl ? operator.affiliateUrl : plan.url;
+  const relAttr = isAffiliate
+    ? 'sponsored noopener noreferrer nofollow'
+    : 'noopener noreferrer sponsored';
   const techLabel =
     plan.technology === 'fiber' ? 'Valokuitu' : plan.technology === '5G' ? '5G-kotinetti' : '4G-kotinetti';
 
@@ -111,6 +137,11 @@ export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOpe
       <span className="absolute -top-3 right-4 rounded-full bg-secondary px-3 py-1 text-xs font-bold text-white">
         {techLabel}
       </span>
+      {isAffiliate && (
+        <span className="absolute -top-3 left-4 rounded-full bg-slate-200 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-600">
+          Mainos
+        </span>
+      )}
 
       <div className="mb-4 flex items-start justify-between">
         <div>
@@ -153,9 +184,18 @@ export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOpe
       </ul>
 
       <a
-        href={plan.url}
+        href={targetUrl}
         target="_blank"
-        rel="noopener noreferrer sponsored"
+        rel={relAttr}
+        onClick={() =>
+          trackAffiliateClick(operator?.name ?? plan.operatorId, 'broadband', {
+            plan_id: plan.id,
+            plan_name: plan.name,
+            monthly_price: plan.monthlyPrice,
+            technology: plan.technology,
+            is_affiliate: isAffiliate,
+          })
+        }
         className="flex items-center justify-center gap-2 rounded-xl bg-accent py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-600 min-h-[44px]"
       >
         Katso tarjous
