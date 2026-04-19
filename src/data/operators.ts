@@ -72,6 +72,8 @@ export const operators: Operator[] = [
       'Hieman kalliimpi kuin DNA',
       'Liittymävalikoima voi olla sekava',
     ],
+    isAffiliate: true,
+    affiliateUrl: 'https://go.adt291.com/t/t?a=1553065612&as=2066470020&t=2&tk=1',
   },
   // === MVNO / BUDGET OPERATORS ===
   {
@@ -97,6 +99,8 @@ export const operators: Operator[] = [
       'Rajallinen asiakaspalvelu (chat-painotteinen)',
       'Ei viihdepalveluita',
     ],
+    isAffiliate: true,
+    affiliateUrl: 'https://in.moi.fi/t/t?a=1119688036&as=2066470020&t=2&tk=1',
   },
   {
     id: 'giga',
@@ -168,6 +172,31 @@ export const operators: Operator[] = [
       'Ei 5G-liittymiä',
       'Data lisäpalveluna — ei nykyaikaisia paketteja',
     ],
+  },
+  // === BROADBAND-ONLY OPERATORS ===
+  {
+    id: 'valoo',
+    name: 'Valoo',
+    slug: 'valoo',
+    description:
+      'Valoo on suomalainen laajakaistaoperaattori, joka tarjoaa kiinteää valokuitulaajakaistaa kuluttajille ja taloyhtiöille. Tunnetaan selkeästä hinnoittelusta ja kilpailukykyisistä nopeuksista ilman pitkää sitoutumista.',
+    founded: 2015,
+    website: 'https://www.valoo.fi',
+    type: 'MVNO',
+    color: '#FFB000',
+    pros: [
+      'Erikoistunut valokuituun',
+      'Selkeä hinnoittelu',
+      'Ei pitkää sitoutumista',
+      'Kilpailukykyiset nopeudet',
+    ],
+    cons: [
+      'Vain laajakaistaa — ei mobiililiittymiä',
+      'Saatavuus riippuu alueesta',
+      'Pienempi toimija kuin suuret MNO:t',
+    ],
+    isAffiliate: true,
+    affiliateUrl: 'https://go.adt246.net/t/t?a=1801146847&as=2066470020&t=2&tk=1',
   },
 ];
 

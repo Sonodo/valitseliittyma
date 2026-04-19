@@ -25,6 +25,7 @@ import {
 } from 'lucide-react';
 import { AnimatedHeading, ScrollReveal, WaveDivider, StatsCounter } from '@/components/landing';
 import { MobilePlanCard } from '@/components/ui/PlanCard';
+import { trackBeginCompare } from '@/lib/analytics';
 import type { MobilePlan } from '@/types';
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -217,6 +218,7 @@ export default function HomeContent({
             >
               <Link
                 href="/puhelinliittymat"
+                onClick={() => trackBeginCompare()}
                 className="group inline-flex items-center justify-center border-2 border-accent bg-accent px-6 py-3 sm:px-8 sm:py-4 text-sm font-bold uppercase tracking-widest text-white transition-all duration-300 hover:bg-transparent hover:text-white"
               >
                 Vertaa liittymiä

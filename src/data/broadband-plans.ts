@@ -247,6 +247,35 @@ export const broadbandPlans: BroadbandPlan[] = [
     specialFeatures: ['5G-verkko', 'Rajaton data', 'Helppo asennus', 'Nopea kuin kuitu'],
     url: 'https://www.telia.fi/laajakaista',
   },
+  // ═══════════════════════════════════════
+  // VALOO — Fiber
+  // ═══════════════════════════════════════
+  {
+    id: 'valoo-netti-100m',
+    operatorId: 'valoo',
+    name: 'Valoo 100M',
+    category: 'broadband',
+    monthlyPrice: 19.90,
+    technology: 'fiber',
+    downloadSpeed: 100,
+    uploadSpeed: 100,
+    contractType: 'no-commitment',
+    specialFeatures: ['Valokuitu', 'Rajaton data', 'Symmetrinen nopeus', 'Ei sitoutumista'],
+    url: 'https://www.valoo.fi',
+  },
+  {
+    id: 'valoo-netti-1000m',
+    operatorId: 'valoo',
+    name: 'Valoo 1000M',
+    category: 'broadband',
+    monthlyPrice: 39.90,
+    technology: 'fiber',
+    downloadSpeed: 1000,
+    uploadSpeed: 1000,
+    contractType: 'no-commitment',
+    specialFeatures: ['Valokuitu', 'Rajaton data', 'Symmetrinen gigabit', 'Ei sitoutumista'],
+    url: 'https://www.valoo.fi',
+  },
 ];
 
 // Helpers

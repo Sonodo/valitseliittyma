@@ -23,6 +23,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/:path*',
+        has: [{ type: 'host', value: 'www.valitseliittyma.fi' }],
         destination: 'https://valitseliittyma.fi/:path*',
         permanent: true,
       },
