@@ -19,16 +19,6 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: process.cwd(),
   },
-  async redirects() {
-    return [
-      {
-        source: '/:path*',
-        missing: [{ type: 'host', value: 'valitseliittyma.fi' }],
-        destination: 'https://valitseliittyma.fi/:path*',
-        permanent: true,
-      },
-    ];
-  },
   async headers() {
     const securityHeaders = [
       { key: 'X-Frame-Options', value: 'DENY' },
