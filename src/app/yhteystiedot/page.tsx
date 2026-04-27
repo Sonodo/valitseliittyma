@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import {
   PUBLISHER_ORGANIZATION_SCHEMA,
-  HENRI_PERSON_SCHEMA,
   breadcrumbSchema,
 } from '@/lib/schema';
 
@@ -27,10 +25,6 @@ export default function YhteystiedotPage() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(HENRI_PERSON_SCHEMA) }}
-      />
-      <script
-        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
 
@@ -51,13 +45,13 @@ export default function YhteystiedotPage() {
             Helsinki, Suomi
           </p>
 
-          <h2>Vastaava päätoimittaja</h2>
+          <h2>Toimitus</h2>
           <p>
-            <strong>Henri Linnainmaa</strong>, KTM (Aalto-yliopisto)<br />
-            Tutustu päätoimittajaan ja toimituksen periaatteisiin{' '}
-            <Link href="/tietoa" className="text-cyan-700 hover:underline">
+            Valitse Liittymän sisällöstä ja vertailumenetelmistä vastaa Sonodon
+            toimitus. Tutustu toimituksen periaatteisiin{' '}
+            <a href="/tietoa" className="text-cyan-700 hover:underline">
               tietoa-sivulla
-            </Link>
+            </a>
             .
           </p>
 

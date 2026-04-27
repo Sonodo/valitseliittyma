@@ -18,7 +18,7 @@ export default function TietosuojaPage() {
         <article className="mt-10 prose prose-slate max-w-none">
           <h2>1. Rekisterinpitäjä</h2>
           <p>
-            Sonodo — Henri Linnainmaa<br />
+            Sonodo (toiminimi)<br />
             Helsinki, Suomi
           </p>
 

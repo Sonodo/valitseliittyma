@@ -18,7 +18,7 @@ export default function KayttoehdotPage() {
         <article className="mt-10 prose prose-slate max-w-none">
           <h2>1. Palveluntarjoaja</h2>
           <p>
-            Sonodo — Henri Linnainmaa<br />
+            Sonodo (toiminimi)<br />
             Helsinki, Suomi
           </p>
 

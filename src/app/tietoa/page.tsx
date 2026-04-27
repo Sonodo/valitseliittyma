@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import {
-  HENRI_PERSON_SCHEMA,
   PUBLISHER_ORGANIZATION_SCHEMA,
   breadcrumbSchema,
 } from '@/lib/schema';
@@ -9,7 +8,7 @@ import {
 export const metadata: Metadata = {
   title: 'Tietoa palvelusta ja toimituksen periaatteet — Valitse Liittymä',
   description:
-    'Valitse Liittymä on riippumaton puhelinliittymien ja laajakaistojen vertailupalvelu. Tutustu toimituksen periaatteisiin, vertailumenetelmään ja vastaavaan päätoimittajaan.',
+    'Valitse Liittymä on riippumaton puhelinliittymien ja laajakaistojen vertailupalvelu. Tutustu toimituksen periaatteisiin ja vertailumenetelmään.',
   alternates: { canonical: '/tietoa' },
 };
 
@@ -24,10 +23,6 @@ export default function TietoaPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(PUBLISHER_ORGANIZATION_SCHEMA) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(HENRI_PERSON_SCHEMA) }}
       />
       <script
         type="application/ld+json"
@@ -103,35 +98,35 @@ export default function TietoaPage() {
 
           <h3>5. Valitusten käsittely</h3>
           <p>
-            Palautetta ja reklamaatioita käsittelee toimituksen vastaava henkilö.
-            Valitukset käsitellään luottamuksellisesti, ja vastaamme yhden arkipäivän
-            kuluessa. Kuluttajan oikeudet operaattoria vastaan koskevia riitatilanteita
-            voi viedä kuluttajariitalautakuntaan tai KKV:n kuluttajaneuvontaan.
+            Palautetta ja reklamaatioita käsittelee Sonodon toimitus. Valitukset
+            käsitellään luottamuksellisesti, ja vastaamme yhden arkipäivän kuluessa.
+            Kuluttajan oikeudet operaattoria vastaan koskevia riitatilanteita voi viedä
+            kuluttajariitalautakuntaan tai KKV:n kuluttajaneuvontaan.
           </p>
 
-          <h2>Vastaava päätoimittaja</h2>
+          <h2>Toimitus ja vastuu sisällöstä</h2>
           <div className="not-prose mt-4 rounded-xl border border-slate-200 bg-white p-6 sm:p-8">
-            <h3 className="text-xl font-bold text-slate-900">Henri Linnainmaa</h3>
+            <h3 className="text-xl font-bold text-slate-900">Sonodo</h3>
             <p className="mt-1 text-sm font-medium text-cyan-700">
-              KTM (Aalto-yliopisto) — Vastaava päätoimittaja
+              Palvelun ylläpitäjä ja toimituksellinen vastuu
             </p>
             <div className="mt-4 space-y-4 text-base leading-relaxed text-slate-700">
               <p>
-                Henri Linnainmaa on kauppatieteiden maisteri Aalto-yliopistosta. Hän on
-                urallaan konsultoinut yrityksiä tekoälyn soveltamisessa liiketoimintaan ja
-                rakentanut kymmeniä tekoälypohjaisia tiedonkeruu- ja analyysiratkaisuja
-                yrityskäyttöön muun muassa raportointiin, datavalidointiin ja markkinointiin.
+                Valitse Liittymän julkaisee ja ylläpitää <strong>Sonodo</strong>
+                -toiminimi. Sonodo on erikoistunut data-analyyttisiin
+                kuluttajavertailupalveluihin, ja vastaa Valitse-verkoston
+                sisällöstä, vertailumenetelmistä ja toimituksellisista periaatteista.
               </p>
               <p>
-                Vastaavana päätoimittajana Henri vastaa siitä, että Valitse Liittymän
-                vertailut perustuvat tarkistettuihin tietoihin ja että toimituksen
-                periaatteita noudatetaan kaikessa sisällöntuotannossa. Hänen
-                lähestymistapansa yhdistää huolellisen menetelmäsuunnittelun, laajan
-                lähdetarkistuksen ja jatkuvan iteratiivisen kehittämisen — sama
-                data-analyyttinen työtapa, joka on tunnusomaista Valitse-verkostolle.
+                Sonodon toimitus vastaa siitä, että Valitse Liittymän vertailut
+                perustuvat tarkistettuihin tietoihin ja että toimituksen periaatteita
+                noudatetaan kaikessa sisällöntuotannossa. Lähestymistapamme yhdistää
+                huolellisen menetelmäsuunnittelun, laajan lähdetarkistuksen ja jatkuvan
+                iteratiivisen kehittämisen — sama data-analyyttinen työtapa, joka on
+                tunnusomaista Valitse-verkostolle.
               </p>
               <p>
-                Yhteydenotot päätoimittajaan:{' '}
+                Yhteydenotot toimitukseen:{' '}
                 <a
                   href="mailto:info@valitseliittyma.fi"
                   className="font-semibold text-cyan-700 hover:underline"
@@ -159,12 +154,11 @@ export default function TietoaPage() {
             päätöksiä ja säästämään arjen kuluissa.
           </p>
 
-          <h2>Yhteystiedot ja vastuuhenkilö</h2>
+          <h2>Yhteystiedot</h2>
           <p>
             <strong>Sonodo</strong> (toiminimi)<br />
             Y-tunnus: 2887416-4<br />
             Helsinki, Suomi<br />
-            Vastaava päätoimittaja: Henri Linnainmaa, KTM<br />
             Sähköposti:{' '}
             <a
               href="mailto:info@valitseliittyma.fi"
