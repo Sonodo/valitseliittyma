@@ -7,6 +7,8 @@ import { mobilePlans, getPlansByOperator } from '@/data/mobile-plans';
 import { broadbandPlans, getBroadbandByOperator } from '@/data/broadband-plans';
 import { comparisonPairs } from '@/data/comparisons';
 import { MobilePlanCard, BroadbandPlanCard } from '@/components/ui/PlanCard';
+import { plansToItemListSchema, breadcrumbSchema } from '@/lib/schema';
+import { SITE_URL } from '@/lib/constants';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -43,7 +45,21 @@ export default async function OperatorPage({ params }: Props) {
     url: operator.website,
     description: operator.description,
     foundingDate: operator.founded.toString(),
+    ...(operator.brand ? { brand: operator.brand } : {}),
   };
+
+  const allPlans = [...opMobilePlans, ...opBroadbandPlans];
+  const planListLd = plansToItemListSchema(
+    allPlans,
+    `${SITE_URL}/operaattorit/${operator.slug}`,
+    `${operator.name} — liittymät | Valitse Liittymä`,
+  );
+
+  const breadcrumbLd = breadcrumbSchema([
+    { name: 'Etusivu', url: '/' },
+    { name: 'Operaattorit', url: '/operaattorit' },
+    { name: operator.name, url: `/operaattorit/${operator.slug}` },
+  ]);
 
   return (
     <div className="py-12 sm:py-16">
@@ -51,6 +67,16 @@ export default async function OperatorPage({ params }: Props) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {allPlans.length > 0 && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(planListLd) }}
+          />
+        )}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
         />
 
         <Link

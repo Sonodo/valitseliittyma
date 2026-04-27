@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { broadbandPlans } from '@/data/broadband-plans';
 import BroadbandPlanFilters from '@/components/plans/BroadbandPlanFilters';
+import { plansToItemListSchema, breadcrumbSchema } from '@/lib/schema';
+import { SITE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Laajakaista — Vertaa laajakaistaliittymiä Suomessa',
@@ -14,8 +16,27 @@ export const metadata: Metadata = {
 };
 
 export default function LaajakaistaPage() {
+  const itemListLd = plansToItemListSchema(
+    broadbandPlans,
+    `${SITE_URL}/laajakaista`,
+    'Laajakaistaliittymät — Valitse Liittymä',
+  );
+
+  const breadcrumbLd = breadcrumbSchema([
+    { name: 'Etusivu', url: '/' },
+    { name: 'Laajakaista', url: '/laajakaista' },
+  ]);
+
   return (
     <div className="py-12 sm:py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10">
           <h1 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">

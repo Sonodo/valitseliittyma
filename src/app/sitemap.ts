@@ -25,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tietosuoja',
     '/kayttoehdot',
     '/yhteystiedot',
+    '/sanasto',
   ];
 
   const entries: MetadataRoute.Sitemap = staticPages.map((path) => ({
