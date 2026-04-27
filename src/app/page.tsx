@@ -3,7 +3,8 @@ import { operators } from '@/data/operators';
 import { mobilePlans, getCheapestPlans } from '@/data/mobile-plans';
 import { getLatestPosts } from '@/data/blog-posts';
 import { cities } from '@/data/cities';
-import { SITE_URL } from '@/lib/constants';
+import { faqPageSchema } from '@/lib/schema';
+import { HOMEPAGE_FAQ } from './faq-data';
 import HomeContent from './home-content';
 
 export const metadata: Metadata = {
@@ -25,20 +26,28 @@ export default function HomePage() {
   const latestPosts = getLatestPosts(3);
   const totalPlans = mobilePlans.length;
 
+  const faqLd = faqPageSchema(HOMEPAGE_FAQ);
+
   return (
-    <HomeContent
-      cheapPlans={cheapPlans}
-      latestPosts={latestPosts}
-      operatorCount={operators.length}
-      totalPlans={totalPlans}
-      cityCount={cities.length}
-      operators={operators.map((op) => ({
-        id: op.id,
-        name: op.name,
-        slug: op.slug,
-        color: op.color,
-        type: op.type,
-      }))}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+      />
+      <HomeContent
+        cheapPlans={cheapPlans}
+        latestPosts={latestPosts}
+        operatorCount={operators.length}
+        totalPlans={totalPlans}
+        cityCount={cities.length}
+        operators={operators.map((op) => ({
+          id: op.id,
+          name: op.name,
+          slug: op.slug,
+          color: op.color,
+          type: op.type,
+        }))}
+      />
+    </>
   );
 }

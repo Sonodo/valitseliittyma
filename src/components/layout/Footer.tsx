@@ -33,7 +33,9 @@ const footerSections = {
     links: [
       { label: 'Oppaat', href: '/opas' },
       { label: 'Artikkelit', href: '/blogi' },
+      { label: 'Sanasto', href: '/sanasto' },
       { label: 'Tietoa palvelusta', href: '/tietoa' },
+      { label: 'Toimituksen periaatteet', href: '/tietoa#ranking' },
       { label: 'Tietosuoja', href: '/tietosuoja' },
       { label: 'Käyttöehdot', href: '/kayttoehdot' },
     ],

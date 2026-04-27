@@ -27,6 +27,7 @@ import { AnimatedHeading, ScrollReveal, WaveDivider, StatsCounter } from '@/comp
 import { MobilePlanCard } from '@/components/ui/PlanCard';
 import { trackBeginCompare } from '@/lib/analytics';
 import type { MobilePlan } from '@/types';
+import { HOMEPAGE_FAQ } from './faq-data';
 
 /* ═══════════════════════════════════════════════════════════════════
    Valitse Liittymä — Premium Landing Page
@@ -37,28 +38,7 @@ const ease = [0.25, 0.1, 0.25, 1] as const;
 
 /* ── Data ───────────────────────────────────────────────────────── */
 
-const faqItems = [
-  {
-    q: 'Onko Valitse Liittymän palvelu ilmainen?',
-    a: 'Kyllä. Valitse Liittymä on täysin ilmainen käyttää — ei maksuja, ei rekisteröitymistä, ei sitoumusta.',
-  },
-  {
-    q: 'Kuinka usein liittymätiedot päivitetään?',
-    a: 'Päivitämme liittymätiedot viikoittain. Hinnat ja ehdot voivat kuitenkin muuttua — tarkista aina ajantasainen hinta operaattorin sivuilta.',
-  },
-  {
-    q: 'Miten operaattorin vaihto toimii?',
-    a: 'Tilaa uusi liittymä haluamaltasi operaattorilta ja pyydä numeron siirtoa. Uusi operaattori hoitaa vanhan liittymän irtisanomisen puolestasi. Siirto kestää 1–5 arkipäivää.',
-  },
-  {
-    q: 'Onko budjettioperaattori yhtä luotettava kuin Elisa, DNA tai Telia?',
-    a: 'Kyllä. Budjettioperaattorit (MVNO) käyttävät isojen operaattoreiden verkkoja. Esimerkiksi Moi Mobiili toimii DNA:n verkossa, joten verkkolaatu on sama.',
-  },
-  {
-    q: 'Tarvitsenko 5G-liittymän?',
-    a: '5G tuo nopeamman yhteyden ja pienemmän viiveen. Jos käytät paljon dataa tai katsot suoratoistosisältöä, 5G on hyvä valinta. Peruskäyttäjälle 4G riittää mainiosti.',
-  },
-];
+const faqItems = HOMEPAGE_FAQ;
 
 const howItWorks = [
   {
