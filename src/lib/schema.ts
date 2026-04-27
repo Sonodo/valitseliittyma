@@ -237,26 +237,6 @@ export function breadcrumbSchema(
   };
 }
 
-/* ── Person / Editor schema (Henri Linnainmaa) ───────────────────── */
-
-export const HENRI_PERSON_SCHEMA: SchemaObject = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Henri Linnainmaa',
-  jobTitle: 'Vastaava päätoimittaja',
-  honorificSuffix: 'KTM',
-  alumniOf: {
-    '@type': 'CollegeOrUniversity',
-    name: 'Aalto-yliopisto',
-  },
-  worksFor: {
-    '@type': 'Organization',
-    name: SITE_NAME,
-    url: SITE_URL,
-  },
-  knowsLanguage: ['fi', 'en'],
-};
-
 /* ── Publisher Organization (Sonodo / Valitse Liittymä) ──────────── */
 
 export const PUBLISHER_ORGANIZATION_SCHEMA: SchemaObject = {
@@ -269,9 +249,10 @@ export const PUBLISHER_ORGANIZATION_SCHEMA: SchemaObject = {
   legalName: 'Sonodo',
   taxID: '2887416-4',
   vatID: 'FI28874164',
-  founder: {
-    '@type': 'Person',
-    name: 'Henri Linnainmaa',
+  identifier: {
+    '@type': 'PropertyValue',
+    propertyID: 'FI Y-tunnus',
+    value: '2887416-4',
   },
   areaServed: {
     '@type': 'Country',
