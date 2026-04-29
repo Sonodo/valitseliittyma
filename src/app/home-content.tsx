@@ -304,7 +304,7 @@ export default function HomeContent({
 
       {/* ─────────────────────────────────────────────────────────────
           SECTION 4: CATEGORY CARDS — Gradient color progression
-          Like Lakimaatti process steps, violet gradient
+          Process-step style cards, violet gradient
          ───────────────────────────────────────────────────────────── */}
       <section className="bg-white py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -518,7 +518,7 @@ export default function HomeContent({
 
       {/* ─────────────────────────────────────────────────────────────
           SECTION 9: COMPARISON TABLE
-          White bg, Lakimaatti-style table with highlighted column
+          White bg, comparison table with highlighted column
          ───────────────────────────────────────────────────────────── */}
       <section className="bg-white py-20 sm:py-28">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
