@@ -71,5 +71,4 @@ export const VALITSE_SITES = [
 export const EMPIRE_SITES = [
   { name: 'Asuntomaatti', url: 'https://asuntomaatti.fi', description: 'Etsi asuntoja' },
   { name: 'Alennuskartta', url: 'https://alennuskartta.fi', description: 'Löydä tarjoukset' },
-  { name: 'Lakimaatti', url: 'https://lakimaatti.fi', description: 'Lakipalvelut' },
 ];
