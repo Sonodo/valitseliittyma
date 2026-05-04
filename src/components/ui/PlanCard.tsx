@@ -7,6 +7,7 @@ import { MobilePlan, BroadbandPlan } from '@/types';
 import { getOperatorById } from '@/data/operators';
 import { formatData, formatSpeed } from '@/lib/utils';
 import { trackAffiliateClick } from '@/lib/analytics';
+import { PartnerBadge, DISCLOSURE_COPY } from '@/components/disclosure';
 
 function formatPriceDisplay(price: number): string {
   return price.toFixed(2).replace('.', ',');
@@ -32,11 +33,10 @@ export const MobilePlanCard = memo(function MobilePlanCard({ plan, showOperator 
           5G
         </span>
       )}
-      {isAffiliate && (
-        <span className="absolute -top-3 left-4 rounded-full bg-slate-200 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-600">
-          Mainos
-        </span>
-      )}
+      <PartnerBadge
+        variant={isAffiliate ? 'kumppani' : 'markkinahinta'}
+        className="absolute -top-3 left-4 z-10"
+      />
 
       <div className="mb-4 flex items-start justify-between">
         <div>
@@ -102,17 +102,15 @@ export const MobilePlanCard = memo(function MobilePlanCard({ plan, showOperator 
             plan_id: plan.id,
             plan_name: plan.name,
             monthly_price: plan.monthlyPrice,
+            partner: isAffiliate,
             is_affiliate: isAffiliate,
           })
         }
         className="flex items-center justify-center gap-2 rounded-xl bg-accent py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-600 min-h-[44px]"
       >
-        Katso tarjous
+        {isAffiliate ? DISCLOSURE_COPY.ctaPartner : DISCLOSURE_COPY.ctaMarket}
         <ExternalLink className="h-4 w-4" />
       </a>
-      <p className="mt-1.5 text-center text-[11px] text-slate-400">
-        Mainoslinkki — saatamme saada palkkion siirryttyäsi operaattorin sivulle.
-      </p>
     </div>
   );
 });
@@ -137,11 +135,10 @@ export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOpe
       <span className="absolute -top-3 right-4 rounded-full bg-secondary px-3 py-1 text-xs font-bold text-white">
         {techLabel}
       </span>
-      {isAffiliate && (
-        <span className="absolute -top-3 left-4 rounded-full bg-slate-200 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-600">
-          Mainos
-        </span>
-      )}
+      <PartnerBadge
+        variant={isAffiliate ? 'kumppani' : 'markkinahinta'}
+        className="absolute -top-3 left-4 z-10"
+      />
 
       <div className="mb-4 flex items-start justify-between">
         <div>
@@ -193,17 +190,15 @@ export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOpe
             plan_name: plan.name,
             monthly_price: plan.monthlyPrice,
             technology: plan.technology,
+            partner: isAffiliate,
             is_affiliate: isAffiliate,
           })
         }
         className="flex items-center justify-center gap-2 rounded-xl bg-accent py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-600 min-h-[44px]"
       >
-        Katso tarjous
+        {isAffiliate ? DISCLOSURE_COPY.ctaPartner : DISCLOSURE_COPY.ctaMarket}
         <ExternalLink className="h-4 w-4" />
       </a>
-      <p className="mt-1.5 text-center text-[11px] text-slate-400">
-        Mainoslinkki — saatamme saada palkkion siirryttyäsi operaattorin sivulle.
-      </p>
     </div>
   );
 });
