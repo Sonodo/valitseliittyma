@@ -3,7 +3,6 @@ import { mobilePlans } from '@/data/mobile-plans';
 import MobilePlanFilters from '@/components/plans/MobilePlanFilters';
 import { plansToItemListSchema, breadcrumbSchema } from '@/lib/schema';
 import { SITE_URL } from '@/lib/constants';
-import { SiteDisclosureBar } from '@/components/disclosure';
 
 export const metadata: Metadata = {
   title: 'Puhelinliittymät — Vertaa kaikkia liittymiä Suomessa',
@@ -30,7 +29,6 @@ export default function PuhelinliittymatPage() {
 
   return (
     <>
-      <SiteDisclosureBar />
       <div className="py-12 sm:py-16">
       <script
         type="application/ld+json"

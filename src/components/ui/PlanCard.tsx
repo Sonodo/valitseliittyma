@@ -7,7 +7,7 @@ import { MobilePlan, BroadbandPlan } from '@/types';
 import { getOperatorById } from '@/data/operators';
 import { formatData, formatSpeed } from '@/lib/utils';
 import { trackAffiliateClick } from '@/lib/analytics';
-import { PartnerBadge, DISCLOSURE_COPY } from '@/components/disclosure';
+import { DISCLOSURE_COPY } from '@/components/disclosure';
 
 function formatPriceDisplay(price: number): string {
   return price.toFixed(2).replace('.', ',');
@@ -33,10 +33,6 @@ export const MobilePlanCard = memo(function MobilePlanCard({ plan, showOperator 
           5G
         </span>
       )}
-      <PartnerBadge
-        variant={isAffiliate ? 'kumppani' : 'markkinahinta'}
-        className="absolute -top-3 left-4 z-10"
-      />
 
       <div className="mb-4 flex items-start justify-between">
         <div>
@@ -108,7 +104,7 @@ export const MobilePlanCard = memo(function MobilePlanCard({ plan, showOperator 
         }
         className="flex items-center justify-center gap-2 rounded-xl bg-accent py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-600 min-h-[44px]"
       >
-        {isAffiliate ? DISCLOSURE_COPY.ctaPartner : DISCLOSURE_COPY.ctaMarket}
+        {DISCLOSURE_COPY.cta}
         <ExternalLink className="h-4 w-4" />
       </a>
     </div>
@@ -135,10 +131,6 @@ export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOpe
       <span className="absolute -top-3 right-4 rounded-full bg-secondary px-3 py-1 text-xs font-bold text-white">
         {techLabel}
       </span>
-      <PartnerBadge
-        variant={isAffiliate ? 'kumppani' : 'markkinahinta'}
-        className="absolute -top-3 left-4 z-10"
-      />
 
       <div className="mb-4 flex items-start justify-between">
         <div>
@@ -196,7 +188,7 @@ export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOpe
         }
         className="flex items-center justify-center gap-2 rounded-xl bg-accent py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-600 min-h-[44px]"
       >
-        {isAffiliate ? DISCLOSURE_COPY.ctaPartner : DISCLOSURE_COPY.ctaMarket}
+        {DISCLOSURE_COPY.cta}
         <ExternalLink className="h-4 w-4" />
       </a>
     </div>

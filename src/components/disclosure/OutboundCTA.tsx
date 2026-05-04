@@ -7,6 +7,11 @@ import { trackEvent } from '@/lib/analytics';
 
 interface OutboundCTAProps {
   href: string;
+  /**
+   * Whether this link is to a commercial partner.
+   * Used ONLY for `rel="sponsored"` and GA4 event payload.
+   * Does NOT alter visible CTA text or styling — uniform across all providers.
+   */
   partner: boolean;
   /** Provider/operator name for GA4 event payload. */
   provider: string;
@@ -14,16 +19,16 @@ interface OutboundCTAProps {
   productType?: string;
   /** Extra GA4 payload (plan id, price, etc.). */
   extras?: Record<string, unknown>;
-  /** Override label. Defaults to partner-aware copy. */
+  /** Override label. Defaults to uniform CTA copy. */
   label?: ReactNode;
   className?: string;
 }
 
 /**
- * Partner-aware outbound CTA.
- * - Renders "Siirry kumppanin sivulle →" if partner=true, otherwise "Siirry tarjoajan sivulle →".
+ * Outbound CTA with uniform text + style across all providers.
+ * - Renders the same label regardless of partner status.
  * - Adds rel="sponsored" on partner links (always combined with noopener noreferrer).
- * - Fires GA4 `affiliate_click` with `partner: boolean` payload.
+ * - Fires GA4 `affiliate_click` with `partner: boolean` payload (internal analytics only).
  */
 export function OutboundCTA({
   href,
@@ -34,7 +39,7 @@ export function OutboundCTA({
   label,
   className,
 }: OutboundCTAProps) {
-  const text = label ?? (partner ? DISCLOSURE_COPY.ctaPartner : DISCLOSURE_COPY.ctaMarket);
+  const text = label ?? DISCLOSURE_COPY.cta;
   const rel = partner
     ? 'sponsored noopener noreferrer nofollow'
     : 'noopener noreferrer';

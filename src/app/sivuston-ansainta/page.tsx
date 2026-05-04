@@ -5,16 +5,16 @@ import { SITE_NAME } from '@/lib/constants';
 import { SITE_CONFIG } from '@/components/disclosure';
 
 export const metadata: Metadata = {
-  title: 'Luotettavuus ja rahoitus — näin ansaitsemme rahaa',
+  title: 'Sivuston ansainta — näin ansaitsemme rahaa',
   description: `Miten ${SITE_NAME} valitsee operaattorit, järjestää tarjoukset ja ansaitsee rahaa. Avoin selvitys palkkioista, järjestysalgoritmistä ja siitä mitä emme tee.`,
-  alternates: { canonical: '/luotettavuus' },
+  alternates: { canonical: '/sivuston-ansainta' },
   robots: { index: true, follow: true },
 };
 
-export default function LuotettavuusPage() {
+export default function SivustonAnsaintaPage() {
   const breadcrumbLd = breadcrumbSchema([
     { name: 'Etusivu', url: '/' },
-    { name: 'Luotettavuus', url: '/luotettavuus' },
+    { name: 'Sivuston ansainta', url: '/sivuston-ansainta' },
   ]);
 
   return (
@@ -29,7 +29,7 @@ export default function LuotettavuusPage() {
             Toimituksen periaatteet
           </p>
           <h1 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl">
-            Luotettavuus ja rahoitus
+            Sivuston ansainta
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-slate-600">
             Tämä sivu kertoo avoimesti, miten {SITE_NAME} hankkii tietonsa,
@@ -42,19 +42,20 @@ export default function LuotettavuusPage() {
         <section className="mb-10">
           <h2 className="text-xl font-bold text-slate-900">Mistä tarjoajat tulevat</h2>
           <p className="mt-3 text-slate-700 leading-relaxed">
-            Kerätä operaattoreiden ja palveluntarjoajien tarjoukset suoraan heidän
-            julkisilta sivuiltaan. Lisäksi käytämme rajatun joukon kumppaneita,
-            joiden kanssa meillä on suora affiliate-sopimus — heidän tarjouksensa
-            päivittyvät kumppanin omasta järjestelmästä, joten hinta- ja
-            ehtotiedot ovat tuoreimmat.
+            Keräämme operaattoreiden ja palveluntarjoajien tarjoukset suoraan
+            heidän julkisilta sivuiltaan. Lisäksi käytämme rajatun joukon
+            kumppaneita, joiden kanssa meillä on suora affiliate-sopimus
+            Adtraction-verkoston kautta — heidän tarjouksensa päivittyvät
+            kumppanin omasta järjestelmästä, joten hinta- ja ehtotiedot ovat
+            tuoreimmat.
           </p>
           <p className="mt-3 text-slate-700 leading-relaxed">
             Sisällytämme listalle <strong>kaikki Suomessa toimivat merkittävät
             operaattorit</strong> riippumatta siitä, onko meillä heidän kanssaan
-            kaupallinen sopimus. Vertailusta jätetään pois ainoastaan operaattorit,
-            joiden tiedot eivät ole julkisesti saatavilla, joiden tarjonta on
-            rajattu hyvin pieneen alueeseen tai joiden palvelu on todettu
-            kuluttajaviranomaisen toimesta sopimattomaksi.
+            kaupallinen sopimus. Vertailusta jätetään pois ainoastaan
+            operaattorit, joiden tiedot eivät ole julkisesti saatavilla, joiden
+            tarjonta on rajattu hyvin pieneen alueeseen tai joiden palvelu on
+            todettu kuluttajaviranomaisen toimesta sopimattomaksi.
           </p>
         </section>
 
@@ -63,21 +64,21 @@ export default function LuotettavuusPage() {
           <p className="mt-3 text-slate-700 leading-relaxed">
             Tarjoukset järjestetään <strong>oletuksena hinnan mukaan</strong>{' '}
             ({SITE_CONFIG.rankingCriteria}). Algoritmi <strong>ei</strong> ota
-            huomioon sitä, saammeko tarjoajalta palkkion vai emme. Kahden samanhintaisen
-            tarjouksen järjestys ratkaistaan sopimuksen pituudella (lyhyempi sitoutuminen
-            ensin) ja lopuksi datamäärällä / nopeudella. Käyttäjä voi vaihtaa
-            järjestysperusteen tai suodattaa hakuja vapaasti.
+            huomioon sitä, saammeko tarjoajalta palkkion vai emme. Kahden
+            samanhintaisen tarjouksen järjestys ratkaistaan sopimuksen
+            pituudella (lyhyempi sitoutuminen ensin) ja lopuksi datamäärällä /
+            nopeudella. Käyttäjä voi vaihtaa järjestysperusteen tai suodattaa
+            hakuja vapaasti.
           </p>
           <p className="mt-3 text-slate-700 leading-relaxed">
-            Kumppanitarjoukset on merkitty selkeästi pillillä{' '}
-            <span className="rounded-full bg-[#E8EEF6] px-2 py-0.5 text-[11px] font-semibold text-[#3B5266]">
-              Kumppanitarjous
-            </span>
-            . Muut tarjoukset kantavat merkintää{' '}
-            <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-500">
-              Markkinahinta
-            </span>
-            .
+            Kumppani- ja ei-kumppanitarjoukset näkyvät vertailussa{' '}
+            <strong>identtisellä tavalla</strong> — sama ulkoasu, sama
+            järjestyslogiikka. Kumppanilinkkeihin lisätään tekninen{' '}
+            <code className="rounded bg-slate-100 px-1 py-0.5 text-xs">
+              rel=&quot;sponsored&quot;
+            </code>
+            -merkintä hakukoneita varten, mutta käyttäjälle näkyvä korttien
+            ulkoasu ei poikkea.
           </p>
         </section>
 

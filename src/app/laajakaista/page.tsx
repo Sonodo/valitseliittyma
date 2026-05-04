@@ -3,7 +3,6 @@ import { broadbandPlans } from '@/data/broadband-plans';
 import BroadbandPlanFilters from '@/components/plans/BroadbandPlanFilters';
 import { plansToItemListSchema, breadcrumbSchema } from '@/lib/schema';
 import { SITE_URL } from '@/lib/constants';
-import { SiteDisclosureBar } from '@/components/disclosure';
 
 export const metadata: Metadata = {
   title: 'Laajakaista — Vertaa laajakaistaliittymiä Suomessa',
@@ -30,7 +29,6 @@ export default function LaajakaistaPage() {
 
   return (
     <>
-      <SiteDisclosureBar />
       <div className="py-12 sm:py-16">
         <script
           type="application/ld+json"

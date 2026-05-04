@@ -36,7 +36,7 @@ const footerSections = {
       { label: 'Sanasto', href: '/sanasto' },
       { label: 'Tietoa palvelusta', href: '/tietoa' },
       { label: 'Toimituksen periaatteet', href: '/tietoa#ranking' },
-      { label: 'Luotettavuus & rahoitus', href: '/luotettavuus' },
+      { label: 'Sivuston ansainta', href: '/sivuston-ansainta' },
       { label: 'Tietosuoja', href: '/tietosuoja' },
       { label: 'Käyttöehdot', href: '/kayttoehdot' },
     ],
