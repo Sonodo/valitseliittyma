@@ -85,7 +85,7 @@
 2. **Mirror Session #088 fixes to deploy repo** (or retire deploy repo)
 3. **Submit sitemap to Google Search Console** — accelerate indexing
 4. **Apply for AdSense** — organic traffic monetization
-5. **Apply for Adtraction telecom affiliate programs** — partnership revenue
+5. **Apply for Adtraction programs (5 unwired operators)** — Elisa/Saunalahti, DNA, Giga Mobiili, Oomi Mobiili, Globetel. Once approved, paste the tracking URL into `src/data/operators.ts` (see top-of-file note); two-line edit per operator, no code changes needed. Currently wired: Telia, Moi, Valoo.
 6. **Post-launch SEO monitoring** — Track keyword rankings
 7. **Verify remaining operator data accuracy** — Elisa, DNA, Telia plans
 

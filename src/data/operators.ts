@@ -1,8 +1,28 @@
 import { Operator } from '@/types';
 
+// =============================================================================
+// AFFILIATE WIRING (Adtraction channel 2066470020)
+// =============================================================================
+// To wire an operator's affiliate program after it has been approved in the
+// Adtraction panel, add these two fields to the operator entry below:
+//
+//   isAffiliate: true,
+//   affiliateUrl: 'https://<adtraction-tracking-url>?as=2066470020&...',
+//
+// PlanCard.tsx automatically prefers `affiliateUrl` over `plan.url` when
+// `isAffiliate` is true, and adds the "Mainos" badge + sponsored rel attr.
+// No component change is needed — wiring is a two-line data edit.
+//
+// Currently wired:  Telia, Moi Mobiili, Valoo
+// Pending Chairman: Elisa, DNA, Giga Mobiili, Oomi Mobiili, Globetel
+// (Each pending operator is marked `// TODO(adtraction): apply` below.)
+// =============================================================================
+
 export const operators: Operator[] = [
   // === MAJOR NETWORK OPERATORS (MNO) ===
   {
+    // TODO(adtraction): apply for Elisa/Saunalahti program in Adtraction panel,
+    // then set `isAffiliate: true` + `affiliateUrl` (see top-of-file note).
     id: 'elisa',
     name: 'Elisa',
     slug: 'elisa',
@@ -28,6 +48,8 @@ export const operators: Operator[] = [
     ],
   },
   {
+    // TODO(adtraction): apply for DNA program in Adtraction panel,
+    // then set `isAffiliate: true` + `affiliateUrl` (see top-of-file note).
     id: 'dna',
     name: 'DNA',
     slug: 'dna',
@@ -103,6 +125,9 @@ export const operators: Operator[] = [
     affiliateUrl: 'https://in.moi.fi/t/t?a=1119688036&as=2066470020&t=2&tk=1',
   },
   {
+    // TODO(adtraction): apply for Giga Mobiili program in Adtraction panel
+    // (or contact Gigantti directly — not all retailers list in Adtraction),
+    // then set `isAffiliate: true` + `affiliateUrl` (see top-of-file note).
     id: 'giga',
     name: 'Giga Mobiili',
     slug: 'giga',
@@ -126,6 +151,9 @@ export const operators: Operator[] = [
     ],
   },
   {
+    // TODO(adtraction): apply for Oomi Mobiili program in Adtraction panel
+    // (Oomi energy already runs an Adtraction program — mobile may be the same
+    // advertiser or a separate one), then set `isAffiliate: true` + `affiliateUrl`.
     id: 'oomi',
     name: 'Oomi Mobiili',
     slug: 'oomi',
@@ -150,6 +178,10 @@ export const operators: Operator[] = [
     ],
   },
   {
+    // TODO(adtraction): apply for Globetel program in Adtraction panel
+    // (smaller MVNO — may not run an affiliate program; if absent, fall back
+    // to direct partnership or leave unwired). Then set
+    // `isAffiliate: true` + `affiliateUrl` (see top-of-file note).
     id: 'globetel',
     name: 'Globetel',
     slug: 'globetel',
