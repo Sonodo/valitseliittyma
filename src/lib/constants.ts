@@ -57,6 +57,11 @@ export const NAVIGATION: NavigationItem[] = [
     href: '/blogi',
     description: 'Ajankohtaista liittymämarkkinoilta',
   },
+  {
+    label: 'Menetelmä',
+    href: '/menetelma',
+    description: 'Miten teemme rankingit',
+  },
 ];
 
 // Valitse network cross-links

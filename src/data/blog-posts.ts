@@ -2,6 +2,97 @@ import { BlogPost } from '@/types';
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'mobiilinopeudet-2026-speedtest-traficom',
+    title: 'Mobiilinopeudet 2026 — DNA jyrää Speedtestissä, mutta mitä se kertoo tavalliselle käyttäjälle?',
+    description:
+      'Speedtestin H1 2025 -mittauksessa DNA otti kärkisijan 135,95 Mbit/s keskinopeudella. Editoriaali siitä, miksi Mbit/s-luvut ovat marketing-fiktiota useimmille ja mihin metriikkoihin kannattaa oikeasti katsoa.',
+    date: '2026-06-04',
+    author: 'Valitse Liittymä',
+    category: 'Editoriaali',
+    readingTime: 9,
+    content: `
+<p>Speedtestin H1 2025 Connectivity Report julkaistiin syyskuussa 2025. Tulos oli sama kuin edellisellä mittauskaudella: DNA:n mediaaninopeus Suomessa oli <strong>135,95 Mbit/s</strong>, Telialla 131,38 ja Elisalla 107,60. 5G-osuudessa ero kasvoi — DNA 242,64, Telia 215,69, Elisa 209,49 Mbit/s. Numerot tulivat suoraan Ooklan käyttäjäpohjaisesta datasta, jota Mobiili.fi referoi <a href="https://mobiili.fi/2025/09/18/tuttu-nimi-jatkaa-karjessa-yksi-mobiilioperaattori-tarjoaa-edelleen-speedtestin-mukaan-selvasti-nopeimmat-yhteydet-suomessa/" target="_blank" rel="noopener noreferrer">18.9.2025 julkaistussa jutussaan</a>.</p>
+
+<p>DNA on käyttänyt tätä mainonnassaan kovalla kädellä. Reilu — luvut ovat oikeat, mittaus on uskottava, ja jos asuu Helsingin ydinkeskustassa ja juoksee Speedtest-sovellusta, ero on todellinen. Mutta tämän jutun argumentti on toinen: <em>näille luvuille kannattaa antaa vähemmän painoarvoa kuin niille annetaan, ja painoarvon pitäisi siirtyä kahteen muuhun mittariin, joista marketingissa ei juuri puhuta</em>.</p>
+
+<h2>Mitä 135 Mbit/s edes tarkoittaa arjessa?</h2>
+
+<p>Ennen kuin operaattorivertailu jatkuu, kalibroidaan mittakaava. Suoratoistosovellusten omat suositukset:</p>
+
+<ul>
+  <li>Netflix 4K HDR: noin 25 Mbit/s vakiintunutta nopeutta</li>
+  <li>YouTube 4K 60fps: noin 20 Mbit/s</li>
+  <li>Disney+ 4K: noin 25 Mbit/s</li>
+  <li>Spotify Lossless: noin 1,5 Mbit/s</li>
+  <li>Teams- tai Google Meet -videopuhelu HD-laadulla: 3–5 Mbit/s</li>
+  <li>Verkkoselailu, sähköposti, viestit: alle 5 Mbit/s</li>
+</ul>
+
+<p>Toisin sanoen yksi puhelin, joka katselee 4K-elokuvaa videopuhelun ohessa ja synkkaa varmuuskopion taustalla, tarvitsee noin 30–35 Mbit/s. Suomen keskimääräinen mobiilinopeus on 4–5-kertainen tähän nähden myös heikoimmassa kolmesta. Ero 107,6 ja 135,95 Mbit/s välillä on käyttäjälle <strong>näkymätön</strong> 95 % ajasta. Sen huomaa vain, jos lataa kymmenen gigan pelin tai 4K-elokuvan offline-katseluun, eikä silloinkaan kuin kymmeniä sekunteja.</p>
+
+<p>Tämä on argumentin lähtöpiste. Top-numero ei valehtele, mutta se kertoo eri kysymyksestä kuin mikä useimmille käyttäjille on relevantti.</p>
+
+<h2>Oikea erottelija on kuuluvuus — ja siinä Speedtest valehtelee rakenteellisesti</h2>
+
+<p>Speedtest-tulokset koostuvat siitä, mitä käyttäjät ovat mitanneet itse — silloin kun siellä on signaalia. Jos verkkoa ei kuulu, mittausta ei tehdä, joten huono kuuluvuus ei laske keskiarvoa. Datasetti on rakenteellisesti vinoutunut suosimaan kaupunkikäyttäjiä.</p>
+
+<p>Traficom kiersi <a href="https://mobiili.fi/2025/12/12/traficom-testasi-mobiiliverkon-toimivuutta-ongelma-alueilla-eroja-operaattorien-valilla-paljastui/" target="_blank" rel="noopener noreferrer">lokakuussa 2025 Posion ja Porvoon ongelma-alueet</a>. Posiolla ajettiin noin 600 kilometrin reitti ja tehtiin yli 1 400 puhelumittausta. Tulos: DNA ja Elisa hoitivat puhelut moitteetta, Telialta epäonnistui 7 puheluyritystä. Latausnopeudet pyörivät pääosin 5–20 Mbit/s tasolla — eli sillä alueella, jolla nopeus on jo vaikutuksetonta — mutta yksittäisessä mittauspisteessä <em>kaikki kolme</em> operaattoria putosivat alle 5 Mbit/s. Porvoossa kaikki kolme veivät puhelut maaliin, mutta katvealueita oli pistemäisesti silläkin reitillä.</p>
+
+<p>Tämä on käyttäjälle merkityksellinen ero. Posion 600 kilometrin reitillä Telia hävisi 7 puhelua. Se ei näy missään Speedtest-keskiarvossa, koska missattu puhelu ei generoi Speedtest-mittausta. Mutta jos asuu juuri sillä reitillä, se on koko operaattorin laatu lyhyesti tiivistettynä. Tämä on syy, miksi Traficomin oma kattavuuskartta ja kentästä kerätty mittausdata painavat enemmän kuin Speedtestin top-numero ihmisille, jotka asuvat marginaalikuuluvuusalueilla.</p>
+
+<h2>Latenssi, jitter ja yhteyden tasaisuus — Bittimittari</h2>
+
+<p>Traficomin kuluttajille tarjoama <a href="https://bittimittari.fi/fi/laatututkimus" target="_blank" rel="noopener noreferrer">Bittimittari-laatututkimus</a> mittaa neljän tunnin ajan, viiden minuutin välein, latausnopeutta, lähetysnopeutta ja viivettä. Käyttäjä saa PDF-raportin, joka vertaa toteumaa sopimuksen vähimmäis-, normaali- ja maksiminopeuteen. Asetus on tehty kiinteille yhteyksille — laite kytketään modeemiin Ethernet-kaapelilla — mutta sama logiikka pätee mobiilin laatuun. <em>Yksittäinen huipputulos ei ole sama asia kuin tasainen yhteys</em>.</p>
+
+<p>Tämä on kategorian rajatapaus, koska Speedtestin julkaisemat mittarit sisältävät myös &quot;consistent quality&quot; -tarkastelun. H1 2025:ssa DNA voitti senkin. Mutta tasaisuus on määritelmäkysymys — Ooklan kriteerit (vähintään 5 Mbit/s lataus / 1 Mbit/s lähetys videopuheluun riittävänä rajana) ovat löyhempiä kuin se, mikä riittää pelaajalle tai etätyöntekijälle. Sellaiselle käyttäjälle merkitsevät ovat <strong>latenssi ja jitter</strong> — ja niissä erot ovat kapeampia kuin Mbit/s-numeroissa, mutta vaikutus arkeen on suurempi. 25 ms vs 55 ms ping on kilpapelaajalle ero voiton ja häviön välillä; 100 vs 135 Mbit/s ei ole.</p>
+
+<h2>5G erikseen — missä se oikeasti muuttaa jotain</h2>
+
+<p>5G:n top-luvut ovat näyttäviä (DNA 242,64 Mbit/s), mutta ne ovat lähinnä kapasiteettilupauksia. Käyttäjälle 5G muuttaa kahta asiaa konkreettisesti:</p>
+
+<ol>
+  <li><strong>Tiheässä kaupunkialueella</strong> 5G:n suurempi kapasiteetti tarkoittaa, että verkko ei tukkeudu konsertissa, festivaalilla, junassa tai Helsingin keskustan ruuhka-aikoina. Tämä on oikea voitto, ei top-numero.</li>
+  <li><strong>Latenssi laskee</strong> 4G:n ~30–50 ms tasosta 5G:llä tyypillisesti 10–25 ms tasoon. Tämä tuntuu videopuheluissa, pilvitallennuksessa ja peleissä. Tämä on toinen oikea voitto.</li>
+</ol>
+
+<p>Maaseudulla 5G ei tee mitään, mitä 4G ei jo tee — koska kapasiteetti ei ole pullonkaula. Traficomin Posio-testissä havaittiin jopa tilanteita, joissa 4G veti paremmin kuin 5G samalla pisteellä. Tämä on rakenteellinen ominaisuus, ei häiriö: 5G:n alemmat taajuudet kantavat hyvin, mutta korkeammat (joista nopeus tulee) eivät läpäise seiniä eivätkä kanna pitkälle. Maaseudulla 5G-liittymä on käytännössä 4G-liittymä, jolla on hyvät spec-paperit.</p>
+
+<h2>Editoriaali — miten tätä kaikkea pitäisi lukea</h2>
+
+<p>Otsikko on se, jonka tähän juttuun lupasin: <strong>DNA jyrää Speedtestissä</strong>. Tämä on rehellisesti totta H1 2025 -datassa. Mutta jos tämän jutun pitäisi muuttaa lukijan ostokäytöstä, suositus menee näin:</p>
+
+<p><em>Pidä Speedtestin top-numeroa marketing-fiktiona ja keskity kahteen kysymykseen.</em></p>
+
+<p><strong>Yksi:</strong> Kuuluuko verkko siellä missä olen? Ei vain Helsingin keskustassa, vaan kotipihalla, työpaikalla, mökillä, sen tien varrella, jota ajan päivittäin. Tähän vastaa operaattorin oma kattavuuskartta yhdistettynä Traficomin kenttätesteihin niiltä alueilta, jos niitä on tehty. Jos asuu kaupungissa, kaikki kolme isoa pelaavat hyvin. Jos asuu marginaalialueella, ero voi olla 7 hävitynyttä puhelua per 600 kilometriä.</p>
+
+<p><strong>Kaksi:</strong> Mikä on todennäköinen pudotusten määrä ja viiveen vaihtelu? Tähän vastaa Bittimittarin datan kaltainen tasaisuusmittari, ei top-nopeus. Jos käyttötarkoitus on etätyö, videopuhelut, kilpapelaaminen tai pilvitallennus, latenssin ja jitterin merkitys ylittää kymmenkertaisesti sen, näkyykö Speedtestissä 110 vai 135 Mbit/s.</p>
+
+<h2>Konkreettinen suositus käyttäjäprofiilin mukaan</h2>
+
+<p><strong>Urbaani, paljon videopuheluita, mobiilityöskentely:</strong> Telia tai DNA. Molempien 5G-verkot ovat tiheässä kaupunkialueessa erinomaisia. DNA voittaa Speedtest-numeroilla, Telia on tasaisen vahva — ero on käytännössä mitätön. Päätä hinnalla ja sopimusehdoilla.</p>
+
+<p><strong>Maaseudulla, mökillä, kuuluvuus on kriittinen:</strong> Älä päätä tätä Speedtestin pohjalta. Tarkista operaattorin oma kattavuuskartta yhdistettynä Traficomin julkaisemaan kenttätestidataan oman alueen läheltä. Posion testissä DNA ja Elisa olivat kärjessä puhelujen pitävyydessä; muilla alueilla järjestys voi olla eri. Naapurin kokemus oman alueen verkosta on tässä lopulta arvokkain datapiste.</p>
+
+<p><strong>Halvin perustarpeisiin:</strong> MVNO, joka käyttää sitä isoa verkkoa, jolla on oman alueen paras kuuluvuus. Moi käyttää DNA:n verkkoa, Globetel Telian, Oomi Elisan. Verkko on identtinen — pelkkä asiakaspalvelu, hinta ja paketointi vaihtuvat. Halvin laillinen tapa saada 4G-rajaton on tässä kategoriassa.</p>
+
+<p><strong>Pelaaja tai 5G-fani:</strong> DNA tai Telia. Latenssi ja 5G-saatavuus painavat enemmän kuin kuukausihinta.</p>
+
+<h2>Sivun loppuun</h2>
+
+<p>Tämä juttu yritti tehdä yhden asian: nostaa kaksi aliarvostettua mittaria (kuuluvuus, tasaisuus) yhden yliarvostetun mittarin (top-nopeus) viereen, ja antaa lukijalle työkalut päättää itse, kumpi merkitsee enemmän omassa käytössä. Mikään yksittäinen Mbit/s-luku ei kerro koko tarinaa.</p>
+
+<p>Speedtest- ja Traficom-data näkyvät jokaisen liittymäkortin alla Valitse Liittymän vertailussa. Lähdeluettelo ja painokertoimet kuvataan kohdassa <a href="/menetelma">näin teemme rankingit</a>.</p>
+
+<h3>Lähteet</h3>
+<ul>
+  <li>Mobiili.fi 18.9.2025 — <a href="https://mobiili.fi/2025/09/18/tuttu-nimi-jatkaa-karjessa-yksi-mobiilioperaattori-tarjoaa-edelleen-speedtestin-mukaan-selvasti-nopeimmat-yhteydet-suomessa/" target="_blank" rel="noopener noreferrer">Speedtest Connectivity Report H1 2025</a></li>
+  <li>Mobiili.fi 12.12.2025 — <a href="https://mobiili.fi/2025/12/12/traficom-testasi-mobiiliverkon-toimivuutta-ongelma-alueilla-eroja-operaattorien-valilla-paljastui/" target="_blank" rel="noopener noreferrer">Traficomin kenttätestit Posio + Porvoo</a></li>
+  <li>Traficom Bittimittari — <a href="https://bittimittari.fi/fi/laatututkimus" target="_blank" rel="noopener noreferrer">Laatututkimuksen mittaustapa ja metodologia</a></li>
+  <li>Traficom — <a href="https://tieto.traficom.fi/fi/tilastot/laajakaistaverkon-laatumittaukset" target="_blank" rel="noopener noreferrer">Laajakaistaverkon laatumittaukset</a></li>
+</ul>
+`,
+  },
+  {
     slug: 'halvimmat-puhelinliittymat-2026',
     title: 'Halvimmat puhelinliittymät 2026 — kattava hintavertailu',
     description: 'Selvitimme, mitkä ovat Suomen halvimmat puhelinliittymät vuonna 2026. Vertailussa mukana Elisa, DNA, Telia sekä budjettioperaattorit Moi, Giga ja Oomi.',
