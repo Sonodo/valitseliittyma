@@ -27,7 +27,7 @@ export const MobilePlanCard = memo(function MobilePlanCard({ plan, showOperator 
     : 'noopener noreferrer sponsored';
 
   return (
-    <div className="card-hover group relative flex flex-col">
+    <div className="card group relative flex flex-col">
       {plan.has5G && (
         <span className="absolute -top-3 right-4 rounded-full bg-accent px-3 py-1 text-xs font-bold text-white">
           5G
@@ -127,7 +127,7 @@ export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOpe
     plan.technology === 'fiber' ? 'Valokuitu' : plan.technology === '5G' ? '5G-kotinetti' : '4G-kotinetti';
 
   return (
-    <div className="card-hover group relative flex flex-col">
+    <div className="card group relative flex flex-col">
       <span className="absolute -top-3 right-4 rounded-full bg-secondary px-3 py-1 text-xs font-bold text-white">
         {techLabel}
       </span>
