@@ -28,28 +28,30 @@ export default function LaajakaistaPage() {
   ]);
 
   return (
-    <div className="py-12 sm:py-16">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
-      />
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-10">
-          <h1 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">
-            Laajakaistaliittymät
-          </h1>
-          <p className="mt-4 max-w-3xl text-lg text-slate-600">
-            Vertaa {broadbandPlans.length} laajakaistaliittymää. Valokuitu, 4G-kotinetti ja 5G-kotinetti
-            kaikilta operaattoreilta.
-          </p>
-        </div>
+    <>
+      <div className="py-12 sm:py-16">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+        />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <h1 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">
+              Laajakaistaliittymät
+            </h1>
+            <p className="mt-4 max-w-3xl text-lg text-slate-600">
+              Vertaa {broadbandPlans.length} laajakaistaliittymää. Valokuitu, 4G-kotinetti ja 5G-kotinetti
+              kaikilta operaattoreilta.
+            </p>
+          </div>
 
-        <BroadbandPlanFilters plans={broadbandPlans} />
+          <BroadbandPlanFilters plans={broadbandPlans} />
+        </div>
       </div>
-    </div>
+    </>
   );
 }

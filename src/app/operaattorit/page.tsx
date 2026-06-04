@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ArrowRight, Globe, Signal } from 'lucide-react';
 import { operators } from '@/data/operators';
 import { mobilePlans } from '@/data/mobile-plans';
+import { broadbandPlans } from '@/data/broadband-plans';
 
 export const metadata: Metadata = {
   title: 'Operaattorit Suomessa — Kaikki matkapuhelinoperaattorit',
@@ -12,8 +13,16 @@ export const metadata: Metadata = {
 };
 
 export default function OperaattoritPage() {
-  const mnos = operators.filter((o) => o.type === 'MNO');
-  const mvnos = operators.filter((o) => o.type === 'MVNO');
+  // Count mobile + broadband plans per operator. Hide operators with zero
+  // plans entirely (e.g. Valoo had 0 mobile plans surfaced as "0 liittymää",
+  // confusing users into thinking the operator was unavailable).
+  const totalPlanCount = (operatorId: string): number =>
+    mobilePlans.filter((p) => p.operatorId === operatorId).length +
+    broadbandPlans.filter((p) => p.operatorId === operatorId).length;
+
+  const visibleOperators = operators.filter((o) => totalPlanCount(o.id) > 0);
+  const mnos = visibleOperators.filter((o) => o.type === 'MNO');
+  const mvnos = visibleOperators.filter((o) => o.type === 'MVNO');
 
   return (
     <div className="py-12 sm:py-16">
@@ -35,7 +44,7 @@ export default function OperaattoritPage() {
         </h2>
         <div className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-3">
           {mnos.map((op) => {
-            const planCount = mobilePlans.filter((p) => p.operatorId === op.id).length;
+            const planCount = totalPlanCount(op.id);
             return (
               <Link
                 key={op.id}
@@ -75,7 +84,7 @@ export default function OperaattoritPage() {
         </h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {mvnos.map((op) => {
-            const planCount = mobilePlans.filter((p) => p.operatorId === op.id).length;
+            const planCount = totalPlanCount(op.id);
             return (
               <Link
                 key={op.id}

@@ -5,8 +5,14 @@ import { memo } from 'react';
 import { Signal, Wifi, Check, X, ExternalLink } from 'lucide-react';
 import { MobilePlan, BroadbandPlan } from '@/types';
 import { getOperatorById } from '@/data/operators';
+import {
+  getOperatorBenchmark,
+  buildBenchmarkTooltip,
+} from '@/data/operator-benchmarks';
 import { formatData, formatSpeed } from '@/lib/utils';
 import { trackAffiliateClick } from '@/lib/analytics';
+import { DISCLOSURE_COPY } from '@/components/disclosure';
+import BenchmarkBadge from '@/components/data/BenchmarkBadge';
 
 function formatPriceDisplay(price: number): string {
   return price.toFixed(2).replace('.', ',');
@@ -21,20 +27,28 @@ export const MobilePlanCard = memo(function MobilePlanCard({ plan, showOperator 
   const operator = getOperatorById(plan.operatorId);
   const isAffiliate = Boolean(operator?.isAffiliate);
   const targetUrl = isAffiliate && operator?.affiliateUrl ? operator.affiliateUrl : plan.url;
+  // Only affiliate operators get rel="sponsored nofollow". Non-affiliate CTAs
+  // (Elisa, DNA, Moi non-affiliate, Giga, Oomi, Globetel) get a clean rel
+  // attribute so we don't mislabel editorial outbound links as paid.
   const relAttr = isAffiliate
-    ? 'sponsored noopener noreferrer nofollow'
-    : 'noopener noreferrer sponsored';
+    ? 'noopener noreferrer nofollow sponsored'
+    : 'noopener noreferrer';
+
+  const benchmark = getOperatorBenchmark(plan.operatorId);
+  // Show 5G-specific Speedtest value when the plan itself is a 5G plan.
+  const speedtestValue =
+    plan.has5G && typeof benchmark?.speedtest5gMbps === 'number'
+      ? benchmark.speedtest5gMbps
+      : benchmark?.speedtestDownloadMbps ?? null;
+  const speedtestLabel = plan.has5G && benchmark?.speedtest5gMbps
+    ? `Speedtest 5G · ${benchmark.speedtestPeriod}`
+    : `Speedtest · ${benchmark?.speedtestPeriod ?? ''}`.trim();
 
   return (
-    <div className="card-hover group relative flex flex-col">
+    <div className="card group relative flex flex-col">
       {plan.has5G && (
         <span className="absolute -top-3 right-4 rounded-full bg-accent px-3 py-1 text-xs font-bold text-white">
           5G
-        </span>
-      )}
-      {isAffiliate && (
-        <span className="absolute -top-3 left-4 rounded-full bg-slate-200 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-600">
-          Mainos
         </span>
       )}
 
@@ -57,6 +71,32 @@ export const MobilePlanCard = memo(function MobilePlanCard({ plan, showOperator 
           <span className="text-sm text-slate-500"> €/kk</span>
         </div>
       </div>
+
+      {benchmark && typeof speedtestValue === 'number' && (
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <BenchmarkBadge
+            value={speedtestValue}
+            benchmark={null}
+            benchmarkLabel={speedtestLabel}
+            unit="Mbit/s"
+            goodDirection="higher"
+            decimals={0}
+            tooltip={buildBenchmarkTooltip(benchmark)}
+          />
+          {benchmark.trafficomQualityNote && (
+            <a
+              href={benchmark.trafficomQualityUrl ?? 'https://bittimittari.fi/fi/laatututkimus'}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={benchmark.trafficomQualityNote}
+              className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-medium text-slate-700 ring-1 ring-inset ring-slate-200 transition hover:bg-slate-200 hover:text-slate-900"
+            >
+              <span className="font-semibold">Traficom</span>
+              <span className="hidden sm:inline text-slate-500">· laatumittaus 10/2025</span>
+            </a>
+          )}
+        </div>
+      )}
 
       <div className={`mb-4 grid gap-3 ${plan.maxSpeed === 0 ? 'grid-cols-1' : 'grid-cols-2'}`}>
         <div className="rounded-lg bg-accent-50 p-3 text-center">
@@ -102,17 +142,15 @@ export const MobilePlanCard = memo(function MobilePlanCard({ plan, showOperator 
             plan_id: plan.id,
             plan_name: plan.name,
             monthly_price: plan.monthlyPrice,
+            partner: isAffiliate,
             is_affiliate: isAffiliate,
           })
         }
         className="flex items-center justify-center gap-2 rounded-xl bg-accent py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-600 min-h-[44px]"
       >
-        Katso tarjous
+        {DISCLOSURE_COPY.cta}
         <ExternalLink className="h-4 w-4" />
       </a>
-      <p className="mt-1.5 text-center text-[11px] text-slate-400">
-        Mainoslinkki — saatamme saada palkkion siirryttyäsi operaattorin sivulle.
-      </p>
     </div>
   );
 });
@@ -126,22 +164,31 @@ export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOpe
   const operator = getOperatorById(plan.operatorId);
   const isAffiliate = Boolean(operator?.isAffiliate);
   const targetUrl = isAffiliate && operator?.affiliateUrl ? operator.affiliateUrl : plan.url;
+  // Only affiliate operators get rel="sponsored nofollow"; clean rel otherwise.
   const relAttr = isAffiliate
-    ? 'sponsored noopener noreferrer nofollow'
-    : 'noopener noreferrer sponsored';
+    ? 'noopener noreferrer nofollow sponsored'
+    : 'noopener noreferrer';
   const techLabel =
     plan.technology === 'fiber' ? 'Valokuitu' : plan.technology === '5G' ? '5G-kotinetti' : '4G-kotinetti';
 
+  // Speedtest Intelligence reports the mobile network — relevant only for
+  // 4G/5G home-broadband (kotinetti). Fixed fiber sits outside that dataset.
+  const benchmark =
+    plan.technology !== 'fiber' ? getOperatorBenchmark(plan.operatorId) : null;
+  const speedtestValue =
+    plan.technology === '5G' && typeof benchmark?.speedtest5gMbps === 'number'
+      ? benchmark.speedtest5gMbps
+      : benchmark?.speedtestDownloadMbps ?? null;
+  const speedtestLabel =
+    plan.technology === '5G' && benchmark?.speedtest5gMbps
+      ? `Speedtest 5G · ${benchmark.speedtestPeriod}`
+      : `Speedtest · ${benchmark?.speedtestPeriod ?? ''}`.trim();
+
   return (
-    <div className="card-hover group relative flex flex-col">
+    <div className="card group relative flex flex-col">
       <span className="absolute -top-3 right-4 rounded-full bg-secondary px-3 py-1 text-xs font-bold text-white">
         {techLabel}
       </span>
-      {isAffiliate && (
-        <span className="absolute -top-3 left-4 rounded-full bg-slate-200 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-600">
-          Mainos
-        </span>
-      )}
 
       <div className="mb-4 flex items-start justify-between">
         <div>
@@ -162,6 +209,20 @@ export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOpe
           <span className="text-sm text-slate-500"> €/kk</span>
         </div>
       </div>
+
+      {benchmark && typeof speedtestValue === 'number' && (
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <BenchmarkBadge
+            value={speedtestValue}
+            benchmark={null}
+            benchmarkLabel={speedtestLabel}
+            unit="Mbit/s"
+            goodDirection="higher"
+            decimals={0}
+            tooltip={buildBenchmarkTooltip(benchmark)}
+          />
+        </div>
+      )}
 
       <div className="mb-4 grid grid-cols-2 gap-3">
         <div className="rounded-lg bg-accent-50 p-3 text-center">
@@ -193,17 +254,15 @@ export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOpe
             plan_name: plan.name,
             monthly_price: plan.monthlyPrice,
             technology: plan.technology,
+            partner: isAffiliate,
             is_affiliate: isAffiliate,
           })
         }
         className="flex items-center justify-center gap-2 rounded-xl bg-accent py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-600 min-h-[44px]"
       >
-        Katso tarjous
+        {DISCLOSURE_COPY.cta}
         <ExternalLink className="h-4 w-4" />
       </a>
-      <p className="mt-1.5 text-center text-[11px] text-slate-400">
-        Mainoslinkki — saatamme saada palkkion siirryttyäsi operaattorin sivulle.
-      </p>
     </div>
   );
 });

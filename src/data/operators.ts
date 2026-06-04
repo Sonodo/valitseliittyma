@@ -1,38 +1,23 @@
 import { Operator } from '@/types';
 
-// =============================================================================
-// AFFILIATE WIRING (Adtraction channel 2066470020)
-// =============================================================================
-// To wire an operator's affiliate program after it has been approved in the
-// Adtraction panel, add these two fields to the operator entry below:
-//
-//   isAffiliate: true,
-//   affiliateUrl: 'https://<adtraction-tracking-url>?as=2066470020&...',
-//
-// PlanCard.tsx automatically prefers `affiliateUrl` over `plan.url` when
-// `isAffiliate` is true, and adds the "Mainos" badge + sponsored rel attr.
-// No component change is needed — wiring is a two-line data edit.
-//
-// Currently wired:  Telia, Moi Mobiili, Valoo
-// Pending Chairman: Elisa, DNA, Giga Mobiili, Oomi Mobiili, Globetel
-// (Each pending operator is marked `// TODO(adtraction): apply` below.)
-// =============================================================================
-
+// Market-share single source of truth: Traficom matkaviestinverkon liittymät
+// (FiCom / Traficom semiannual) — 2025 figures: Elisa 38 %, DNA 31 %, Telia 30 %.
+// Mirrored in src/data/operator-benchmarks.ts marketSharePct fields. Update both
+// when refreshing.
+// Source: https://tieto.traficom.fi/fi/tilastot/matkaviestinverkon-liittymat
 export const operators: Operator[] = [
   // === MAJOR NETWORK OPERATORS (MNO) ===
   {
-    // TODO(adtraction): apply for Elisa/Saunalahti program in Adtraction panel,
-    // then set `isAffiliate: true` + `affiliateUrl` (see top-of-file note).
     id: 'elisa',
     name: 'Elisa',
     slug: 'elisa',
     brand: 'Saunalahti',
     description:
-      'Suomen suurin teleoperaattori, joka palvelee kuluttajia Saunalahti-brändillä. Elisa tunnetaan kattavasta 5G-verkosta, luotettavista palveluista ja monipuolisesta liittymävalikoimasta. Markkinajohtaja noin 37 % markkinaosuudella.',
+      'Suomen suurin teleoperaattori, joka palvelee kuluttajia Saunalahti-brändillä. Elisa tunnetaan kattavasta 5G-verkosta, luotettavista palveluista ja monipuolisesta liittymävalikoimasta. Markkinajohtaja noin 38 % markkinaosuudella.',
     founded: 1882,
     website: 'https://www.elisa.fi',
     type: 'MNO',
-    marketShare: 37,
+    marketShare: 38,
     color: '#5C2D91',
     pros: [
       'Suomen laajin 5G-verkko',
@@ -48,17 +33,15 @@ export const operators: Operator[] = [
     ],
   },
   {
-    // TODO(adtraction): apply for DNA program in Adtraction panel,
-    // then set `isAffiliate: true` + `affiliateUrl` (see top-of-file note).
     id: 'dna',
     name: 'DNA',
     slug: 'dna',
     description:
-      'Suomen kolmanneksi suurin teleoperaattori noin 27 % markkinaosuudella. DNA tunnetaan kilpailukykyisistä hinnoista, hyvästä 5G-kattavuudesta ja selkeistä liittymäpaketeista.',
+      'Suomen toiseksi suurin teleoperaattori noin 31 % markkinaosuudella. DNA tunnetaan kilpailukykyisistä hinnoista, hyvästä 5G-kattavuudesta ja selkeistä liittymäpaketeista.',
     founded: 2001,
     website: 'https://www.dna.fi',
     type: 'MNO',
-    marketShare: 27,
+    marketShare: 31,
     color: '#00A651',
     pros: [
       'Kilpailukykyiset hinnat',
@@ -77,7 +60,7 @@ export const operators: Operator[] = [
     name: 'Telia',
     slug: 'telia',
     description:
-      'Telia Finland on osa pohjoismaista Telia Company -konsernia. Noin 30 % markkinaosuudella se on Suomen toiseksi suurin operaattori. Tunnetaan laadukkaasta verkosta, yrityspuolen palveluista ja Telia TV:stä.',
+      'Telia Finland on osa pohjoismaista Telia Company -konsernia. Noin 30 % markkinaosuudella se on Suomen kolmanneksi suurin operaattori. Tunnetaan laadukkaasta verkosta, yrityspuolen palveluista ja Telia TV:stä.',
     founded: 2002,
     website: 'https://www.telia.fi',
     type: 'MNO',
@@ -125,9 +108,6 @@ export const operators: Operator[] = [
     affiliateUrl: 'https://in.moi.fi/t/t?a=1119688036&as=2066470020&t=2&tk=1',
   },
   {
-    // TODO(adtraction): apply for Giga Mobiili program in Adtraction panel
-    // (or contact Gigantti directly — not all retailers list in Adtraction),
-    // then set `isAffiliate: true` + `affiliateUrl` (see top-of-file note).
     id: 'giga',
     name: 'Giga Mobiili',
     slug: 'giga',
@@ -151,9 +131,6 @@ export const operators: Operator[] = [
     ],
   },
   {
-    // TODO(adtraction): apply for Oomi Mobiili program in Adtraction panel
-    // (Oomi energy already runs an Adtraction program — mobile may be the same
-    // advertiser or a separate one), then set `isAffiliate: true` + `affiliateUrl`.
     id: 'oomi',
     name: 'Oomi Mobiili',
     slug: 'oomi',
@@ -178,10 +155,6 @@ export const operators: Operator[] = [
     ],
   },
   {
-    // TODO(adtraction): apply for Globetel program in Adtraction panel
-    // (smaller MVNO — may not run an affiliate program; if absent, fall back
-    // to direct partnership or leave unwired). Then set
-    // `isAffiliate: true` + `affiliateUrl` (see top-of-file note).
     id: 'globetel',
     name: 'Globetel',
     slug: 'globetel',

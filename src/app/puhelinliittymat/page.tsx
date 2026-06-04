@@ -28,7 +28,8 @@ export default function PuhelinliittymatPage() {
   ]);
 
   return (
-    <div className="py-12 sm:py-16">
+    <>
+      <div className="py-12 sm:py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
@@ -51,5 +52,6 @@ export default function PuhelinliittymatPage() {
         <MobilePlanFilters plans={mobilePlans} />
       </div>
     </div>
+    </>
   );
 }
