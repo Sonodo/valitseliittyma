@@ -6,7 +6,7 @@ import { useId, useState } from 'react';
  * BenchmarkBadge — pill showing a value with a colored delta vs a benchmark.
  *
  * Used inside comparison row cards to anchor a number to an authoritative
- * reference (e.g. Suomen Pankki keskikorko, Bittimittari mediaani).
+ * reference (e.g. Suomen Pankki keskikorko, Bittimittari keskiarvo).
  *
  * Direction-aware:
  * - goodDirection="lower"  → below benchmark is green

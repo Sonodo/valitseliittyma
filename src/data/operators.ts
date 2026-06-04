@@ -1,5 +1,10 @@
 import { Operator } from '@/types';
 
+// Market-share single source of truth: Traficom matkaviestinverkon liittymät
+// (FiCom / Traficom semiannual) — 2025 figures: Elisa 38 %, DNA 31 %, Telia 30 %.
+// Mirrored in src/data/operator-benchmarks.ts marketSharePct fields. Update both
+// when refreshing.
+// Source: https://tieto.traficom.fi/fi/tilastot/matkaviestinverkon-liittymat
 export const operators: Operator[] = [
   // === MAJOR NETWORK OPERATORS (MNO) ===
   {
@@ -8,11 +13,11 @@ export const operators: Operator[] = [
     slug: 'elisa',
     brand: 'Saunalahti',
     description:
-      'Suomen suurin teleoperaattori, joka palvelee kuluttajia Saunalahti-brändillä. Elisa tunnetaan kattavasta 5G-verkosta, luotettavista palveluista ja monipuolisesta liittymävalikoimasta. Markkinajohtaja noin 37 % markkinaosuudella.',
+      'Suomen suurin teleoperaattori, joka palvelee kuluttajia Saunalahti-brändillä. Elisa tunnetaan kattavasta 5G-verkosta, luotettavista palveluista ja monipuolisesta liittymävalikoimasta. Markkinajohtaja noin 38 % markkinaosuudella.',
     founded: 1882,
     website: 'https://www.elisa.fi',
     type: 'MNO',
-    marketShare: 37,
+    marketShare: 38,
     color: '#5C2D91',
     pros: [
       'Suomen laajin 5G-verkko',
@@ -32,11 +37,11 @@ export const operators: Operator[] = [
     name: 'DNA',
     slug: 'dna',
     description:
-      'Suomen kolmanneksi suurin teleoperaattori noin 27 % markkinaosuudella. DNA tunnetaan kilpailukykyisistä hinnoista, hyvästä 5G-kattavuudesta ja selkeistä liittymäpaketeista.',
+      'Suomen toiseksi suurin teleoperaattori noin 31 % markkinaosuudella. DNA tunnetaan kilpailukykyisistä hinnoista, hyvästä 5G-kattavuudesta ja selkeistä liittymäpaketeista.',
     founded: 2001,
     website: 'https://www.dna.fi',
     type: 'MNO',
-    marketShare: 27,
+    marketShare: 31,
     color: '#00A651',
     pros: [
       'Kilpailukykyiset hinnat',
@@ -55,7 +60,7 @@ export const operators: Operator[] = [
     name: 'Telia',
     slug: 'telia',
     description:
-      'Telia Finland on osa pohjoismaista Telia Company -konsernia. Noin 30 % markkinaosuudella se on Suomen toiseksi suurin operaattori. Tunnetaan laadukkaasta verkosta, yrityspuolen palveluista ja Telia TV:stä.',
+      'Telia Finland on osa pohjoismaista Telia Company -konsernia. Noin 30 % markkinaosuudella se on Suomen kolmanneksi suurin operaattori. Tunnetaan laadukkaasta verkosta, yrityspuolen palveluista ja Telia TV:stä.',
     founded: 2002,
     website: 'https://www.telia.fi',
     type: 'MNO',

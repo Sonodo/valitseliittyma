@@ -19,3 +19,6 @@ dist/
 build/
 
 .vercel
+
+# TypeScript incremental build cache
+*.tsbuildinfo

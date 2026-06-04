@@ -11,7 +11,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Editoriaali',
     readingTime: 9,
     content: `
-<p>Speedtestin H1 2025 Connectivity Report julkaistiin syyskuussa 2025. Tulos oli sama kuin edellisellä mittauskaudella: DNA:n mediaaninopeus Suomessa oli <strong>135,95 Mbit/s</strong>, Telialla 131,38 ja Elisalla 107,60. 5G-osuudessa ero kasvoi — DNA 242,64, Telia 215,69, Elisa 209,49 Mbit/s. Numerot tulivat suoraan Ooklan käyttäjäpohjaisesta datasta, jota Mobiili.fi referoi <a href="https://mobiili.fi/2025/09/18/tuttu-nimi-jatkaa-karjessa-yksi-mobiilioperaattori-tarjoaa-edelleen-speedtestin-mukaan-selvasti-nopeimmat-yhteydet-suomessa/" target="_blank" rel="noopener noreferrer">18.9.2025 julkaistussa jutussaan</a>.</p>
+<p>Speedtestin H1 2025 Connectivity Report julkaistiin syyskuussa 2025. Tulos oli sama kuin edellisellä mittauskaudella: DNA:n keskinopeus Suomessa oli <strong>135,95 Mbit/s</strong>, Telialla 131,38 ja Elisalla 107,60. 5G-osuudessa ero kasvoi — DNA 242,64, Telia 215,69, Elisa 209,49 Mbit/s. Numerot tulivat suoraan Ooklan käyttäjäpohjaisesta datasta, jota Mobiili.fi referoi <a href="https://mobiili.fi/2025/09/18/tuttu-nimi-jatkaa-karjessa-yksi-mobiilioperaattori-tarjoaa-edelleen-speedtestin-mukaan-selvasti-nopeimmat-yhteydet-suomessa/" target="_blank" rel="noopener noreferrer">18.9.2025 julkaistussa jutussaan</a>.</p>
 
 <p>DNA on käyttänyt tätä mainonnassaan kovalla kädellä. Reilu — luvut ovat oikeat, mittaus on uskottava, ja jos asuu Helsingin ydinkeskustassa ja juoksee Speedtest-sovellusta, ero on todellinen. Mutta tämän jutun argumentti on toinen: <em>näille luvuille kannattaa antaa vähemmän painoarvoa kuin niille annetaan, ja painoarvon pitäisi siirtyä kahteen muuhun mittariin, joista marketingissa ei juuri puhuta</em>.</p>
 
@@ -36,7 +36,7 @@ export const blogPosts: BlogPost[] = [
 
 <p>Speedtest-tulokset koostuvat siitä, mitä käyttäjät ovat mitanneet itse — silloin kun siellä on signaalia. Jos verkkoa ei kuulu, mittausta ei tehdä, joten huono kuuluvuus ei laske keskiarvoa. Datasetti on rakenteellisesti vinoutunut suosimaan kaupunkikäyttäjiä.</p>
 
-<p>Traficom kiersi <a href="https://mobiili.fi/2025/12/12/traficom-testasi-mobiiliverkon-toimivuutta-ongelma-alueilla-eroja-operaattorien-valilla-paljastui/" target="_blank" rel="noopener noreferrer">lokakuussa 2025 Posion ja Porvoon ongelma-alueet</a>. Posiolla ajettiin noin 600 kilometrin reitti ja tehtiin yli 1 400 puhelumittausta. Tulos: DNA ja Elisa hoitivat puhelut moitteetta, Telialta epäonnistui 7 puheluyritystä. Latausnopeudet pyörivät pääosin 5–20 Mbit/s tasolla — eli sillä alueella, jolla nopeus on jo vaikutuksetonta — mutta yksittäisessä mittauspisteessä <em>kaikki kolme</em> operaattoria putosivat alle 5 Mbit/s. Porvoossa kaikki kolme veivät puhelut maaliin, mutta katvealueita oli pistemäisesti silläkin reitillä.</p>
+<p>Traficom kiersi <a href="https://mobiili.fi/2025/12/12/traficom-testasi-mobiiliverkon-toimivuutta-ongelma-alueilla-eroja-operaattorien-valilla-paljastui/" target="_blank" rel="noopener noreferrer">lokakuussa 2025 Posion ja Porvoon ongelma-alueet</a>. Posiolla ajettiin noin 600 kilometrin reitti ja tehtiin yli 1 400 puhelumittausta. Tulos: DNA ja Elisa hoitivat puhelut moitteetta, Telialta epäonnistui 7 puheluyritystä. Latausnopeudet pyörivät pääosin 5–20 Mbit/s tasolla — eli sillä alueella, jolla nopeus on jo vaikutuksetonta — mutta yksittäisessä mittauspisteessä <em>kaikki kolme</em> operaattoria putosivat alle 5 Mbit/s. Porvoossa kaikki kolme operaattoria veivät puhelut maaliin.</p>
 
 <p>Tämä on käyttäjälle merkityksellinen ero. Posion 600 kilometrin reitillä Telia hävisi 7 puhelua. Se ei näy missään Speedtest-keskiarvossa, koska missattu puhelu ei generoi Speedtest-mittausta. Mutta jos asuu juuri sillä reitillä, se on koko operaattorin laatu lyhyesti tiivistettynä. Tämä on syy, miksi Traficomin oma kattavuuskartta ja kentästä kerätty mittausdata painavat enemmän kuin Speedtestin top-numero ihmisille, jotka asuvat marginaalikuuluvuusalueilla.</p>
 
@@ -134,7 +134,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Vertailu',
     readingTime: 10,
     content: `
-<p>Suomen matkapuhelinmarkkinoita hallitsee kolme suurta operaattoria: Elisa (37 % markkinaosuus), Telia (30 %) ja DNA (27 %). Kaikki kolme tarjoavat kattavan valikoiman liittymiä, mutta eroja löytyy hinnoissa, verkossa ja lisäpalveluissa.</p>
+<p>Suomen matkapuhelinmarkkinoita hallitsee kolme suurta operaattoria: Elisa (38 % markkinaosuus), DNA (31 %) ja Telia (30 %). Kaikki kolme tarjoavat kattavan valikoiman liittymiä, mutta eroja löytyy hinnoissa, verkossa ja lisäpalveluissa.</p>
 
 <h2>Verkko ja kattavuus</h2>
 <p>Kaikilla kolmella operaattorilla on oma 4G- ja 5G-verkko. Elisan 5G-verkko on laajin ja kattaa jo yli 300 paikkakuntaa. Telian ja DNA:n 5G-verkot ovat hieman pienemmät, mutta kasvavat jatkuvasti. 4G-verkkojen kattavuudessa erot ovat pieniä — kaikki kolme kattavat käytännössä koko asutun Suomen.</p>

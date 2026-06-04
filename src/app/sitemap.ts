@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/blogi',
     '/laskuri/liittymahinta',
     '/laskuri/datankulutus',
+    '/menetelma',
     '/tietoa',
     '/tietosuoja',
     '/kayttoehdot',

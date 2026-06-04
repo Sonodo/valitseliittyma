@@ -51,12 +51,6 @@ export interface OperatorBenchmark {
   parentNetworkSlug?: OperatorSlug;
 }
 
-/** Industry-average overall download for H1 2025 (DNA+Telia+Elisa mean). */
-export const SPEEDTEST_AVG_MBPS = 125; // ((135.95 + 131.38 + 107.60) / 3) ≈ 124.98 — rounded.
-
-/** Headline publication date of the Speedtest H1 2025 dataset. */
-export const SPEEDTEST_UPDATED_AT = '2025-09-18';
-
 const SPEEDTEST_SRC =
   'https://mobiili.fi/2025/09/18/tuttu-nimi-jatkaa-karjessa-yksi-mobiilioperaattori-tarjoaa-edelleen-speedtestin-mukaan-selvasti-nopeimmat-yhteydet-suomessa/';
 
@@ -175,11 +169,16 @@ const OPERATOR_DISPLAY_NAMES: Record<OperatorSlug, string> = {
 /**
  * Build the tooltip body shown when the user hovers/focuses the badge.
  * Mentions the parent network for MVNOs so the comparison is honest.
+ *
+ * No industry-average anchor — the previous SPEEDTEST_AVG_MBPS constant was
+ * the mean of DNA+Telia+Elisa, which made the badge compare each MNO against
+ * an average derived from itself (mathematically circular). Card now shows
+ * the operator's own Speedtest value with sourcing, no delta.
  */
 export function buildBenchmarkTooltip(b: OperatorBenchmark): string {
   if (b.parentNetworkSlug) {
     const parentName = OPERATOR_DISPLAY_NAMES[b.parentNetworkSlug];
-    return `Käyttää ${parentName}-verkkoa — Speedtest ${b.speedtestPeriod} ${b.speedtestDownloadMbps?.toFixed(1).replace('.', ',')} Mbit/s. Vertailukohta: toimialan keskiarvo ${SPEEDTEST_AVG_MBPS} Mbit/s.`;
+    return `Käyttää ${parentName}-verkkoa — Speedtest ${b.speedtestPeriod} ${b.speedtestDownloadMbps?.toFixed(1).replace('.', ',')} Mbit/s. Lähde: Speedtest Intelligence H1 2025 (Mobiili.fi 18.9.2025).`;
   }
-  return `Operaattorin oma Speedtest-keskiarvo (${b.speedtestPeriod}). Vertailukohta: toimialan keskiarvo ${SPEEDTEST_AVG_MBPS} Mbit/s.`;
+  return `Operaattorin oma Speedtest-keskiarvo (${b.speedtestPeriod}). Lähde: Speedtest Intelligence H1 2025 (Mobiili.fi 18.9.2025).`;
 }

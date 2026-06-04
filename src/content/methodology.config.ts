@@ -6,7 +6,7 @@ const config: MethodologyConfig = {
   lastReviewedAt: '2026-06-04',
 
   summary: [
-    'Valitse Liittymä vertailee Suomen mobiili- ja laajakaistaliittymiä. Pisteytys yhdistää Traficomin Bittimittari-mittausdatan, Speedtest H2/2024 -keskiarvot ja Traficomin matkaviestinverkon liittymä- ja kuuluvuustilastot.',
+    'Valitse Liittymä vertailee Suomen mobiili- ja laajakaistaliittymiä. Pisteytys yhdistää Traficomin Bittimittari-mittausdatan, Speedtest H1 2025 -keskiarvot ja Traficomin matkaviestinverkon liittymä- ja kuuluvuustilastot.',
     'Liittymävertailussa nopeudet ja kuuluvuus arvioidaan postinumeroittain todellisten mittausten perusteella — emme luota pelkästään operaattorien ilmoittamiin maksiminopeuksiin.',
   ],
 
@@ -20,7 +20,7 @@ const config: MethodologyConfig = {
         'Riippumaton nopeusmittauspalvelu. Käytämme aggregoitua dataa operaattorien todellisten nopeuksien arvioinnissa postinumeroittain.',
     },
     {
-      name: 'Speedtest by Ookla — H2/2024 Suomi',
+      name: 'Speedtest by Ookla — H1 2025 Suomi',
       type: 'Mittausdata',
       refreshCadence: 'Puolivuosittain',
       url: 'https://www.speedtest.net/global-index/finland',
@@ -54,7 +54,7 @@ const config: MethodologyConfig = {
     {
       factor: 'Todellinen nopeus',
       description:
-        'Bittimittari- ja Speedtest-aineistosta laskettu mediaaninopeus postinumeroalueella.',
+        'Bittimittari- ja Speedtest-aineistosta laskettu keskinopeus postinumeroalueella.',
       weight: 30,
     },
     {
@@ -94,7 +94,7 @@ const config: MethodologyConfig = {
       date: '2026-06-04',
       title: 'Menetelmä-sivu julkaistu',
       summary:
-        'Bittimittari- ja Speedtest H2/2024 -datan käyttö, Traficomin liittymä- ja kuuluvuustilastot sekä painokertoimet (hinta 35 %, nopeus 30 %, ehdot 15 %, kuuluvuus 15 %, palaute 5 %) dokumentoitu.',
+        'Bittimittari- ja Speedtest H1 2025 -datan käyttö, Traficomin liittymä- ja kuuluvuustilastot sekä painokertoimet (hinta 35 %, nopeus 30 %, ehdot 15 %, kuuluvuus 15 %, palaute 5 %) dokumentoitu.',
     },
   ],
 

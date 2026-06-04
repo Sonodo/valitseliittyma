@@ -8,7 +8,6 @@ import { getOperatorById } from '@/data/operators';
 import {
   getOperatorBenchmark,
   buildBenchmarkTooltip,
-  SPEEDTEST_AVG_MBPS,
 } from '@/data/operator-benchmarks';
 import { formatData, formatSpeed } from '@/lib/utils';
 import { trackAffiliateClick } from '@/lib/analytics';
@@ -28,9 +27,12 @@ export const MobilePlanCard = memo(function MobilePlanCard({ plan, showOperator 
   const operator = getOperatorById(plan.operatorId);
   const isAffiliate = Boolean(operator?.isAffiliate);
   const targetUrl = isAffiliate && operator?.affiliateUrl ? operator.affiliateUrl : plan.url;
+  // Only affiliate operators get rel="sponsored nofollow". Non-affiliate CTAs
+  // (Elisa, DNA, Moi non-affiliate, Giga, Oomi, Globetel) get a clean rel
+  // attribute so we don't mislabel editorial outbound links as paid.
   const relAttr = isAffiliate
-    ? 'sponsored noopener noreferrer nofollow'
-    : 'noopener noreferrer sponsored';
+    ? 'noopener noreferrer nofollow sponsored'
+    : 'noopener noreferrer';
 
   const benchmark = getOperatorBenchmark(plan.operatorId);
   // Show 5G-specific Speedtest value when the plan itself is a 5G plan.
@@ -74,7 +76,7 @@ export const MobilePlanCard = memo(function MobilePlanCard({ plan, showOperator 
         <div className="mb-4 flex flex-wrap items-center gap-2">
           <BenchmarkBadge
             value={speedtestValue}
-            benchmark={SPEEDTEST_AVG_MBPS}
+            benchmark={null}
             benchmarkLabel={speedtestLabel}
             unit="Mbit/s"
             goodDirection="higher"
@@ -162,9 +164,10 @@ export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOpe
   const operator = getOperatorById(plan.operatorId);
   const isAffiliate = Boolean(operator?.isAffiliate);
   const targetUrl = isAffiliate && operator?.affiliateUrl ? operator.affiliateUrl : plan.url;
+  // Only affiliate operators get rel="sponsored nofollow"; clean rel otherwise.
   const relAttr = isAffiliate
-    ? 'sponsored noopener noreferrer nofollow'
-    : 'noopener noreferrer sponsored';
+    ? 'noopener noreferrer nofollow sponsored'
+    : 'noopener noreferrer';
   const techLabel =
     plan.technology === 'fiber' ? 'Valokuitu' : plan.technology === '5G' ? '5G-kotinetti' : '4G-kotinetti';
 
@@ -211,7 +214,7 @@ export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOpe
         <div className="mb-4 flex flex-wrap items-center gap-2">
           <BenchmarkBadge
             value={speedtestValue}
-            benchmark={SPEEDTEST_AVG_MBPS}
+            benchmark={null}
             benchmarkLabel={speedtestLabel}
             unit="Mbit/s"
             goodDirection="higher"
