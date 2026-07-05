@@ -29,6 +29,8 @@ export default function HomePage() {
 
   const faqLd = faqPageSchema(HOMEPAGE_FAQ);
 
+  const faqLd = faqPageSchema(HOMEPAGE_FAQ);
+
   return (
     <>
       <script
