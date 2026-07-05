@@ -4,6 +4,7 @@ import {
   PUBLISHER_ORGANIZATION_SCHEMA,
   breadcrumbSchema,
 } from '@/lib/schema';
+import { DATA_REVIEWED_AT } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Tietoa palvelusta ja toimituksen periaatteet — Valitse Liittymä',
@@ -46,7 +47,7 @@ export default function TietoaPage() {
           <h2>Miten palvelu toimii?</h2>
           <p>
             Keräämme tiedot suoraan operaattoreiden virallisilta verkkosivuilta ja
-            päivitämme ne säännöllisesti. Vertailussa ovat mukana suurimmat
+            kerromme avoimesti, milloin ne on viimeksi tarkistettu. Vertailussa ovat mukana suurimmat
             kantaverkkooperaattorit Elisa, DNA ja Telia sekä virtuaalioperaattorit
             (MVNO:t) Moi Mobiili, Giga Mobiili, Oomi Mobiili ja Globetel sekä
             laajakaistaoperaattori Valoo. Selvyyden vuoksi: Suomen telekommunikaatiota
@@ -79,13 +80,13 @@ export default function TietoaPage() {
             kaupallista yhteistyötä, jotta vertailu pysyy kattavana.
           </p>
 
-          <h3>3. Päivitysvälit</h3>
+          <h3>3. Tietojen tarkistus</h3>
           <p>
             Liittymähinnat ja -ehdot tarkistetaan suoraan operaattoreiden virallisilta
-            sivuilta vähintään kerran kuukaudessa, ja merkittävät kampanjat päivitetään
-            nopeammin. Hinnat ja kampanjat voivat kuitenkin muuttua nopeasti, joten
-            kehotamme aina varmistamaan ajantasaisen hinnan operaattorin sivulta ennen
-            tilausta.
+            sivuilta, ja viimeisin tarkistus on tehty {DATA_REVIEWED_AT}. Päivämäärä
+            kerrotaan avoimesti vertailusivuilla. Hinnat ja kampanjat voivat muuttua
+            nopeasti, joten kehotamme aina varmistamaan ajantasaisen hinnan operaattorin
+            sivulta ennen tilausta.
           </p>
 
           <h3>4. Virheiden korjaaminen</h3>

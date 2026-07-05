@@ -7,6 +7,12 @@ export const SITE_DESCRIPTION =
   'Vertaa puhelinliittymiä ja laajakaistoja Suomessa. Löydä halvin liittymä Elisan, DNA:n, Telian ja budjettioperaattoreiden valikoimista. Ilmainen ja kattava vertailu.';
 export const SITE_TAGLINE = 'Vertaa ja säästä liittymäkuluissa';
 
+// Data freshness — the date the plan data (src/data/mobile-plans.ts +
+// broadband-plans.ts) was last substantively reviewed against operator sites.
+// UPDATE THIS whenever plan data is checked or revised. Rendered on the
+// homepage trust sections, listing pages, methodology and editorial pages.
+export const DATA_REVIEWED_AT = '20.4.2026';
+
 // Colors — teal/blue telecom theme
 export const COLORS = {
   primary: '#0891B2', // cyan-600
@@ -30,7 +36,7 @@ export const NAVIGATION: NavigationItem[] = [
   {
     label: 'Puhelinliittymät',
     href: '/puhelinliittymat',
-    description: 'Vertaa kaikkia puhelinliittymiä',
+    description: 'Vertaa puhelinliittymiä',
   },
   {
     label: 'Laajakaista',
@@ -40,7 +46,7 @@ export const NAVIGATION: NavigationItem[] = [
   {
     label: 'Operaattorit',
     href: '/operaattorit',
-    description: 'Kaikki operaattorit Suomessa',
+    description: 'Suomen merkittävimmät operaattorit',
   },
   {
     label: 'Vertaa',

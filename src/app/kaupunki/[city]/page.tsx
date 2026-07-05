@@ -135,7 +135,7 @@ export default async function CityPage({ params }: Props) {
         {/* CTA */}
         <div className="rounded-2xl border border-slate-200 bg-slate-50 p-8 text-center">
           <h2 className="text-xl font-bold text-slate-900">
-            Vertaa kaikkia liittymiä {city.name}
+            Vertaa liittymiä {city.name}
           </h2>
           <p className="mt-2 text-slate-600">
             Suodata liittymiä hinnan, datan ja operaattorin mukaan.

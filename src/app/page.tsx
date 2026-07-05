@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { operators } from '@/data/operators';
 import { mobilePlans, getCheapestPlans } from '@/data/mobile-plans';
+import { broadbandPlans } from '@/data/broadband-plans';
 import { getLatestPosts } from '@/data/blog-posts';
 import { cities } from '@/data/cities';
 import { faqPageSchema } from '@/lib/schema';
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   const cheapPlans = getCheapestPlans(3);
   const latestPosts = getLatestPosts(3);
-  const totalPlans = mobilePlans.length;
+  const totalPlans = mobilePlans.length + broadbandPlans.length;
 
   const faqLd = faqPageSchema(HOMEPAGE_FAQ);
 
@@ -39,6 +40,7 @@ export default function HomePage() {
         latestPosts={latestPosts}
         operatorCount={operators.length}
         totalPlans={totalPlans}
+        mobilePlanCount={mobilePlans.length}
         cityCount={cities.length}
         operators={operators.map((op) => ({
           id: op.id,

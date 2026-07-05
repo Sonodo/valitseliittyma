@@ -1,4 +1,5 @@
 import type { MethodologyConfig } from '@/components/methodology/types';
+import { DATA_REVIEWED_AT } from '@/lib/constants';
 
 const config: MethodologyConfig = {
   siteName: 'Valitse Liittymä',
@@ -8,6 +9,7 @@ const config: MethodologyConfig = {
   summary: [
     'Valitse Liittymä vertailee Suomen mobiili- ja laajakaistaliittymiä. Pisteytys yhdistää Traficomin Bittimittari-mittausdatan, Speedtest H1 2025 -keskiarvot ja Traficomin matkaviestinverkon liittymä- ja kuuluvuustilastot.',
     'Liittymävertailussa nopeudet ja kuuluvuus arvioidaan postinumeroittain todellisten mittausten perusteella — emme luota pelkästään operaattorien ilmoittamiin maksiminopeuksiin.',
+    `Liittymäkohtaiset hinnat ja ehdot on tarkistettu viimeksi ${DATA_REVIEWED_AT}. Hinnat ja kampanjat voivat muuttua nopeasti — tarkista lopullinen hinta aina operaattorilta ennen tilausta.`,
   ],
 
   dataSources: [

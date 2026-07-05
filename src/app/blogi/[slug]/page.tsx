@@ -85,7 +85,7 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="mt-12 rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center">
           <h2 className="text-xl font-bold text-slate-900">Etsitkö parempaa liittymää?</h2>
           <p className="mt-2 text-slate-600">
-            Vertaa kaikkia puhelinliittymiä ja löydä edullisin.
+            Vertaa puhelinliittymiä ja löydä edullisin.
           </p>
           <Link
             href="/puhelinliittymat"

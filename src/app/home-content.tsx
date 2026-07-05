@@ -26,6 +26,7 @@ import {
 import { AnimatedHeading, ScrollReveal, WaveDivider, StatsCounter } from '@/components/landing';
 import { MobilePlanCard } from '@/components/ui/PlanCard';
 import { trackBeginCompare } from '@/lib/analytics';
+import { DATA_REVIEWED_AT } from '@/lib/constants';
 import type { MobilePlan } from '@/types';
 import { HOMEPAGE_FAQ } from './faq-data';
 
@@ -45,7 +46,7 @@ const howItWorks = [
     step: 1,
     icon: Search,
     title: 'Vertaile',
-    desc: 'Selaa kaikkien operaattoreiden liittymiä yhdessä paikassa. Suodata nopeuden, hinnan tai 5G:n mukaan.',
+    desc: 'Selaa Suomen merkittävimpien operaattoreiden liittymiä yhdessä paikassa. Suodata nopeuden, hinnan tai 5G:n mukaan.',
   },
   {
     step: 2,
@@ -69,8 +70,8 @@ const valueProps = [
   },
   {
     icon: Clock,
-    title: 'Aina ajan tasalla',
-    description: 'Tarkistamme liittymätiedot viikoittain. Näet aina ajankohtaiset hinnat ja ehdot yhdestä paikasta.',
+    title: 'Läpinäkyvä päivityskäytäntö',
+    description: `Liittymätiedot on tarkistettu ${DATA_REVIEWED_AT}, ja kerromme päivämäärän avoimesti. Tarkista lopullinen hinta aina operaattorilta.`,
   },
   {
     icon: TrendingDown,
@@ -79,8 +80,8 @@ const valueProps = [
   },
   {
     icon: Globe,
-    title: 'Kaikki operaattorit',
-    description: 'Elisa, DNA, Telia, Moi, Globetel ja muut — kaikki yhdessä paikassa ilman erillisiä hakuja.',
+    title: 'Suomen merkittävimmät operaattorit',
+    description: 'Elisa, DNA, Telia, Moi, Globetel ja muut — 8 operaattoria yhdessä paikassa ilman erillisiä hakuja.',
   },
 ];
 
@@ -100,6 +101,7 @@ interface HomeContentProps {
   }>;
   operatorCount: number;
   totalPlans: number;
+  mobilePlanCount: number;
   cityCount: number;
   operators: Array<{
     id: string;
@@ -115,6 +117,7 @@ export default function HomeContent({
   latestPosts,
   operatorCount,
   totalPlans,
+  mobilePlanCount,
   cityCount,
   operators,
 }: HomeContentProps) {
@@ -185,8 +188,8 @@ export default function HomeContent({
               transition={{ duration: 0.6, delay: 0.7, ease }}
               className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/80"
             >
-              Vertaile puhelinliittymiä ja laajakaistoja kaikilta 7 operaattorilta —
-              Elisa, DNA, Telia, Moi, Giga, Oomi ja Globetel yhdellä haulla.
+              Vertaile puhelinliittymiä ja laajakaistoja 8 operaattorilta —
+              Elisa, DNA, Telia, Moi, Giga, Oomi, Globetel ja Valoo yhdellä haulla.
             </motion.p>
 
             {/* CTAs */}
@@ -220,9 +223,9 @@ export default function HomeContent({
               className="mt-14 flex flex-wrap items-center justify-center gap-6 sm:gap-10"
             >
               {[
-                { value: `${operatorCount}+`, label: 'operaattoria' },
-                { value: `${totalPlans}+`, label: 'liittymää' },
-                { value: 'Viikoittain', label: 'päivitetty' },
+                { value: `${operatorCount}`, label: 'operaattoria' },
+                { value: `${totalPlans}`, label: 'liittymää' },
+                { value: DATA_REVIEWED_AT, label: 'tiedot tarkistettu' },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-6">
                   {i > 0 && <div className="h-8 w-px bg-white/10" />}
@@ -248,7 +251,7 @@ export default function HomeContent({
             { icon: Shield, text: 'Laaja vertailu', color: 'text-accent' },
             { icon: Check, text: 'Ilmainen palvelu', color: 'text-emerald-500' },
             { icon: Users, text: `${operatorCount} operaattoria`, color: 'text-accent-400' },
-            { icon: Zap, text: 'Viikoittain tarkistettu data', color: 'text-amber-500' },
+            { icon: Zap, text: `Liittymätiedot tarkistettu ${DATA_REVIEWED_AT}`, color: 'text-amber-500' },
           ].map((item, i) => (
             <ScrollReveal key={i} delay={i * 0.1} direction="up">
               <div className="flex items-center gap-2 text-sm font-medium text-slate-700">
@@ -291,7 +294,7 @@ export default function HomeContent({
                 href="/puhelinliittymat"
                 className="inline-flex items-center justify-center gap-2 border-2 border-accent bg-accent px-6 py-3 text-sm font-bold uppercase tracking-widest text-white transition-all duration-300 hover:bg-transparent hover:text-accent"
               >
-                Näytä kaikki {totalPlans} liittymää
+                Näytä kaikki {mobilePlanCount} puhelinliittymää
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -319,7 +322,7 @@ export default function HomeContent({
 
           <div className="mt-14 grid grid-cols-1 gap-4 md:grid-cols-[1fr_auto_1fr_auto_1fr] md:items-center md:gap-3">
             {[
-              { icon: Smartphone, title: 'Puhelinliittymät', desc: 'Kaikki operaattorit', href: '/puhelinliittymat', bg: 'bg-accent-100', text: 'text-accent-900', iconColor: 'text-accent-600' },
+              { icon: Smartphone, title: 'Puhelinliittymät', desc: '8 operaattoria', href: '/puhelinliittymat', bg: 'bg-accent-100', text: 'text-accent-900', iconColor: 'text-accent-600' },
               { icon: Wifi, title: 'Laajakaista', desc: 'Kuitu, 4G & 5G', href: '/laajakaista', bg: 'bg-accent-300', text: 'text-white', iconColor: 'text-white/80' },
               { icon: CreditCard, title: 'Halvimmat', desc: 'Pienin kuukausimaksu', href: '/halvin-puhelinliittyma', bg: 'bg-accent', text: 'text-white', iconColor: 'text-white/80' },
             ].flatMap((item, i, arr) => {
@@ -377,11 +380,11 @@ export default function HomeContent({
             <ScrollReveal direction="left">
               <div className="max-w-xl">
                 <h2 className="text-2xl font-extrabold uppercase leading-tight tracking-wide text-white sm:text-3xl lg:text-4xl">
-                  Kattava. Ajantasainen. Ilmainen.
+                  Kattava. Läpinäkyvä. Ilmainen.
                 </h2>
                 <p className="mt-6 text-lg leading-relaxed text-white/70">
                   Suomalaiset maksavat keskimäärin liikaa puhelinliittymästään. Valitse Liittymä auttaa löytämään
-                  saman laadun edullisemmin — vertailemalla kaikkien operaattoreiden tarjoukset kattavasti yhdessä paikassa.
+                  saman laadun edullisemmin — vertailemalla Suomen merkittävimpien operaattoreiden tarjoukset yhdessä paikassa.
                 </p>
                 <div className="mt-8">
                   <Link
@@ -423,8 +426,8 @@ export default function HomeContent({
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <StatsCounter
             stats={[
-              { end: operatorCount, suffix: '+', label: 'Operaattoria' },
-              { end: totalPlans, suffix: '+', label: 'Liittymää' },
+              { end: operatorCount, label: 'Operaattoria' },
+              { end: totalPlans, label: 'Liittymää' },
               { end: cityCount, label: 'Kaupunkia' },
               { end: 0, suffix: ' €', label: 'Hintaa palvelusta' },
             ]}
@@ -550,9 +553,9 @@ export default function HomeContent({
                 </thead>
                 <tbody className="divide-y divide-slate-100 bg-white text-sm">
                   {[
-                    { label: 'Kattavuus', a: 'Operaattori kerrallaan', b: 'Rajallinen', c: 'Kaikki operaattorit' },
+                    { label: 'Kattavuus', a: 'Operaattori kerrallaan', b: 'Rajallinen', c: `${operatorCount} operaattoria, ${totalPlans} liittymää` },
                     { label: 'Menetelmä', a: 'Vaihteleva', b: 'Henkilökohtainen kokemus', c: 'Objektiivinen järjestys' },
-                    { label: 'Ajantasaisuus', a: 'Vaihtelee', b: 'Voi olla vanhentunutta', c: 'Viikoittain päivitetty' },
+                    { label: 'Ajantasaisuus', a: 'Vaihtelee', b: 'Voi olla vanhentunutta', c: 'Päiväysleimattu data' },
                     { label: 'Ajankäyttö', a: 'Tunteja', b: 'Satunnaista', c: 'Muutama minuutti' },
                     { label: 'Hinta', a: 'Ilmainen', b: 'Ilmainen', c: 'Ilmainen' },
                   ].map((row, i) => (
@@ -701,7 +704,7 @@ export default function HomeContent({
             />
             <p className="mx-auto mt-6 max-w-2xl text-lg text-white/70 leading-relaxed">
               Vertaa liittymiä ilmaiseksi ja löydä juuri sinulle sopiva liittymä parhaaseen hintaan.
-              Kattava, ajantasainen ja täysin ilmainen palvelu.
+              Puolueeton, läpinäkyvä ja täysin ilmainen palvelu.
             </p>
             <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Link

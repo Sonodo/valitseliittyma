@@ -83,7 +83,7 @@ export default async function OperatorPage({ params }: Props) {
           href="/operaattorit"
           className="mb-6 inline-flex items-center gap-1 text-sm text-slate-500 hover:text-cyan-600"
         >
-          <ArrowLeft className="h-4 w-4" /> Kaikki operaattorit
+          <ArrowLeft className="h-4 w-4" /> Operaattorit
         </Link>
 
         {/* Header */}

@@ -56,7 +56,7 @@ export default async function ComparisonPage({ params }: Props) {
           href="/operaattorit"
           className="mb-6 inline-flex items-center gap-1 text-sm text-slate-500 hover:text-cyan-600"
         >
-          <ArrowLeft className="h-4 w-4" /> Kaikki operaattorit
+          <ArrowLeft className="h-4 w-4" /> Operaattorit
         </Link>
 
         <h1 className="mb-4 text-3xl font-extrabold text-slate-900 sm:text-4xl">

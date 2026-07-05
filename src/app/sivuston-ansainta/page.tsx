@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { breadcrumbSchema } from '@/lib/schema';
-import { SITE_NAME } from '@/lib/constants';
+import { SITE_NAME, DATA_REVIEWED_AT } from '@/lib/constants';
 import { SITE_CONFIG } from '@/components/disclosure';
 
 export const metadata: Metadata = {
@@ -119,21 +119,22 @@ export default function SivustonAnsaintaPage() {
         </section>
 
         <section className="mb-10">
-          <h2 className="text-xl font-bold text-slate-900">Päivitysväli</h2>
+          <h2 className="text-xl font-bold text-slate-900">Tietojen tarkistus</h2>
           <p className="mt-3 text-slate-700 leading-relaxed">
-            Kumppanitarjousten hinnat päivittyvät automaattisesti kumppanin
-            järjestelmästä useamman kerran viikossa. Muiden tarjoajien hintoja
-            tarkistetaan manuaalisesti vähintään kerran kuussa. Mikäli huomaat
-            virheellisen hinnan, kerro siitä — korjaamme sen vuorokauden sisällä.
+            Kaikki hinnat tarkistetaan manuaalisesti operaattoreiden julkisilta
+            sivuilta — sama käytäntö koskee kumppaneita ja muita tarjoajia.
+            Viimeisin tarkistus on tehty {DATA_REVIEWED_AT}, ja päivämäärä kerrotaan
+            avoimesti vertailusivuilla. Mikäli huomaat virheellisen hinnan, kerro
+            siitä — pyrimme korjaamaan sen vuorokauden sisällä.
           </p>
         </section>
 
         <section className="mb-10">
           <h2 className="text-xl font-bold text-slate-900">Mukana olevat ja pois jätetyt operaattorit</h2>
           <p className="mt-3 text-slate-700 leading-relaxed">
-            Vertailussa on mukana kaikki Suomen merkittävät operaattorit:
+            Vertailussa ovat mukana Suomen merkittävimmät operaattorit:
             Elisa, DNA, Telia, Moi Mobiili, Giga Mobiili, Oomi Mobiili ja Globetel
-            sekä useita laajakaistapuolen pienempiä toimijoita.
+            sekä laajakaistaoperaattori Valoo.
           </p>
           <p className="mt-3 text-slate-700 leading-relaxed">
             Pois on jätetty operaattorit, joiden tarjonta on alueellisesti hyvin

@@ -2,15 +2,14 @@ import type { Metadata } from 'next';
 import { mobilePlans } from '@/data/mobile-plans';
 import MobilePlanFilters from '@/components/plans/MobilePlanFilters';
 import { plansToItemListSchema, breadcrumbSchema } from '@/lib/schema';
-import { SITE_URL } from '@/lib/constants';
+import { SITE_URL, DATA_REVIEWED_AT } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Puhelinliittymät — Vertaa kaikkia liittymiä Suomessa',
-  description:
-    'Vertaa kaikkia puhelinliittymiä Suomessa. Suodata hinnan, datan, operaattorin ja 5G:n mukaan. Löydä halvin liittymä.',
+  title: `Puhelinliittymät — Vertaa ${mobilePlans.length} liittymää Suomessa`,
+  description: `Vertaa ${mobilePlans.length} puhelinliittymää Suomen merkittävimmiltä operaattoreilta. Suodata hinnan, datan, operaattorin ja 5G:n mukaan. Löydä halvin liittymä.`,
   openGraph: {
-    title: 'Puhelinliittymät — Vertaa kaikkia liittymiä Suomessa',
-    description: 'Vertaa kaikkia puhelinliittymiä ja löydä halvin. Suodata ja lajittele.',
+    title: `Puhelinliittymät — Vertaa ${mobilePlans.length} liittymää Suomessa`,
+    description: 'Vertaa puhelinliittymiä ja löydä halvin. Suodata ja lajittele.',
   },
   alternates: { canonical: '/puhelinliittymat' },
 };
@@ -44,8 +43,11 @@ export default function PuhelinliittymatPage() {
             Puhelinliittymät
           </h1>
           <p className="mt-4 max-w-3xl text-lg text-slate-600">
-            Vertaa {mobilePlans.length} puhelinliittymää Suomen kaikilta operaattoreilta.
+            Vertaa {mobilePlans.length} puhelinliittymää Suomen merkittävimmiltä operaattoreilta.
             Suodata hinnan, datamäärän, operaattorin ja verkkotyypin mukaan.
+          </p>
+          <p className="mt-2 text-sm text-slate-500">
+            Liittymätiedot tarkistettu {DATA_REVIEWED_AT}. Tarkista lopulliset hinnat operaattorilta.
           </p>
         </div>
 

@@ -68,7 +68,7 @@ export default function OpasIndexPage() {
             Etsitkö edullisinta liittymää?
           </h2>
           <p className="mt-2 text-slate-600">
-            Vertaa kaikkia puhelinliittymiä ja löydä sinulle sopiva vaihtoehto.
+            Vertaa puhelinliittymiä ja löydä sinulle sopiva vaihtoehto.
           </p>
           <Link
             href="/puhelinliittymat"

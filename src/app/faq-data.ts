@@ -6,6 +6,8 @@
  * read aloud by AI assistants (Google SGE, ChatGPT search).
  */
 
+import { DATA_REVIEWED_AT } from '@/lib/constants';
+
 export interface FaqItem {
   q: string;
   a: string;
@@ -18,7 +20,7 @@ export const HOMEPAGE_FAQ: FaqItem[] = [
   },
   {
     q: 'Mikä on edullisin puhelinliittymä juuri nyt?',
-    a: 'Edullisin liittymä riippuu siitä, paljonko dataa tarvitset. Pieneen käyttöön (1–10 Gt/kk) löytyy liittymiä alle 8 €/kk; rajaton 5G alkaa noin 25–30 €/kk. Vertaile ajantasaiset hinnat sivuiltamme — päivitämme liittymätiedot kuukausittain.',
+    a: `Edullisin liittymä riippuu siitä, paljonko dataa tarvitset. Pieneen käyttöön (1–10 Gt/kk) löytyy liittymiä alle 8 €/kk; rajaton 5G alkaa noin 25–30 €/kk. Vertaile hinnat sivuiltamme — liittymätiedot on tarkistettu ${DATA_REVIEWED_AT}, ja lopullinen hinta kannattaa aina varmistaa operaattorilta.`,
   },
   {
     q: 'Voiko oman puhelinnumeron siirtää uudelle operaattorille?',

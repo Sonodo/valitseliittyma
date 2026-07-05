@@ -6,7 +6,7 @@
 **Domain**: valitseliittyma.fi (Valitse Liittymä brand)
 **GA4**: G-Q3MR58J1E7
 **Clarity**: w9nc8umkc7
-**Last Updated**: Session #088 — 2026-04-14 (audit fix sweep)
+**Last Updated**: 2026-07-05 (claim-integrity fixes — media defensibility)
 
 ## Current State — LIVE
 
@@ -15,23 +15,17 @@
 - **Clarity**: w9nc8umkc7 active
 - **GSC**: Verification tag added
 - **Cross-links**: Links to other Valitse sites maintained in `src/lib/constants.ts`
-- ~56 pages, 7 operators (Elisa, DNA, Telia, Moi, Giga Mobiili, Oomi, Globetel), 30 mobile + 20 broadband plans, 12 operator-vs pages, 3+ blog articles, 3 guides, 2 calculators, 10 city pages
+- ~56 pages, 8 operators (Elisa, DNA, Telia, Moi, Giga Mobiili, Oomi, Globetel, Valoo), 28 mobile + 20 broadband plans, 12 operator-vs pages, 3+ blog articles, 3 guides, 2 calculators, 10 city pages
 - Next.js 16 + TypeScript + Tailwind CSS v4
 
-## KNOWN CAVEAT — Deploy repo divergence
-
-- A previous session (#087) marked this folder as a 308 redirect shell and moved the live
-  product to `Sonodo/liittyma-deploy`. Subsequent work has re-hydrated the product source
-  in this folder without mirroring changes to the deploy repo. Any fix applied here must
-  also be mirrored in `Sonodo/liittyma-deploy` before it reaches production, OR the
-  `next.config.ts` redirect block here must be removed and this folder re-deployed as the
-  canonical source.
-- **Decision pending Chairman direction**: consolidate to a single source of truth
-  (recommended: this folder) and retire the standalone deploy repo.
-- Until that decision lands, STATUS assumes the empire source-of-truth is this folder
-  and any audit fixes should be re-applied to the deploy repo manually.
-
 ## Recent Changes
+
+### 2026-07-05 — Claim-integrity fixes (media defensibility)
+- **Freshness overclaims killed**: "Tarkistamme liittymätiedot viikoittain" / "Viikoittain päivitetty" / "Aina ajan tasalla" (homepage ×4), "päivitämme liittymätiedot kuukausittain" (FAQ + FAQPage JSON-LD), "vähintään kerran kuukaudessa" (/tietoa) and the fabricated "hinnat päivittyvät automaattisesti kumppanin järjestelmästä useamman kerran viikossa" (/sivuston-ansainta) — data is hardcoded static TS with no update process; none of these were true.
+- **Replaced with dated truth**: new `DATA_REVIEWED_AT = '20.4.2026'` in `src/lib/constants.ts` (git evidence: last substantive plan-data commits are `3d4fa94` 2026-04-14 mobile-plans and `f306c10` 2026-04-20 broadband-plans; the 2026-06-04 commit touched only benchmarks/disclosure). Stamp rendered on homepage (hero metric + trust bar + value prop), /puhelinliittymat, /laajakaista, /menetelma summary, /tietoa and /sivuston-ansainta. **Update the constant whenever plan data is reviewed.**
+- **Coverage overclaims killed**: "Kaikki operaattorit" (homepage ×3, nav), "kaikilta 7 operaattorilta" (hero — count was also wrong), "Vertaa kaikkia (puhelin)liittymiä Suomessa" (listing metadata/OG, blogi/opas/kaupunki CTAs), "kaikki Suomen merkittävät operaattorit" (/sivuston-ansainta) → truthful "Suomen merkittävimmät operaattorit" / real counts ("8 operaattoria, 48 liittymää"). Hero "+"-suffixes dropped (8 and 48 are exact). Scoped filter/back-link labels rephrased so `grep "aikki operaattorit"` stays at 0.
+- **Stale caveat removed**: the Session #087 "redirect shell / Sonodo/liittyma-deploy divergence" caveat is obsolete — this folder is the canonical source, pushes to `Sonodo/valitseliittyma`, and live production serves current repo data (verified in 2026-07-05 site review).
+- Benchmark layer (Speedtest H1/2025 + Traficom 10/2025, verified 2026-06-04) untouched — it was already honest and dated.
 
 ### Session #088 — Audit Fix Sweep (2026-04-14)
 - **Full quality audit applied** (`_EMPIRE_HQ/AUDITS/2026-04-14-empire-quality-audit/valitseliittyma.md`)
@@ -81,14 +75,13 @@
 
 ## Next Steps
 
-1. **Resolve deploy-repo divergence** — consolidate to a single canonical source
-2. **Mirror Session #088 fixes to deploy repo** (or retire deploy repo)
-3. **Submit sitemap to Google Search Console** — accelerate indexing
-4. **Apply for AdSense** — organic traffic monetization
-5. **Apply for Adtraction telecom affiliate programs** — partnership revenue
+1. **Monthly data-refresh routine** — check all 48 plans against operator sites once a month, bump `DATA_REVIEWED_AT` in `src/lib/constants.ts`; once the cadence has actually held for 2-3 cycles, the site may claim it
+2. **Verify remaining operator data accuracy** — Elisa, DNA, Telia plans (pairs with refresh routine)
+3. **Wire Elisa + DNA affiliate programs** — verify Adtraction availability first (see SITE_REVIEW_2026-07-05.md §B note)
+4. **Submit sitemap to Google Search Console** — accelerate indexing
+5. **Apply for AdSense** — organic traffic monetization
 6. **Post-launch SEO monitoring** — Track keyword rankings
-7. **Verify remaining operator data accuracy** — Elisa, DNA, Telia plans
 
 ## Blockers
 
-- Deploy-repo divergence (see caveat) — low urgency operationally, high urgency for correctness
+- None

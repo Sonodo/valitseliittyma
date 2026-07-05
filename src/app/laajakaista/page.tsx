@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { broadbandPlans } from '@/data/broadband-plans';
 import BroadbandPlanFilters from '@/components/plans/BroadbandPlanFilters';
 import { plansToItemListSchema, breadcrumbSchema } from '@/lib/schema';
-import { SITE_URL } from '@/lib/constants';
+import { SITE_URL, DATA_REVIEWED_AT } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Laajakaista — Vertaa laajakaistaliittymiä Suomessa',
@@ -45,7 +45,10 @@ export default function LaajakaistaPage() {
             </h1>
             <p className="mt-4 max-w-3xl text-lg text-slate-600">
               Vertaa {broadbandPlans.length} laajakaistaliittymää. Valokuitu, 4G-kotinetti ja 5G-kotinetti
-              kaikilta operaattoreilta.
+              Suomen merkittävimmiltä operaattoreilta.
+            </p>
+            <p className="mt-2 text-sm text-slate-500">
+              Liittymätiedot tarkistettu {DATA_REVIEWED_AT}. Tarkista lopulliset hinnat operaattorilta.
             </p>
           </div>
 
