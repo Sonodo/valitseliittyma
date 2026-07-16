@@ -51,7 +51,12 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
   },
   verification: {
-    google: 'WnQHzpggXe9YQu1nGT2kpLtXyIqbx08XQJRvKkq7_rw',
+    // Both tags kept: the original property tag + the Chairman's new
+    // Search Console property for valitseliittyma.fi (added 2026-07-16).
+    google: [
+      'WnQHzpggXe9YQu1nGT2kpLtXyIqbx08XQJRvKkq7_rw',
+      'PrmzOWhqVc65C8j0WdbVhgzai6uGSGIJG2l0sUhnf4M',
+    ],
   },
 };
 
