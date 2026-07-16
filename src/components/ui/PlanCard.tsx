@@ -69,6 +69,14 @@ export const MobilePlanCard = memo(function MobilePlanCard({ plan, showOperator 
             {formatPriceDisplay(plan.monthlyPrice)}
           </span>
           <span className="text-sm text-slate-500"> €/kk</span>
+          {typeof plan.campaignPrice === 'number' && (
+            <p className="mt-0.5 text-xs text-slate-500">
+              {plan.campaignNote ?? 'kampanjahinta'}:{' '}
+              <span className="font-semibold text-emerald-700">
+                {formatPriceDisplay(plan.campaignPrice)} €/kk
+              </span>
+            </p>
+          )}
         </div>
       </div>
 
@@ -120,17 +128,18 @@ export const MobilePlanCard = memo(function MobilePlanCard({ plan, showOperator 
             {feature}
           </li>
         ))}
-        {plan.euRoamingData > 0 ? (
-          <li className="flex items-center gap-2 text-sm text-slate-600">
-            <Check className="h-4 w-4 shrink-0 text-emerald-500" />
-            EU-roaming {plan.euRoamingData} Gt
-          </li>
-        ) : (
-          <li className="flex items-center gap-2 text-sm text-slate-400">
-            <X className="h-4 w-4 shrink-0 text-slate-400" />
-            Ei EU-roaming-dataa
-          </li>
-        )}
+        {typeof plan.euRoamingData === 'number' &&
+          (plan.euRoamingData > 0 ? (
+            <li className="flex items-center gap-2 text-sm text-slate-600">
+              <Check className="h-4 w-4 shrink-0 text-emerald-500" />
+              EU-roaming {plan.euRoamingData} Gt
+            </li>
+          ) : (
+            <li className="flex items-center gap-2 text-sm text-slate-400">
+              <X className="h-4 w-4 shrink-0 text-slate-400" />
+              Ei EU-roaming-dataa
+            </li>
+          ))}
       </ul>
 
       <a
@@ -207,6 +216,14 @@ export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOpe
             {formatPriceDisplay(plan.monthlyPrice)}
           </span>
           <span className="text-sm text-slate-500"> €/kk</span>
+          {typeof plan.campaignPrice === 'number' && (
+            <p className="mt-0.5 text-xs text-slate-500">
+              {plan.campaignNote ?? 'kampanjahinta'}:{' '}
+              <span className="font-semibold text-emerald-700">
+                {formatPriceDisplay(plan.campaignPrice)} €/kk
+              </span>
+            </p>
+          )}
         </div>
       </div>
 
@@ -224,15 +241,17 @@ export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOpe
         </div>
       )}
 
-      <div className="mb-4 grid grid-cols-2 gap-3">
+      <div className={`mb-4 grid gap-3 ${typeof plan.uploadSpeed === 'number' ? 'grid-cols-2' : 'grid-cols-1'}`}>
         <div className="rounded-lg bg-accent-50 p-3 text-center">
           <p className="text-sm font-semibold text-slate-900">{formatSpeed(plan.downloadSpeed)}</p>
           <p className="text-xs text-slate-500">Lataus</p>
         </div>
-        <div className="rounded-lg bg-accent-50 p-3 text-center">
-          <p className="text-sm font-semibold text-slate-900">{formatSpeed(plan.uploadSpeed)}</p>
-          <p className="text-xs text-slate-500">Lähetys</p>
-        </div>
+        {typeof plan.uploadSpeed === 'number' && (
+          <div className="rounded-lg bg-accent-50 p-3 text-center">
+            <p className="text-sm font-semibold text-slate-900">{formatSpeed(plan.uploadSpeed)}</p>
+            <p className="text-xs text-slate-500">Lähetys</p>
+          </div>
+        )}
       </div>
 
       <ul className="mb-5 flex-1 space-y-2">

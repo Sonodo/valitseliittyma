@@ -11,7 +11,11 @@ export const SITE_TAGLINE = 'Vertaa ja säästä liittymäkuluissa';
 // broadband-plans.ts) was last substantively reviewed against operator sites.
 // UPDATE THIS whenever plan data is checked or revised. Rendered on the
 // homepage trust sections, listing pages, methodology and editorial pages.
-export const DATA_REVIEWED_AT = '20.4.2026';
+// 2026-07-16 full re-verification: all operators checked against official
+// pages (Elisa via cross-corroborated secondary source); lineups rebranded
+// (Elisa Huoleton, DNA Huoleton Plus, Telia Rajaton, Moi Kevyt–Super),
+// campaign prices captured separately, unverifiable fixed-fiber rows removed.
+export const DATA_REVIEWED_AT = '16.7.2026';
 
 // Colors — teal/blue telecom theme
 export const COLORS = {

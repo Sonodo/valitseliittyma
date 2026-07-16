@@ -4,6 +4,8 @@ import { mobilePlans, getCheapestPlans } from '@/data/mobile-plans';
 import { operators } from '@/data/operators';
 import { MobilePlanCard } from '@/components/ui/PlanCard';
 import MethodologyBox from '@/components/ui/MethodologyBox';
+import { plansToItemListSchema, breadcrumbSchema } from '@/lib/schema';
+import { SITE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Halvin puhelinliittymä 2026 — Edullisimmat liittymät vertailussa',
@@ -47,8 +49,27 @@ export default function HalvinPuhelinliittymaPage() {
     .sort((a, b) => a.monthlyPrice - b.monthlyPrice)
     .slice(0, 5);
 
+  const cheapestOverall = sortedByPrice[0];
+  const itemListLd = plansToItemListSchema(
+    sortedByPrice.slice(0, 10),
+    `${SITE_URL}/halvin-puhelinliittyma`,
+    'Halvimmat puhelinliittymät — Valitse Liittymä',
+  );
+  const breadcrumbLd = breadcrumbSchema([
+    { name: 'Etusivu', url: '/' },
+    { name: 'Halvin puhelinliittymä', url: '/halvin-puhelinliittyma' },
+  ]);
+
   return (
     <div className="py-12 sm:py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 max-w-3xl">
           <h1 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">
@@ -58,6 +79,24 @@ export default function HalvinPuhelinliittymaPage() {
             Vertailemme puolestasi Suomen edullisimmat puhelinliittymät. Useimmissa vertailun
             liittymissä on rajaton puhe ja viestit Suomeen — erona on datamäärä, nopeus ja hinta.
           </p>
+          <div className="mt-6 rounded-xl border border-slate-200 bg-slate-50/70 px-5 py-4">
+            <p className="text-[15px] leading-relaxed text-slate-700">
+              Halvin puhelinliittymä vertailussa on{' '}
+              <span className="font-semibold text-slate-900">
+                {cheapestOverall.name} (
+                {cheapestOverall.monthlyPrice.toFixed(2).replace('.', ',')} €/kk)
+              </span>
+              {cheapestUnlimited && (
+                <>
+                  {' '}
+                  ja halvin rajattoman datan liittymä {cheapestUnlimited.name} (
+                  {cheapestUnlimited.monthlyPrice.toFixed(2).replace('.', ',')} €/kk)
+                </>
+              )}
+              . Hinnat ovat normaalihintoja ilman kampanja-alennuksia — kampanjahinnat
+              näytetään korteilla erikseen.
+            </p>
+          </div>
         </div>
 
         <MethodologyBox

@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Calculator, TrendingDown } from 'lucide-react';
 import { mobilePlans } from '@/data/mobile-plans';
+import { DATA_REVIEWED_AT } from '@/lib/constants';
 
 type DataTier = 'small' | 'medium' | 'large' | 'unlimited';
 
@@ -177,7 +178,7 @@ export default function SubscriptionCalculator() {
           ({benchmarkPrice.toFixed(2).replace('.', ',')} €/kk)
           {sampleSize > 0 && `: ${sampleNames}`}. Todellinen säästö riippuu valitsemastasi
           liittymästä ja operaattorin kulloisestakin kampanjasta. Hintatiedot tarkistettu viimeksi{' '}
-          {new Date().toLocaleDateString('fi-FI')}.
+          {DATA_REVIEWED_AT}.
         </p>
       </div>
 

@@ -6,6 +6,7 @@ import { comparisonPairs, getComparisonBySlug } from '@/data/comparisons';
 import { getOperatorById } from '@/data/operators';
 import { getPlansByOperator } from '@/data/mobile-plans';
 import { MobilePlanCard } from '@/components/ui/PlanCard';
+import { breadcrumbSchema } from '@/lib/schema';
 import { operatorGenitive } from '@/lib/utils';
 
 interface Props {
@@ -49,8 +50,18 @@ export default async function ComparisonPage({ params }: Props) {
   const has5G1 = plans1.some((p) => p.has5G);
   const has5G2 = plans2.some((p) => p.has5G);
 
+  const breadcrumbLd = breadcrumbSchema([
+    { name: 'Etusivu', url: '/' },
+    { name: 'Operaattorit', url: '/operaattorit' },
+    { name: `${op1.name} vs ${op2.name}`, url: `/liittymavertailu/${slugPair}` },
+  ]);
+
   return (
     <div className="py-12 sm:py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Link
           href="/operaattorit"
@@ -62,10 +73,40 @@ export default async function ComparisonPage({ params }: Props) {
         <h1 className="mb-4 text-3xl font-extrabold text-slate-900 sm:text-4xl">
           {op1.name} vs {op2.name}
         </h1>
-        <p className="mb-10 max-w-3xl text-lg text-slate-600">
+        <p className="mb-6 max-w-3xl text-lg text-slate-600">
           Kattava vertailu: {op1.name} vastaan {op2.name}. Kumpi tarjoaa paremmat liittymät,
           hinnat ja verkon? Selvitä, kumpi sopii sinulle.
         </p>
+
+        {/* Answer capsule — the verdict up top, derived from the same data as
+            the Yhteenveto section below */}
+        <div className="mb-10 max-w-3xl rounded-xl border border-slate-200 bg-slate-50/70 px-5 py-4">
+          <p className="text-[15px] leading-relaxed text-slate-700">
+            {cheapest1 !== cheapest2 ? (
+              <>
+                Edullisimmalla liittymällä mitattuna{' '}
+                <span className="font-semibold text-slate-900">
+                  {cheapest1 < cheapest2 ? op1.name : op2.name} on edullisempi
+                </span>{' '}
+                (alkaen {Math.min(cheapest1, cheapest2).toFixed(2).replace('.', ',')} €/kk vs.{' '}
+                {Math.max(cheapest1, cheapest2).toFixed(2).replace('.', ',')} €/kk).
+              </>
+            ) : (
+              <>
+                Molempien edullisin liittymä maksaa saman verran (
+                {cheapest1.toFixed(2).replace('.', ',')} €/kk).
+              </>
+            )}{' '}
+            {has5G1 && has5G2
+              ? 'Molemmat tarjoavat 5G-liittymiä.'
+              : has5G1
+                ? `5G-liittymiä tarjoaa vain ${op1.name}.`
+                : has5G2
+                  ? `5G-liittymiä tarjoaa vain ${op2.name}.`
+                  : 'Kumpikaan ei tarjoa 5G-liittymiä.'}{' '}
+            Yksityiskohtainen vertailu ja perustelut alla.
+          </p>
+        </div>
 
         {/* Quick comparison table */}
         <div className="mb-12 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">

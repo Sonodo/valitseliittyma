@@ -30,14 +30,16 @@ export interface MobilePlan {
   operatorId: string;
   name: string;
   category: 'mobile';
-  monthlyPrice: number; // EUR/kk
+  monthlyPrice: number; // EUR/kk — normal list price (perushinta), no campaign discounts
+  campaignPrice?: number; // EUR/kk — operator's current campaign price, shown as secondary info only
+  campaignNote?: string; // e.g. "12 kk uusille asiakkaille"
   dataAmount: number | 'unlimited'; // GB or unlimited
   maxSpeed: number; // Mbit/s
   has5G: boolean;
   contractType: ContractType;
   callsIncluded: string; // e.g. "Rajaton Suomeen"
   smsIncluded: string;
-  euRoamingData: number; // GB
+  euRoamingData?: number; // GB — omit when not verified from the operator (0 = verified none)
   specialFeatures: string[];
   url: string;
 }
@@ -47,10 +49,12 @@ export interface BroadbandPlan {
   operatorId: string;
   name: string;
   category: 'broadband';
-  monthlyPrice: number;
+  monthlyPrice: number; // EUR/kk — normal list price (perushinta), no campaign discounts
+  campaignPrice?: number; // EUR/kk — current campaign price, secondary info only
+  campaignNote?: string;
   technology: BroadbandTechnology;
   downloadSpeed: number; // Mbit/s
-  uploadSpeed: number; // Mbit/s
+  uploadSpeed?: number; // Mbit/s — omit when the operator doesn't publish it
   contractType: ContractType;
   specialFeatures: string[];
   url: string;

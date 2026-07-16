@@ -15,7 +15,15 @@ export const metadata: Metadata = {
   alternates: { canonical: '/laajakaista' },
 };
 
+function fmt(price: number): string {
+  return `${price.toFixed(2).replace('.', ',')} €/kk`;
+}
+
 export default function LaajakaistaPage() {
+  const byPrice = [...broadbandPlans].sort((a, b) => a.monthlyPrice - b.monthlyPrice);
+  const cheapest = byPrice[0];
+  const fastest = [...broadbandPlans].sort((a, b) => b.downloadSpeed - a.downloadSpeed)[0];
+
   const itemListLd = plansToItemListSchema(
     broadbandPlans,
     `${SITE_URL}/laajakaista`,
@@ -49,6 +57,32 @@ export default function LaajakaistaPage() {
             </p>
             <p className="mt-2 text-sm text-slate-500">
               Liittymätiedot tarkistettu {DATA_REVIEWED_AT}. Tarkista lopulliset hinnat operaattorilta.
+            </p>
+          </div>
+
+          {/* Answer capsule — data-driven direct answer for readers and AI crawlers */}
+          <div className="mb-4 rounded-xl border border-slate-200 bg-slate-50/70 px-5 py-4">
+            <p className="text-[15px] leading-relaxed text-slate-700">
+              Edullisin kodin nettiliittymä vertailussa on{' '}
+              <span className="font-semibold text-slate-900">
+                {cheapest.name} ({fmt(cheapest.monthlyPrice)})
+              </span>{' '}
+              ja nopein {fastest.name} ({fastest.downloadSpeed} Mbit/s,{' '}
+              {fmt(fastest.monthlyPrice)}). Hinnat ovat normaalihintoja ilman
+              kampanja-alennuksia — voimassa olevat kampanjahinnat näytetään
+              korteilla erikseen.
+            </p>
+          </div>
+
+          {/* Honest coverage note: address-priced fiber is not listable */}
+          <div className="mb-8 rounded-xl border border-amber-200 bg-amber-50 px-5 py-4">
+            <p className="text-sm leading-relaxed text-amber-900">
+              <span className="font-semibold">Huom:</span> Elisan, DNA:n ja Telian
+              kiinteiden valokuituliittymien hinnat ovat osoitekohtaisia, eikä niille
+              ole julkista listahintaa — siksi ne eivät ole tässä vertailussa.
+              Tarkista kuidun saatavuus ja hinta osoitteellesi suoraan operaattorilta.
+              Vertailussa näytetään valtakunnallisesti hinnoitellut kodin
+              nettiliittymät (5G-kotinetit ja Valoon kuitu).
             </p>
           </div>
 

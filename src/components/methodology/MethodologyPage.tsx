@@ -5,8 +5,8 @@ import type { MethodologyConfig } from './types';
  * MethodologyPage — server component rendering a complete /menetelma page.
  *
  * Accepts a site-specific MethodologyConfig and produces a scannable,
- * prose-heavy methodology page covering: summary, data sources, ranking
- * weights, site-wide affiliate disclosure, inline changelog, contact.
+ * prose-heavy methodology page covering: summary, data sources, evaluation
+ * criteria, site-wide affiliate disclosure, inline changelog, contact.
  *
  * No external repo/changelog links. No named contact person. No per-card
  * "Mainos" labels — disclosure is site-wide here.
@@ -17,14 +17,13 @@ export default function MethodologyPage({ config }: { config: MethodologyConfig 
     siteUrl,
     summary,
     dataSources,
-    weights,
+    criteria,
     disclosure,
     changelog,
     contact,
     lastReviewedAt,
+    dataFeed,
   } = config;
-
-  const totalWeight = weights.reduce((sum, w) => sum + w.weight, 0);
 
   return (
     <article className="bg-background">
@@ -38,7 +37,7 @@ export default function MethodologyPage({ config }: { config: MethodologyConfig 
             Miten teemme rankingit
           </h1>
           <p className="mt-4 text-base text-white/70 sm:text-lg">
-            Avoin kuvaus datalähteistä, painokertoimista ja kaupallisista suhteista.
+            Avoin kuvaus datalähteistä, arviointikriteereistä ja kaupallisista suhteista.
             {lastReviewedAt && (
               <>
                 {' '}
@@ -99,18 +98,33 @@ export default function MethodologyPage({ config }: { config: MethodologyConfig 
               </li>
             ))}
           </ul>
+          {dataFeed && (
+            <p className="mt-4 text-sm text-slate-600">
+              <a
+                href={dataFeed.href}
+                className="font-medium text-accent-700 underline hover:text-accent-800"
+              >
+                {dataFeed.label}
+              </a>{' '}
+              — {dataFeed.description}
+            </p>
+          )}
         </Section>
 
-        {/* ─── 4. Painokertoimet ─── */}
-        <Section id="painokertoimet" title="Rankingin painokertoimet">
+        {/* ─── 4. Arviointikriteerit ja järjestys ─── */}
+        <Section id="jarjestys" title="Arviointikriteerit ja järjestys">
           <p className="mt-4 text-base text-slate-700">
-            Lopullinen pisteytys on painotettu yhdistelmä alla olevista
-            tekijöistä. Painot summautuvat sataan prosenttiin. Pyrimme
-            mahdollisimman objektiiviseen ja toistettavaan laskentaan — kaava ja
-            painot dokumentoidaan tällä sivulla.
+            Emme laske liittymistä piilotettua painotettua yhdistelmäpistettä.
+            Listaukset järjestetään oletuksena normaalin kuukausihinnan mukaan
+            (edullisin ensin), ja voit vaihtaa lajitteluperustetta tai suodattaa
+            tuloksia milloin tahansa. Riippumaton mittausdata (Speedtest,
+            Traficom) näytetään liittymäkorteilla tiedoksi — se ei muuta
+            järjestystä. Kaupallinen yhteistyö ei koskaan vaikuta järjestykseen.
+            Alla on kuvattu tekijät, jotka arvioimme ja näytämme jokaisesta
+            liittymästä, sekä kunkin rooli järjestyksessä.
           </p>
-          <div className="mt-6 overflow-hidden rounded-2xl ring-1 ring-slate-200/60">
-            <table className="w-full text-left text-sm">
+          <div className="mt-6 overflow-x-auto rounded-2xl ring-1 ring-slate-200/60">
+            <table className="w-full min-w-[36rem] text-left text-sm">
               <thead className="bg-slate-50 text-slate-700">
                 <tr>
                   <th scope="col" className="px-4 py-3 font-semibold sm:px-6">
@@ -119,54 +133,31 @@ export default function MethodologyPage({ config }: { config: MethodologyConfig 
                   <th scope="col" className="px-4 py-3 font-semibold sm:px-6">
                     Kuvaus
                   </th>
-                  <th
-                    scope="col"
-                    className="px-4 py-3 text-right font-semibold sm:px-6"
-                  >
-                    Paino
+                  <th scope="col" className="px-4 py-3 font-semibold sm:px-6">
+                    Rooli järjestyksessä
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200 bg-white">
-                {weights.map((w) => (
-                  <tr key={w.factor}>
+                {criteria.map((c) => (
+                  <tr key={c.factor}>
                     <th
                       scope="row"
                       className="px-4 py-4 font-semibold text-slate-900 sm:px-6"
                     >
-                      {w.factor}
+                      {c.factor}
                     </th>
                     <td className="px-4 py-4 text-slate-600 sm:px-6">
-                      {w.description}
+                      {c.description}
                     </td>
-                    <td className="whitespace-nowrap px-4 py-4 text-right font-mono text-slate-900 sm:px-6">
-                      {w.weight} %
+                    <td className="px-4 py-4 text-slate-600 sm:px-6">
+                      {c.role}
                     </td>
                   </tr>
                 ))}
               </tbody>
-              <tfoot className="bg-slate-50">
-                <tr>
-                  <th
-                    scope="row"
-                    colSpan={2}
-                    className="px-4 py-3 text-right text-sm font-semibold text-slate-700 sm:px-6"
-                  >
-                    Yhteensä
-                  </th>
-                  <td className="whitespace-nowrap px-4 py-3 text-right font-mono text-sm font-semibold text-slate-900 sm:px-6">
-                    {totalWeight} %
-                  </td>
-                </tr>
-              </tfoot>
             </table>
           </div>
-          {totalWeight !== 100 && (
-            <p className="mt-3 text-xs text-amber-700" role="note">
-              Huom: painojen summa ei ole 100 %. Tämä on tarkoituksellinen
-              välitulos, joka päivitetään lopulliseen julkaisuun.
-            </p>
-          )}
         </Section>
 
         {/* ─── 5. Kaupalliset suhteet ─── */}
@@ -237,7 +228,7 @@ export default function MethodologyPage({ config }: { config: MethodologyConfig 
         <Section id="ota-yhteytta" title="Ota yhteyttä">
           <p className="mt-4 text-base text-slate-700">
             Löysitkö virheen, haluat ehdottaa uutta datalähdettä tai
-            kyseenalaistaa painokertoimen? Otamme palautteen vakavasti.
+            kyseenalaistaa arviointikriteerin? Otamme palautteen vakavasti.
           </p>
           <div className="mt-6">
             <Link

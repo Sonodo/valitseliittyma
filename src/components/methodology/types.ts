@@ -45,13 +45,18 @@ export interface DataSource {
   readonly description?: string;
 }
 
-export interface WeightRow {
-  /** Short Finnish label, e.g. "Hinta". */
+export interface CriterionRow {
+  /** Short Finnish label, e.g. "Kuukausihinta". */
   readonly factor: string;
   /** 1 sentence explaining what is measured. */
   readonly description: string;
-  /** Integer weight in percent. All rows on a config should sum to 100. */
-  readonly weight: number;
+  /**
+   * The criterion's role in ordering, e.g. "Oletusjärjestys",
+   * "Vain tiedoksi" or "Kelpoisuusehto". Ordering is by the price
+   * metric — there is no weighted composite score, so criteria carry a
+   * role rather than a numeric weight.
+   */
+  readonly role: string;
 }
 
 export interface Disclosure {
@@ -98,8 +103,11 @@ export interface MethodologyConfig {
   readonly summary: ReadonlyArray<string>;
   /** Authoritative sources used in ranking. */
   readonly dataSources: ReadonlyArray<DataSource>;
-  /** Ranking weights. Should sum to 100. */
-  readonly weights: ReadonlyArray<WeightRow>;
+  /**
+   * Criteria we evaluate and each one's role in ordering. Ordering is by
+   * the default price metric — there is no weighted composite score.
+   */
+  readonly criteria: ReadonlyArray<CriterionRow>;
   /** Site-wide commercial disclosure copy. */
   readonly disclosure: Disclosure;
   /**
@@ -109,6 +117,16 @@ export interface MethodologyConfig {
   readonly changelog: ReadonlyArray<ChangelogEntry>;
   /** Generic contact link (no named person). */
   readonly contact: ContactLink;
+  /**
+   * Optional public machine-readable data feed advertised on the page
+   * (e.g. the JSON comparison feed) — renders as a download link under
+   * the data sources.
+   */
+  readonly dataFeed?: {
+    readonly href: string;
+    readonly label: string;
+    readonly description: string;
+  };
   /**
    * Optional ISO date of the most recent editorial review of this page.
    * Surfaces as "Viimeksi tarkistettu DD.MM.YYYY" in the hero.

@@ -5,7 +5,7 @@ import config from '@/content/methodology.config';
 export const metadata: Metadata = {
   title: 'Menetelmä — Miten teemme rankingit',
   description:
-    'Avoin kuvaus vertailumme datalähteistä, painokertoimista ja kaupallisista suhteista.',
+    'Avoin kuvaus vertailumme datalähteistä, arviointikriteereistä ja kaupallisista suhteista.',
   alternates: { canonical: `${config.siteUrl}/menetelma` },
 };
 
@@ -33,7 +33,7 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'Miten teemme rankingit',
   description:
-    'Avoin kuvaus vertailumme datalähteistä, painokertoimista ja kaupallisista suhteista.',
+    'Avoin kuvaus vertailumme datalähteistä, arviointikriteereistä ja kaupallisista suhteista.',
   author: { '@type': 'Organization', name: config.siteName },
   publisher: { '@type': 'Organization', name: config.siteName, url: config.siteUrl },
   mainEntityOfPage: `${config.siteUrl}/menetelma`,

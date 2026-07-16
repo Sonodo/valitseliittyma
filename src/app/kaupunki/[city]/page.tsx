@@ -6,6 +6,8 @@ import { cities, getCityBySlug } from '@/data/cities';
 import { getOperatorById } from '@/data/operators';
 import { mobilePlans, get5GPlans } from '@/data/mobile-plans';
 import { broadbandPlans } from '@/data/broadband-plans';
+import { breadcrumbSchema, plansToItemListSchema } from '@/lib/schema';
+import { SITE_URL } from '@/lib/constants';
 import { MobilePlanCard } from '@/components/ui/PlanCard';
 
 interface Props {
@@ -41,8 +43,28 @@ export default async function CityPage({ params }: Props) {
     .sort((a, b) => a.monthlyPrice - b.monthlyPrice)
     .slice(0, 3);
 
+  const breadcrumbLd = breadcrumbSchema([
+    { name: 'Etusivu', url: '/' },
+    { name: `Liittymät — ${city.name}`, url: `/kaupunki/${city.slug}` },
+  ]);
+  const itemListLd = plansToItemListSchema(
+    [...cheapestMobile, ...best5GPlans].filter(
+      (p, i, arr) => arr.findIndex((x) => x.id === p.id) === i,
+    ),
+    `${SITE_URL}/kaupunki/${city.slug}`,
+    `Liittymät ${city.name} — Valitse Liittymä`,
+  );
+
   return (
     <div className="py-12 sm:py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Link
           href="/operaattorit"

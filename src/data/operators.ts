@@ -11,9 +11,8 @@ export const operators: Operator[] = [
     id: 'elisa',
     name: 'Elisa',
     slug: 'elisa',
-    brand: 'Saunalahti',
     description:
-      'Suomen suurin teleoperaattori, joka palvelee kuluttajia Saunalahti-brändillä. Elisa tunnetaan kattavasta 5G-verkosta, luotettavista palveluista ja monipuolisesta liittymävalikoimasta. Markkinajohtaja noin 38 % markkinaosuudella.',
+      'Suomen suurin teleoperaattori. Kuluttajaliittymät myydään Elisa Huoleton- ja Elisa Tarkka -tuoteperheinä (aiempi Saunalahti-brändi on poistunut käytöstä). Elisa tunnetaan kattavasta 5G-verkosta, luotettavista palveluista ja monipuolisesta liittymävalikoimasta. Markkinajohtaja noin 38 % markkinaosuudella.',
     founded: 1882,
     website: 'https://www.elisa.fi',
     type: 'MNO',
@@ -100,6 +99,7 @@ export const operators: Operator[] = [
       'DNA:n luotettava verkko',
     ],
     cons: [
+      'Puhelut ja viestit käytön mukaan kaikissa liittymissä (kattohinta 4 €/kk)',
       'Ei omaa verkkoa — riippuvainen DNA:sta',
       'Rajallinen asiakaspalvelu (chat-painotteinen)',
       'Ei viihdepalveluita',
@@ -125,9 +125,9 @@ export const operators: Operator[] = [
       'Saatavilla Gigantin myymälöissä',
     ],
     cons: [
-      'Lanseerattu 2025, alle vuoden ikäinen — vähän pitkän aikavälin käyttökokemuksia',
+      'Lanseerattu 2025 — vähän pitkän aikavälin käyttökokemuksia',
       'Suppea liittymävalikoima (4 liittymää)',
-      'Ei halvimpia perusliittymiä — hinnat alkaen ~22 €/kk',
+      'Ei halvimpia perusliittymiä — normaalihinnat alkaen ~24 €/kk',
     ],
   },
   {
@@ -148,10 +148,9 @@ export const operators: Operator[] = [
       'Selkeä hinnoittelu',
     ],
     cons: [
-      'Suppea liittymävalikoima (2 liittymää)',
+      'Suppea liittymävalikoima (4 liittymää)',
       'Uusi toimija — lanseerattu joulukuussa 2025',
       'Ei omia viihdepalveluita',
-      'Ei edullisimpia perusliittymiä',
     ],
   },
   {
@@ -184,7 +183,7 @@ export const operators: Operator[] = [
     name: 'Valoo',
     slug: 'valoo',
     description:
-      'Valoo on suomalainen laajakaistaoperaattori, joka tarjoaa kiinteää valokuitulaajakaistaa kuluttajille ja taloyhtiöille. Tunnetaan selkeästä hinnoittelusta ja kilpailukykyisistä nopeuksista ilman pitkää sitoutumista.',
+      'Valoo on suomalainen laajakaistaoperaattori, joka tarjoaa symmetristä valokuitulaajakaistaa (500M–2000M) kuluttajille ja taloyhtiöille. Tunnetaan selkeästä hinnoittelusta ilman pitkää sitoutumista; WiFi 7 -reititin sisältyy liittymiin.',
     founded: 2015,
     website: 'https://www.valoo.fi',
     type: 'MVNO',

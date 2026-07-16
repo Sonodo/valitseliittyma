@@ -14,7 +14,19 @@ export const metadata: Metadata = {
   alternates: { canonical: '/puhelinliittymat' },
 };
 
+function fmt(price: number): string {
+  return `${price.toFixed(2).replace('.', ',')} €/kk`;
+}
+
 export default function PuhelinliittymatPage() {
+  const byPrice = [...mobilePlans].sort((a, b) => a.monthlyPrice - b.monthlyPrice);
+  const cheapest = byPrice[0];
+  const cheapestUnlimitedData = byPrice.find((p) => p.dataAmount === 'unlimited');
+  const cheapestAllUnlimited = byPrice.find(
+    (p) => p.dataAmount === 'unlimited' && p.callsIncluded.startsWith('Rajaton'),
+  );
+  const operatorCount = new Set(mobilePlans.map((p) => p.operatorId)).size;
+
   const itemListLd = plansToItemListSchema(
     mobilePlans,
     `${SITE_URL}/puhelinliittymat`,
@@ -48,6 +60,32 @@ export default function PuhelinliittymatPage() {
           </p>
           <p className="mt-2 text-sm text-slate-500">
             Liittymätiedot tarkistettu {DATA_REVIEWED_AT}. Tarkista lopulliset hinnat operaattorilta.
+          </p>
+        </div>
+
+        {/* Answer capsule — data-driven direct answer for readers and AI crawlers */}
+        <div className="mb-8 rounded-xl border border-slate-200 bg-slate-50/70 px-5 py-4">
+          <p className="text-[15px] leading-relaxed text-slate-700">
+            Edullisin liittymä vertailussa on{' '}
+            <span className="font-semibold text-slate-900">
+              {cheapest.name} ({fmt(cheapest.monthlyPrice)})
+            </span>
+            {cheapestUnlimitedData && (
+              <>
+                , edullisin rajattoman datan liittymä {cheapestUnlimitedData.name} (
+                {fmt(cheapestUnlimitedData.monthlyPrice)})
+              </>
+            )}
+            {cheapestAllUnlimited && cheapestAllUnlimited.id !== cheapestUnlimitedData?.id && (
+              <>
+                {' '}
+                ja edullisin rajattomalla datalla ja puheluilla {cheapestAllUnlimited.name} (
+                {fmt(cheapestAllUnlimited.monthlyPrice)})
+              </>
+            )}
+            . Vertailussa on {mobilePlans.length} liittymää {operatorCount} operaattorilta —
+            hinnat ovat normaalihintoja ilman kampanja-alennuksia, ja voimassa olevat
+            kampanjahinnat näytetään korteilla erikseen.
           </p>
         </div>
 

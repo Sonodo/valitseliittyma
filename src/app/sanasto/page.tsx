@@ -122,7 +122,7 @@ const terms: Term[] = [
     term: 'Kantaverkkooperaattori',
     shortTerm: 'MNO',
     definition:
-      'Mobile Network Operator — operaattori, jolla on oma fyysinen matkaviestintäverkko Suomessa. Suomessa kolme kantaverkkooperaattoria ovat Telia, Elisa (Saunalahti) ja DNA. Kaikki muut Suomessa toimivat liittymät kulkevat näiden kolmen verkossa.',
+      'Mobile Network Operator — operaattori, jolla on oma fyysinen matkaviestintäverkko Suomessa. Suomessa kolme kantaverkko-operaattoria ovat Telia, Elisa ja DNA. Kaikki muut Suomessa toimivat liittymät kulkevat näiden kolmen verkossa.',
   },
   {
     term: 'Virtuaalioperaattori (MVNO)',

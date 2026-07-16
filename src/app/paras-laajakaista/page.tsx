@@ -4,11 +4,13 @@ import { broadbandPlans, getCheapestBroadband, getFiberPlans, get5GBroadband } f
 import { operators } from '@/data/operators';
 import { BroadbandPlanCard } from '@/components/ui/PlanCard';
 import MethodologyBox from '@/components/ui/MethodologyBox';
+import { plansToItemListSchema, breadcrumbSchema } from '@/lib/schema';
+import { SITE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Paras laajakaista 2026 — Vertaa laajakaistaliittymiä',
   description:
-    'Löydä paras laajakaista kotiin. Vertailussa valokuitu, 4G-kotinetti ja 5G-kotinetti. Halvin ja nopein laajakaista Suomessa.',
+    'Löydä paras laajakaista kotiin. Vertailussa 5G-kotinetit ja symmetrinen valokuitu. Halvin ja nopein valtakunnallisesti hinnoiteltu laajakaista Suomessa.',
   alternates: { canonical: '/paras-laajakaista' },
 };
 
@@ -16,17 +18,52 @@ export default function ParasLaajakaistaPage() {
   const cheapest = getCheapestBroadband(3);
   const fiberPlans = getFiberPlans().sort((a, b) => a.monthlyPrice - b.monthlyPrice).slice(0, 3);
   const plans5G = get5GBroadband().sort((a, b) => a.monthlyPrice - b.monthlyPrice);
+  const cheapestOverall = cheapest[0];
+  const fastestOverall = [...broadbandPlans].sort((a, b) => b.downloadSpeed - a.downloadSpeed)[0];
+
+  const itemListLd = plansToItemListSchema(
+    broadbandPlans,
+    `${SITE_URL}/paras-laajakaista`,
+    'Laajakaistat — Valitse Liittymä',
+  );
+  const breadcrumbLd = breadcrumbSchema([
+    { name: 'Etusivu', url: '/' },
+    { name: 'Paras laajakaista', url: '/paras-laajakaista' },
+  ]);
 
   return (
     <div className="py-12 sm:py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 max-w-3xl">
           <h1 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">
             Paras laajakaista 2026
           </h1>
           <p className="mt-4 text-lg text-slate-600">
-            Vertaa laajakaistoja ja löydä sopivin vaihtoehto kotiisi: valokuitu, 4G- tai 5G-kotinetti.
+            Vertaa laajakaistoja ja löydä sopivin vaihtoehto kotiisi: 5G-kotinetti tai symmetrinen valokuitu.
           </p>
+          {cheapestOverall && fastestOverall && (
+            <div className="mt-6 rounded-xl border border-slate-200 bg-slate-50/70 px-5 py-4">
+              <p className="text-[15px] leading-relaxed text-slate-700">
+                Edullisin laajakaista vertailussa on{' '}
+                <span className="font-semibold text-slate-900">
+                  {cheapestOverall.name} (
+                  {cheapestOverall.monthlyPrice.toFixed(2).replace('.', ',')} €/kk)
+                </span>{' '}
+                ja nopein {fastestOverall.name} ({fastestOverall.downloadSpeed} Mbit/s).
+                Suurten operaattorien kiinteät kuituhinnat ovat osoitekohtaisia eivätkä
+                siksi ole listassa — vertailussa näytetään valtakunnallisesti
+                hinnoitellut liittymät normaalihinnoin.
+              </p>
+            </div>
+          )}
         </div>
 
         <MethodologyBox

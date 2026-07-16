@@ -4,99 +4,107 @@ import { DATA_REVIEWED_AT } from '@/lib/constants';
 const config: MethodologyConfig = {
   siteName: 'Valitse Liittymä',
   siteUrl: 'https://valitseliittyma.fi',
-  lastReviewedAt: '2026-06-04',
+  lastReviewedAt: '2026-07-16',
 
   summary: [
-    'Valitse Liittymä vertailee Suomen mobiili- ja laajakaistaliittymiä. Pisteytys yhdistää Traficomin Bittimittari-mittausdatan, Speedtest H1 2025 -keskiarvot ja Traficomin matkaviestinverkon liittymä- ja kuuluvuustilastot.',
-    'Liittymävertailussa nopeudet ja kuuluvuus arvioidaan postinumeroittain todellisten mittausten perusteella — emme luota pelkästään operaattorien ilmoittamiin maksiminopeuksiin.',
-    `Liittymäkohtaiset hinnat ja ehdot on tarkistettu viimeksi ${DATA_REVIEWED_AT}. Hinnat ja kampanjat voivat muuttua nopeasti — tarkista lopullinen hinta aina operaattorilta ennen tilausta.`,
+    'Valitse Liittymä vertailee Suomen mobiili- ja laajakaistaliittymiä. Listaukset järjestetään oletuksena normaalin kuukausihinnan mukaan (edullisin ensin) — emme laske piilotettua painotettua yhdistelmäpistettä. Voit vaihtaa lajitteluperustetta (esim. datan määrä tai maksiminopeus) ja suodattaa tuloksia vapaasti.',
+    'Näytämme liittymistä sekä normaalin listahinnan että operaattorin voimassa olevan kampanjahinnan erikseen. Järjestys perustuu aina normaalihintaan, jotta määräaikainen tarjous ei vääristä vertailua. Riippumaton mittausdata (Speedtest, Traficomin Bittimittari ja laatututkimus) näytetään liittymäkorteilla tiedoksi — se ei muuta järjestystä.',
+    `Liittymäkohtaiset hinnat ja ehdot on tarkistettu viimeksi ${DATA_REVIEWED_AT} operaattorien julkisilta sivuilta. Vertailussa näytetään vain liittymiä, joiden hinnat voidaan todentaa julkisesta lähteestä — esimerkiksi suurten operaattorien osoitekohtaisesti hinnoitellut kuituliittymät eivät siksi ole listassa. Hinnat ja kampanjat voivat muuttua nopeasti — tarkista lopullinen hinta aina operaattorilta ennen tilausta.`,
   ],
 
   dataSources: [
     {
-      name: 'Traficom — Bittimittari',
-      type: 'Mittausdata',
-      refreshCadence: 'Päivittäin',
-      url: 'https://bittimittari.fi/',
+      name: 'Operaattorien julkiset hinnastot',
+      type: 'Oma seuranta',
+      refreshCadence: 'Kuukausittain (käsintarkistus)',
       description:
-        'Riippumaton nopeusmittauspalvelu. Käytämme aggregoitua dataa operaattorien todellisten nopeuksien arvioinnissa postinumeroittain.',
+        'Liittymien hinnat, nopeudet ja ehdot tarkistetaan käsin operaattorien omilta sivuilta. Viimeisin tarkistuspäivä näytetään sivustolla.',
     },
     {
-      name: 'Speedtest by Ookla — H1 2025 Suomi',
+      name: 'Speedtest by Ookla — Suomi-aggregaatit',
       type: 'Mittausdata',
       refreshCadence: 'Puolivuosittain',
       url: 'https://www.speedtest.net/global-index/finland',
       description:
-        'Speedtestin Suomi-aggregaatit operaattoreittain. Käytetään vertailuarvona kiinteissä ja mobiilissa.',
+        'Speedtestin operaattorikohtaiset mitatut keskinopeudet Suomessa. Näytetään liittymäkorteilla vertailuarvona — ei vaikuta järjestykseen.',
+    },
+    {
+      name: 'Traficom — Bittimittari ja laatututkimus',
+      type: 'Mittausdata',
+      refreshCadence: 'Traficomin julkaisujen mukaan',
+      url: 'https://bittimittari.fi/',
+      description:
+        'Riippumaton viranomaistaustainen mittaus- ja laatuaineisto. Käytetään operaattoritason laatumerkintöihin liittymäkorteilla.',
     },
     {
       name: 'Traficom — Matkaviestinverkon liittymät',
       type: 'Viranomainen',
-      refreshCadence: 'Kvartaaleittain',
+      refreshCadence: 'Puolivuosittain',
       url: 'https://www.traficom.fi/fi/tilastot',
       description:
-        'Viralliset operaattorikohtaiset tilastot liittymämääristä, markkinaosuuksista ja teknologiajakaumasta (3G/4G/5G).',
-    },
-    {
-      name: 'Traficom — Kuuluvuuskartta',
-      type: 'Viranomainen',
-      refreshCadence: 'Kvartaaleittain',
-      url: 'https://kuuluvuuskartta.fi/',
-      description:
-        'Operaattorien ilmoittamat ja Traficomin tarkistamat verkon kuuluvuustiedot. Käytetään mobiililiittymien postinumerokohtaisessa vertailussa.',
+        'Viralliset operaattorikohtaiset tilastot liittymämääristä ja markkinaosuuksista. Käytetään operaattorikuvauksissa.',
     },
   ],
 
-  weights: [
+  criteria: [
     {
-      factor: 'Hinta',
-      description: 'Kuukausimaksu € sisältäen avausmaksun jaettuna 24 kk:lle.',
-      weight: 35,
-    },
-    {
-      factor: 'Todellinen nopeus',
+      factor: 'Kuukausihinta (normaalihinta)',
       description:
-        'Bittimittari- ja Speedtest-aineistosta laskettu keskinopeus postinumeroalueella.',
-      weight: 30,
+        'Liittymän normaali listahinta ilman määräaikaisia kampanja-alennuksia. Operaattorin kampanjahinta näytetään erikseen kortilla.',
+      role: 'Oletusjärjestys — listaus järjestetään tämän mukaan, edullisin ensin',
     },
     {
-      factor: 'Sopimusehdot',
+      factor: 'Datan määrä ja maksiminopeus',
       description:
-        'Määräaikaisuus, datakatto, käyttörajoitukset ja roaming-ehdot.',
-      weight: 15,
+        'Liittymään sisältyvä data (Gt tai rajaton) ja operaattorin ilmoittama maksiminopeus (Mbit/s).',
+      role: 'Vaihtoehtoinen lajitteluperuste — valittavissa listauksessa',
     },
     {
-      factor: 'Kuuluvuus / verkon kattavuus',
+      factor: 'Mitattu verkkonopeus',
       description:
-        'Traficomin kuuluvuuskartan mukainen kattavuus (mobiili) tai saatavuus (laajakaista).',
-      weight: 15,
+        'Speedtestin ja Traficomin riippumattomista aineistoista poimittu operaattorin mitattu nopeustaso.',
+      role: 'Vain tiedoksi — näytetään merkintänä kortilla, ei vaikuta järjestykseen',
     },
     {
-      factor: 'Asiakaspalaute',
-      description: 'Operaattorin julkiset palauteindeksit ja Traficomin valitustilastot.',
-      weight: 5,
+      factor: 'Sopimusehdot ja ominaisuudet',
+      description:
+        'Määräaikaisuus, puheluiden ja viestien hinnoittelu, EU-roaming ja muut ominaisuudet.',
+      role: 'Suodatus- ja vertailutieto — ei pisteytetä',
+    },
+    {
+      factor: 'Kelpoisuus (todennettu hinta)',
+      description:
+        'Liittymän on oltava aidosti myynnissä ja sen hinnan todennettavissa julkisesta lähteestä.',
+      role: 'Kelpoisuusehto — sovelletaan ennen järjestystä, ei osa lajittelua',
     },
   ],
 
   disclosure: {
     intro:
-      'Valitse Liittymä on Sonodo Oy:n ylläpitämä kuluttajille suunnattu liittymävertailu. Toimintamme rahoitetaan operaattorien kanssa solmituilla yhteistyösopimuksilla, mutta yhteistyö ei vaikuta sijoituksiin vertailussa.',
+      'Valitse Liittymä on Sonodo-toiminimen ylläpitämä kuluttajille suunnattu liittymävertailu. Toimintamme rahoitetaan operaattorien kanssa solmituilla yhteistyösopimuksilla, mutta yhteistyö ei vaikuta sijoituksiin vertailussa.',
     howItWorks:
-      'Saamme korvauksen, kun käyttäjä siirtyy vertailusta operaattorille ja tilaa liittymän. Korvauksen taso ei muuta pisteytystä — pisteet lasketaan Traficomin Bittimittari- ja Speedtest-datasta dokumentoidulla kaavalla.',
+      'Saamme korvauksen, kun käyttäjä siirtyy vertailusta kumppanioperaattorille ja tilaa liittymän. Korvauksen taso ei muuta järjestystä — listaus järjestetään liittymien julkisten normaalihintojen mukaan.',
     safeguards: [
-      'Nopeudet perustuvat Bittimittarin ja Speedtestin mittausdataan, eivät operaattorin ilmoittamiin maksimeihin.',
-      'Vertailu järjestetään aina kokonaispisteen mukaan, ei kaupallisen korvauksen mukaan.',
-      'Kaikki ulosmenevät operaattorilinkit merkitään rel="sponsored".',
-      'Painokertoimet ja niihin tehdyt muutokset dokumentoidaan tämän sivun Päivityshistoriassa.',
+      'Listaus järjestetään aina objektiivisen mittarin mukaan (oletuksena normaali kuukausihinta) — ei koskaan korvauksen mukaan.',
+      'Näytämme sekä normaalihinnan että kampanjahinnan; järjestys perustuu aina normaalihintaan.',
+      'Mittausdata (Speedtest, Traficom) näytetään sellaisenaan lähteineen — sitä ei muokata kaupallisin perustein.',
+      'Kaikki kumppanioperaattorien ulosmenevät linkit merkitään rel="sponsored".',
+      'Vertailussa on mukana myös operaattoreita, joiden kanssa meillä ei ole kaupallista yhteistyötä.',
     ],
   },
 
   changelog: [
     {
+      date: '2026-07-16',
+      title: 'Menetelmäsivu yhdenmukaistettu todellisen järjestyslogiikan kanssa + hintadatan täysverifiointi',
+      summary:
+        'Aiempi painokerroin-taulukko (hinta 35 %, nopeus 30 %, ehdot 15 %, kuuluvuus 15 %, palaute 5 %) korvattiin kuvauksella todellisesta järjestyksestä: listaus järjestetään normaalin kuukausihinnan mukaan, ja mittausdata näytetään tiedoksi. Samalla kaikki liittymähinnat verifioitiin operaattorien sivuilta: uudistuneet mallistot (Elisa Huoleton, DNA Huoleton Plus, Telia Rajaton, Moi) päivitettiin, kampanjahinnat eroteltiin normaalihinnoista, ja liittymät joiden hintaa ei voi todentaa julkisesta lähteestä (mm. osoitekohtaisesti hinnoitellut kuituliittymät) poistettiin vertailusta.',
+    },
+    {
       date: '2026-06-04',
       title: 'Menetelmä-sivu julkaistu',
       summary:
-        'Bittimittari- ja Speedtest H1 2025 -datan käyttö, Traficomin liittymä- ja kuuluvuustilastot sekä painokertoimet (hinta 35 %, nopeus 30 %, ehdot 15 %, kuuluvuus 15 %, palaute 5 %) dokumentoitu.',
+        'Bittimittari- ja Speedtest H1 2025 -datan käyttö sekä Traficomin liittymä- ja kuuluvuustilastot dokumentoitu.',
     },
   ],
 

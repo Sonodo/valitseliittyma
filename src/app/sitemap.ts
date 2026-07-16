@@ -23,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/laskuri/datankulutus',
     '/menetelma',
     '/tietoa',
+    '/sivuston-ansainta',
     '/tietosuoja',
     '/kayttoehdot',
     '/yhteystiedot',

@@ -74,8 +74,10 @@ export default function TietoaPage() {
             Osa operaattoreista on vertailussa kumppaneitamme — saamme provision
             siirtymisestä operaattorin sivulle (ns. affiliate-tulo). Tämä yhteistyö
             ei vaikuta järjestykseen eikä siihen, mitä tietoja liittymistä esitetään.
-            Mainoslinkit on merkitty selkeästi <em>&quot;Mainos&quot;</em>-tunnisteella ja toteutettu
-            <code>rel=&quot;sponsored&quot;</code>-attribuutilla hakukoneiden ohjeen mukaisesti.
+            Kumppanilinkit on merkitty koneluettavasti{' '}
+            <code>rel=&quot;sponsored&quot;</code>-attribuutilla hakukoneiden ohjeen mukaisesti,
+            ja koko sivuston ansaintamalli on selostettu avoimesti{' '}
+            <a href="/sivuston-ansainta">Sivuston ansainta</a> -sivulla.
             Otamme vertailuun mukaan myös ne operaattorit, joiden kanssa meillä ei ole
             kaupallista yhteistyötä, jotta vertailu pysyy kattavana.
           </p>

@@ -4,6 +4,8 @@ import { mobilePlans, get5GPlans } from '@/data/mobile-plans';
 import { operators } from '@/data/operators';
 import { MobilePlanCard } from '@/components/ui/PlanCard';
 import MethodologyBox from '@/components/ui/MethodologyBox';
+import { plansToItemListSchema, breadcrumbSchema } from '@/lib/schema';
+import { SITE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Paras 5G-liittymä 2026 — Vertaa 5G-puhelinliittymiä',
@@ -19,9 +21,29 @@ export default function Paras5GPage() {
   const operatorsWith5G = operators.filter((op) =>
     mobilePlans.some((p) => p.operatorId === op.id && p.has5G),
   );
+  const cheapestOverall = plans5G[0];
+  const fastestOverall = [...plans5G].sort((a, b) => b.maxSpeed - a.maxSpeed)[0];
+
+  const itemListLd = plansToItemListSchema(
+    plans5G,
+    `${SITE_URL}/paras-5g-liittyma`,
+    '5G-liittymät — Valitse Liittymä',
+  );
+  const breadcrumbLd = breadcrumbSchema([
+    { name: 'Etusivu', url: '/' },
+    { name: 'Paras 5G-liittymä', url: '/paras-5g-liittyma' },
+  ]);
 
   return (
     <div className="py-12 sm:py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 max-w-3xl">
           <h1 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">
@@ -31,6 +53,21 @@ export default function Paras5GPage() {
             5G-verkko tarjoaa huippunopeat yhteydet ja pienen viiveen. Vertaa kaikkia
             5G-puhelinliittymiä ja löydä sinulle sopivin vaihtoehto.
           </p>
+          {cheapestOverall && fastestOverall && (
+            <div className="mt-6 rounded-xl border border-slate-200 bg-slate-50/70 px-5 py-4">
+              <p className="text-[15px] leading-relaxed text-slate-700">
+                Edullisin 5G-liittymä vertailussa on{' '}
+                <span className="font-semibold text-slate-900">
+                  {cheapestOverall.name} (
+                  {cheapestOverall.monthlyPrice.toFixed(2).replace('.', ',')} €/kk)
+                </span>{' '}
+                ja nopein {fastestOverall.name} ({fastestOverall.maxSpeed} Mbit/s).
+                Vertailussa on {plans5G.length} 5G-liittymää {operatorsWith5G.length}{' '}
+                operaattorilta — hinnat ovat normaalihintoja, ja kampanjahinnat
+                näytetään korteilla erikseen.
+              </p>
+            </div>
+          )}
         </div>
 
         <MethodologyBox

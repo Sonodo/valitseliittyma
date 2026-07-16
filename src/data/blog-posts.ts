@@ -81,7 +81,7 @@ export const blogPosts: BlogPost[] = [
 
 <p>Tämä juttu yritti tehdä yhden asian: nostaa kaksi aliarvostettua mittaria (kuuluvuus, tasaisuus) yhden yliarvostetun mittarin (top-nopeus) viereen, ja antaa lukijalle työkalut päättää itse, kumpi merkitsee enemmän omassa käytössä. Mikään yksittäinen Mbit/s-luku ei kerro koko tarinaa.</p>
 
-<p>Speedtest- ja Traficom-data näkyvät jokaisen liittymäkortin alla Valitse Liittymän vertailussa. Lähdeluettelo ja painokertoimet kuvataan kohdassa <a href="/menetelma">näin teemme rankingit</a>.</p>
+<p>Speedtest- ja Traficom-data näkyvät jokaisen liittymäkortin alla Valitse Liittymän vertailussa. Lähdeluettelo ja arviointikriteerit kuvataan kohdassa <a href="/menetelma">näin teemme rankingit</a>.</p>
 
 <h3>Lähteet</h3>
 <ul>

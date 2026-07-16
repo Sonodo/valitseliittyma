@@ -106,10 +106,12 @@ export default async function OperatorPage({ params }: Props) {
               <span>Perustettu: {operator.founded}</span>
               {operator.marketShare && <span>Markkinaosuus: ~{operator.marketShare} %</span>}
               {operator.network && <span>Verkko: {operator.network}</span>}
+              {/* Route through the affiliate link when one exists — this is a
+                  navigation action, not an editorial reference */}
               <a
-                href={operator.website}
+                href={operator.isAffiliate && operator.affiliateUrl ? operator.affiliateUrl : operator.website}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel={operator.isAffiliate && operator.affiliateUrl ? 'sponsored noopener noreferrer nofollow' : 'noopener noreferrer'}
                 className="flex items-center gap-1 text-cyan-600 hover:text-cyan-700"
               >
                 Verkkosivut <ExternalLink className="h-3.5 w-3.5" />
