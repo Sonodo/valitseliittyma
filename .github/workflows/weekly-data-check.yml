@@ -1,0 +1,40 @@
+name: Weekly data check
+
+on:
+  schedule:
+    - cron: '0 5 * * 1' # Mondays 05:00 UTC (~08:00 Helsinki)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  data-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run drift & freshness check
+        id: check
+        run: |
+          set +e
+          node scripts/weekly-data-check.mjs | tee drift-report.md
+          echo "code=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Open or update drift issue
+        if: steps.check.outputs.code == '2'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create data-drift --color D93F0B --description "Automaattinen datavahti havaitsi poikkeaman" --force
+          existing=$(gh issue list --label data-drift --state open --json number --jq '.[0].number' || true)
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body-file drift-report.md
+          else
+            gh issue create --title "Datavahti: poikkeama havaittu ($(date -u +%d.%m.%Y))" --label data-drift --body-file drift-report.md
+          fi
+
+      - name: Fail on drift
+        if: steps.check.outputs.code == '2'
+        run: exit 1
