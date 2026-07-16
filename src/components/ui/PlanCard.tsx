@@ -11,8 +11,10 @@ import {
 } from '@/data/operator-benchmarks';
 import { formatData, formatSpeed } from '@/lib/utils';
 import { trackAffiliateClick } from '@/lib/analytics';
+import { getOfferForOperator } from '@/lib/partner-offers';
 import { DISCLOSURE_COPY } from '@/components/disclosure';
 import BenchmarkBadge from '@/components/data/BenchmarkBadge';
+import PartnerOfferBadge from '@/components/ui/PartnerOfferBadge';
 
 function formatPriceDisplay(price: number): string {
   return price.toFixed(2).replace('.', ',');
@@ -25,6 +27,8 @@ interface MobilePlanCardProps {
 
 export const MobilePlanCard = memo(function MobilePlanCard({ plan, showOperator = true }: MobilePlanCardProps) {
   const operator = getOperatorById(plan.operatorId);
+  // Info-only partner campaign line (weekly Adtraction sync) — never ranks.
+  const offer = getOfferForOperator(plan.operatorId);
   const isAffiliate = Boolean(operator?.isAffiliate);
   const targetUrl = isAffiliate && operator?.affiliateUrl ? operator.affiliateUrl : plan.url;
   // Only affiliate operators get rel="sponsored nofollow". Non-affiliate CTAs
@@ -121,6 +125,13 @@ export const MobilePlanCard = memo(function MobilePlanCard({ plan, showOperator 
         )}
       </div>
 
+      {/* Partner campaign (info only — never affects ranking) */}
+      {offer && (
+        <div className="mb-4">
+          <PartnerOfferBadge offer={offer} operatorName={operator?.name ?? plan.operatorId} />
+        </div>
+      )}
+
       <ul className="mb-5 flex-1 space-y-2">
         {plan.specialFeatures.slice(0, 4).map((feature) => (
           <li key={feature} className="flex items-center gap-2 text-sm text-slate-600">
@@ -171,6 +182,8 @@ interface BroadbandPlanCardProps {
 
 export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOperator = true }: BroadbandPlanCardProps) {
   const operator = getOperatorById(plan.operatorId);
+  // Info-only partner campaign line (weekly Adtraction sync) — never ranks.
+  const offer = getOfferForOperator(plan.operatorId);
   const isAffiliate = Boolean(operator?.isAffiliate);
   const targetUrl = isAffiliate && operator?.affiliateUrl ? operator.affiliateUrl : plan.url;
   // Only affiliate operators get rel="sponsored nofollow"; clean rel otherwise.
@@ -253,6 +266,13 @@ export const BroadbandPlanCard = memo(function BroadbandPlanCard({ plan, showOpe
           </div>
         )}
       </div>
+
+      {/* Partner campaign (info only — never affects ranking) */}
+      {offer && (
+        <div className="mb-4">
+          <PartnerOfferBadge offer={offer} operatorName={operator?.name ?? plan.operatorId} />
+        </div>
+      )}
 
       <ul className="mb-5 flex-1 space-y-2">
         {plan.specialFeatures.slice(0, 4).map((feature) => (
